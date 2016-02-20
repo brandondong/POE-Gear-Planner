@@ -5,7 +5,7 @@ package Util;
  */
 public class GameConstants {
 
-    public static final int NORAML_RESIST_PENALTY = 0;
+    public static final int NORMAL_RESIST_PENALTY = 0;
 
     public static final int CRUEL_RESIST_PENALTY = -20;
 

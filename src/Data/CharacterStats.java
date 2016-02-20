@@ -3,11 +3,9 @@ package Data;
 import Util.GameConstants;
 
 /**
- * Created by Brandon on 2016-02-19.
- *
- * Represents the resistances of a character
+ * Created by Brandon on 2016-02-20.
  */
-public class CharacterResists extends Resists {
+public class CharacterStats extends Stats {
 
     /**
      *
@@ -36,7 +34,7 @@ public class CharacterResists extends Resists {
      * @return the total resistance of the specified type at the chosen difficulty
      */
     public int getTotalResist(ResistType type, Difficulty difficulty) {
-        return getBaseResist(type) + difficulty.getResistancePenalty();
+        return getAdditionalResistValue(type) + difficulty.getResistancePenalty();
     }
 
     /**
@@ -55,6 +53,38 @@ public class CharacterResists extends Resists {
      * @return the maximum resistance of the specified type
      */
     public int getMaxResist(ResistType type) {
-        return getAdditionalMaxResist(type) + GameConstants.BASE_RESISTANCE_CAP;
+        return getMaximumResistValue(type) + GameConstants.BASE_RESISTANCE_CAP;
+    }
+
+    /**
+     *
+     * @return <code>true</code> if the character meets their attribute requirements
+     */
+    public boolean hasRequiredAttributes() {
+        return hasRequiredAttributes(this);
+    }
+
+    /**
+     *
+     * @param other the stats to be checked against
+     * @return <code>true</code> if the character meets the attribute requirements of the stats
+     */
+    public boolean hasRequiredAttributes(Stats other) {
+        for (AttributeType type : AttributeType.values()) {
+            if (!hasRequiredAttribute(type, other.getRequiredAttributeValue(type))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     *
+     * @param type the {@link AttributeType} to be checked
+     * @param value the requirement value of the specified attribute type
+     * @return <code>true</code> if the character has a greater or equal amount of that attribute type
+     */
+    public boolean hasRequiredAttribute(AttributeType type, int value) {
+        return calculateAttributeValue(type) >= value;
     }
 }
