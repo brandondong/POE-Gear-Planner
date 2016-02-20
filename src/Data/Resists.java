@@ -1,87 +1,25 @@
 package Data;
 
-import Util.GameConstants;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Brandon on 2016-02-19.
+ *
+ * Represents the resistances of an item
  */
 public class Resists {
 
-    private int fireResist;
+    private Map<ResistType, Integer> resistances;
 
-    private int coldResist;
-
-    private int lightningResist;
-
-    private int chaosResist;
-
-    private int maxFire;
-
-    private int maxCold;
-
-    private int maxLightning;
-
-    private int maxChaos;
+    private Map<ResistType, Integer> maxRes;
 
     /**
-     * Initializes the resistances with no additional maximum resistances
-     *
-     * @param fireResist the fire resistance
-     * @param coldResist the cold resistance
-     * @param lightningResist the lightning resistance
-     * @param chaosResist the chaos resistance
+     * Initializes the resistances and the additional maximum resistances to be 0
      */
-    public Resists(int fireResist, int coldResist, int lightningResist, int chaosResist) {
-        this(fireResist, coldResist, lightningResist, chaosResist, 0, 0, 0, 0);
-    }
-
-    /**
-     *
-     * @param fireResist the fire resistance
-     * @param coldResist the cold resistance
-     * @param lightningResist the lightning resistance
-     * @param chaosResist the chaos resistance
-     * @param maxFire the additional fire resistance
-     * @param maxCold the additional cold resistance
-     * @param maxLightning the additional lightning resistance
-     * @param maxChaos the additional chaos resistance
-     */
-    public Resists(int fireResist, int coldResist, int lightningResist, int chaosResist, int maxFire, int maxCold, int maxLightning, int maxChaos) {
-        this.fireResist = fireResist;
-        this.coldResist = coldResist;
-        this.lightningResist = lightningResist;
-        this.chaosResist = chaosResist;
-        this.maxFire = maxFire;
-        this.maxCold = maxCold;
-        this.maxLightning = maxLightning;
-        this.maxChaos = maxChaos;
-    }
-
-    /**
-     *
-     * @param type the {@link ResistType} to be returned
-     * @param difficulty the {@link Difficulty} in which the resist should be calculated
-     * @return the effective resistance of the specified type at the chosen difficulty
-     */
-    public int getResist(ResistType type, Difficulty difficulty) {
-        return Math.min(getTotalResist(type, difficulty), getMaxResist(type));
-    }
-
-    /**
-     *
-     * @param type the {@link ResistType} to be returned
-     * @param difficulty the {@link Difficulty} in which the resist should be calculated
-     * @return the total resistance of the specified type at the chosen difficulty
-     */
-    public int getTotalResist(ResistType type, Difficulty difficulty) {
-        if (type == ResistType.FIRE) {
-            return fireResist + difficulty.getResistancePenalty();
-        } else if (type == ResistType.COLD) {
-            return coldResist + difficulty.getResistancePenalty();
-        } else if (type == ResistType.LIGHTNING) {
-            return lightningResist + difficulty.getResistancePenalty();
-        }
-        return chaosResist + difficulty.getResistancePenalty();
+    public Resists() {
+        resistances = new HashMap<>();
+        maxRes = new HashMap<>();
     }
 
     /**
@@ -90,7 +28,11 @@ public class Resists {
      * @return the base resistance of the specified type
      */
     public int getBaseResist(ResistType type) {
-        return getTotalResist(type, Difficulty.NORMAL);
+        Integer res = resistances.get(type);
+        if (res != null) {
+            return res;
+        }
+        return 0;
     }
 
     /**
@@ -99,24 +41,28 @@ public class Resists {
      * @param resists the resistances to be added
      */
     public void addResists(Resists resists) {
-        fireResist += resists.getBaseResist(ResistType.FIRE);
-        coldResist += resists.getBaseResist(ResistType.COLD);
-        lightningResist += resists.getBaseResist(ResistType.LIGHTNING);
-        chaosResist += resists.getBaseResist(ResistType.CHAOS);
-
-        maxFire = resists.getAdditionalMaxResist(ResistType.FIRE);
-        maxCold = resists.getAdditionalMaxResist(ResistType.COLD);
-        maxLightning = resists.getAdditionalMaxResist(ResistType.LIGHTNING);
-        maxChaos = resists.getAdditionalMaxResist(ResistType.CHAOS);
+        for (ResistType type : ResistType.values()) {
+            addResist(type, resists.getBaseResist(type));
+            addMaxResist(type, resists.getAdditionalMaxResist(type));
+        }
     }
 
     /**
      *
-     * @param type the {@link ResistType} to be returned
-     * @return the maximum resistance of the specified type
+     * @param type the {@link ResistType} to be added
+     * @param value the value of the resistance to be added
      */
-    public int getMaxResist(ResistType type) {
-        return getAdditionalMaxResist(type) + GameConstants.BASE_RESISTANCE_CAP;
+    public void addResist(ResistType type, int value) {
+        resistances.put(type, value + getBaseResist(type));
+    }
+
+    /**
+     *
+     * @param type the {@link ResistType} to be added
+     * @param value the value of the additional maximum resistance to be added
+     */
+    public void addMaxResist(ResistType type, int value) {
+        maxRes.put(type, value + getAdditionalMaxResist(type));
     }
 
     /**
@@ -125,13 +71,10 @@ public class Resists {
      * @return the additional maximum resistance of the specified type
      */
     public int getAdditionalMaxResist(ResistType type) {
-        if (type == ResistType.FIRE) {
-            return maxFire;
-        } else if (type == ResistType.COLD) {
-            return maxCold;
-        } else if (type == ResistType.LIGHTNING) {
-            return maxLightning;
+        Integer max = maxRes.get(type);
+        if (max != null) {
+            return max;
         }
-        return maxChaos;
+        return 0;
     }
 }

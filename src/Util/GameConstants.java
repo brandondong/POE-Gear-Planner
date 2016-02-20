@@ -16,8 +16,6 @@ public class GameConstants {
 
     public static final int BASE_RESISTANCE_CAP = 75;
 
-    public static final Resists KRAITLYN_REWARD_NORMAL = new Resists(10, 10, 10, 0);
-
     private GameConstants() {
         // prevent instantiation
     }
