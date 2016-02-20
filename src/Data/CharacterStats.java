@@ -4,6 +4,8 @@ import Util.GameConstants;
 
 /**
  * Created by Brandon on 2016-02-20.
+ *
+ * Represents the stats of a character
  */
 public class CharacterStats extends Stats {
 

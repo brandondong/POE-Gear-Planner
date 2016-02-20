@@ -4,6 +4,8 @@ import Util.GameConstants;
 
 /**
  * Created by Brandon on 2016-02-19.
+ *
+ * Represents a game difficulty
  */
 public enum Difficulty {
     NORMAL(GameConstants.NORMAL_RESIST_PENALTY),
@@ -12,7 +14,7 @@ public enum Difficulty {
 
     private int resistancePenalty;
 
-    private Difficulty(int resistancePenalty) {
+    Difficulty(int resistancePenalty) {
         this.resistancePenalty = resistancePenalty;
     }
 

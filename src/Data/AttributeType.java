@@ -2,6 +2,8 @@ package Data;
 
 /**
  * Created by Brandon on 2016-02-20.
+ *
+ * Represents the character attributes
  */
 public enum AttributeType {
     INTELLIGENCE, DEXTERITY, STRENGTH;
@@ -22,6 +24,10 @@ public enum AttributeType {
         return String.format("%%d%%%% increased %s ", this);
     }
 
+    /**
+     *
+     * @return the unique identifier representing the attribute requirement of this type
+     */
     public String getRequirementId() {
         return String.format("Requires %%d %s", this);
     }
