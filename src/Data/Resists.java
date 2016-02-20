@@ -36,6 +36,19 @@ public class Resists {
     }
 
     /**
+     *
+     * @param type the {@link ResistType} to be returned
+     * @return the additional maximum resistance of the specified type
+     */
+    public int getAdditionalMaxResist(ResistType type) {
+        Integer max = maxRes.get(type);
+        if (max != null) {
+            return max;
+        }
+        return 0;
+    }
+
+    /**
      * Adds another set of resistances onto the current set
      *
      * @param resists the resistances to be added
@@ -63,18 +76,5 @@ public class Resists {
      */
     public void addMaxResist(ResistType type, int value) {
         maxRes.put(type, value + getAdditionalMaxResist(type));
-    }
-
-    /**
-     *
-     * @param type the {@link ResistType} to be returned
-     * @return the additional maximum resistance of the specified type
-     */
-    public int getAdditionalMaxResist(ResistType type) {
-        Integer max = maxRes.get(type);
-        if (max != null) {
-            return max;
-        }
-        return 0;
     }
 }

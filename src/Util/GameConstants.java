@@ -1,8 +1,5 @@
 package Util;
 
-import Data.ResistType;
-import Data.Resists;
-
 /**
  * Created by Brandon on 2016-02-19.
  */
