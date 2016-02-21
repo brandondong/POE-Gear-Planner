@@ -13,7 +13,7 @@ public enum ResistType {
      * @return the unique identifier representing additional resistance of this type
      */
     public String getAdditionalId() {
-        return String.format("+%%d%%%% to %s Resistance", this);
+        return String.format("+%%.1f%%%% to %s Resistance", this);
     }
 
     /**
@@ -21,7 +21,7 @@ public enum ResistType {
      * @return the unique identifier representing maximum resistance of this type
      */
     public String getMaxId() {
-        return String.format("+%%d%%%% to maximum %s Resistance", this);
+        return String.format("+%%.1f%%%% to maximum %s Resistance", this);
     }
 
     @Override

@@ -13,7 +13,7 @@ public enum AttributeType {
      * @return the unique identifier representing a flat addition of this type
      */
     public String getAdditionalId() {
-        return String.format("+%%d to %s", this);
+        return String.format("+%%.1f to %s", this);
     }
 
     /**
@@ -21,15 +21,7 @@ public enum AttributeType {
      * @return the unique identifier representing a percentage addition of this type
      */
     public String getPercentId() {
-        return String.format("%%d%%%% increased %s ", this);
-    }
-
-    /**
-     *
-     * @return the unique identifier representing the attribute requirement of this type
-     */
-    public String getRequirementId() {
-        return String.format("Requires %%d %s", this);
+        return String.format("%%.1f%%%% increased %s ", this);
     }
 
     @Override

@@ -11,6 +11,10 @@ public class Logger {
 
     }
 
+    public static void addWarning(String message) {
+
+    }
+
     private Logger() {
         // prevent instantiation
     }

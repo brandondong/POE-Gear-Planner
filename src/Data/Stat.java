@@ -9,7 +9,7 @@ public class Stat {
 
     private String id;
 
-    private int value;
+    private double value;
 
     /**
      *
@@ -22,10 +22,10 @@ public class Stat {
 
     /**
      *
-     * @param id a formatted unique identifier for the stat type (e.g. "%d%% increased Armour")
+     * @param id a formatted unique identifier for the stat type (e.g. "%.1f%% increased Armour")
      * @param value the value of the stat
      */
-    public Stat(String id, int value) {
+    public Stat(String id, double value) {
         this.id = id;
         this.value = value;
     }
@@ -48,6 +48,9 @@ public class Stat {
      * @return a description in the format of what you would see on the Passive Skill Tree
      */
     public String getDescription() {
+        if (value == (int) value) {
+            return String.format(id.replace(".1f", "d"), (int) value);
+        }
         return String.format(id, value);
     }
 
@@ -63,16 +66,19 @@ public class Stat {
      *
      * @return the value of this stat
      */
-    public int getValue() {
+    public double getValue() {
         return value;
     }
 
     private String parseId(String description) {
-        return description.replaceAll("%", "%%").replaceFirst("[\\d]+", "%d");
+        return description.replaceAll("%", "%%").replaceFirst("[\\d\\.]+", "%.1f");
     }
 
-    private int parseValue(String description) {
-        return Integer.valueOf(description.replaceAll("[\\D]", ""));
+    private double parseValue(String description) {
+        if (description.matches(".*\\d+.*")) {
+            return Double.valueOf(description.replaceAll("[^\\d\\.]", ""));
+        }
+        return 0;
     }
 
     @Override

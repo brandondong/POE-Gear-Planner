@@ -2,6 +2,7 @@ package Data;
 
 import Util.GameConstants;
 import Util.Logger;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -20,21 +21,32 @@ public enum CharacterClass {
 
     /**
      *
-     * @return the base attribute stats of a character class
+     * @return the character class's base stats
      */
-    public Stats getBaseStats() {
+    public CharacterStats getBaseStats() {
         try {
-            JSONObject data = GameConstants.SKILL_TREE_DATA.getJSONObject("characterData");
-            JSONObject classData = data.getJSONObject(String.valueOf(position));
-
-            Stats stats = new Stats();
-            stats.addStat(new Stat(AttributeType.STRENGTH.getAdditionalId(), classData.getInt("base_str")));
-            stats.addStat(new Stat(AttributeType.DEXTERITY.getAdditionalId(), classData.getInt("base_dex")));
-            stats.addStat(new Stat(AttributeType.INTELLIGENCE.getAdditionalId(), classData.getInt("base_int")));
+            JSONObject classData = getClassData();
+            CharacterStats stats = new CharacterStats();
+            stats.addStat(AttributeType.STRENGTH.getAdditionalId(), classData.getInt("base_str"));
+            stats.addStat(AttributeType.DEXTERITY.getAdditionalId(), classData.getInt("base_dex"));
+            stats.addStat(AttributeType.INTELLIGENCE.getAdditionalId(), classData.getInt("base_int"));
             return stats;
         } catch (Exception e) {
             Logger.addError("Could not parse class base stats.", e);
         }
-        return new Stats();
+        return new CharacterStats();
+    }
+
+    private JSONObject getClassData() throws JSONException {
+        JSONObject data = GameConstants.SKILL_TREE_DATA.getJSONObject("characterData");
+        return data.getJSONObject(String.valueOf(position));
+    }
+
+    /**
+     *
+     * @return the corresponding number associated with the class as specified in skilltree.json
+     */
+    public int getPosition() {
+        return position;
     }
 }

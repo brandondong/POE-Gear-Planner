@@ -25,7 +25,7 @@ public class Stats implements Iterable<Stat> {
      * @param id the unique identifier of the stat of interest
      * @return the value of the stat on this item
      */
-    public int getStatValue(String id) {
+    public double getStatValue(String id) {
         Stat stat = stats.get(id);
         if (stat != null) {
             return stat.getValue();
@@ -38,7 +38,7 @@ public class Stats implements Iterable<Stat> {
      * @param type the {@link ResistType} of interest
      * @return the additional resistance of that type
      */
-    public int getAdditionalResistValue(ResistType type) {
+    public double getAdditionalResistValue(ResistType type) {
         return getStatValue(type.getAdditionalId());
     }
 
@@ -47,7 +47,7 @@ public class Stats implements Iterable<Stat> {
      * @param type the {@link ResistType} of interest
      * @return the maximum resistance of that type
      */
-    public int getMaximumResistValue(ResistType type) {
+    public double getMaximumResistValue(ResistType type) {
         return getStatValue(type.getMaxId());
     }
 
@@ -56,7 +56,7 @@ public class Stats implements Iterable<Stat> {
      * @param type the {@link AttributeType} of interest
      * @return the flat addition value of that type
      */
-    public int getAdditionalAttributeValue(AttributeType type) {
+    public double getAdditionalAttributeValue(AttributeType type) {
         return getStatValue(type.getAdditionalId());
     }
 
@@ -65,7 +65,7 @@ public class Stats implements Iterable<Stat> {
      * @param type the {@link AttributeType} of interest
      * @return the percentage addition value of that type
      */
-    public int getPercentAttributeValue(AttributeType type) {
+    public double getPercentAttributeValue(AttributeType type) {
         return getStatValue(type.getPercentId());
     }
 
@@ -79,15 +79,6 @@ public class Stats implements Iterable<Stat> {
     }
 
     /**
-     *
-     * @param type the {@link AttributeType} of interest
-     * @return the required value of that attribute type
-     */
-    public int getRequiredAttributeValue(AttributeType type) {
-        return getStatValue(type.getRequirementId());
-    }
-
-    /**
      * Adds another set of stats onto the current set
      *
      * @param other the stats to be added
@@ -96,6 +87,15 @@ public class Stats implements Iterable<Stat> {
         for (Stat stat : other) {
             addStat(stat);
         }
+    }
+
+    /**
+     *
+     * @param id the unique identifier of the stat
+     * @param value the value of the stat to be added
+     */
+    public void addStat(String id, int value) {
+        addStat(new Stat(id, value));
     }
 
     /**
@@ -111,5 +111,15 @@ public class Stats implements Iterable<Stat> {
     @Override
     public Iterator<Stat> iterator() {
         return stats.values().iterator();
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        for (Stat stat : this) {
+            builder.append(stat.toString());
+            builder.append("\n");
+        }
+        return builder.substring(0, builder.length() - 1);
     }
 }
