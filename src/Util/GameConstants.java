@@ -1,9 +1,6 @@
 package Util;
 
-import Data.KeystoneNode;
-import Data.Node;
-import Data.Stat;
-import Data.Stats;
+import Data.*;
 import org.apache.commons.io.FileUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -75,6 +72,8 @@ public class GameConstants {
         JSONArray array = obj.getJSONArray("sd");
         if (obj.getBoolean("ks")) {
             return new KeystoneNode(id, obj.getString("dn"), array.getString(0));
+        } else if (obj.getString("dn").equals("Jewel Socket")) {
+            return new Jewel(id);
         }
         return new Node(id, parseStats(array));
     }

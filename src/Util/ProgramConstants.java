@@ -5,5 +5,5 @@ package Util;
  */
 public class ProgramConstants {
 
-    public static final String NEW_CHARACTER_NAME = "New Character";
+    public static final String NEW_CHARACTER_NAME = "New Build";
 }

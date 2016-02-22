@@ -27,6 +27,8 @@ public class Character {
 
     private String name;
 
+    private int numJewels;
+
     public Character(CharacterClass characterClass) {
         this.characterClass = characterClass;
         name = ProgramConstants.NEW_CHARACTER_NAME;
@@ -76,6 +78,10 @@ public class Character {
         keystones.add(node);
     }
 
+    public void incNumJewels() {
+        numJewels++;
+    }
+
     public CharacterClass getCharacterClass() {
         return characterClass;
     }
@@ -90,6 +96,10 @@ public class Character {
 
     public String getName() {
         return name;
+    }
+
+    public int getNumJewels() {
+        return numJewels;
     }
 
     /**
@@ -108,6 +118,8 @@ public class Character {
         }
         builder.append("\n\n");
         builder.append(stats);
+        builder.append("\n");
+        builder.append(String.format("Number of Jewel Sockets: %d", numJewels));
         if (!keystones.isEmpty()) {
             builder.append("\n");
             for (KeystoneNode keystone : keystones) {

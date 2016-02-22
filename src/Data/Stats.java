@@ -105,8 +105,8 @@ public class Stats implements Iterable<Stat> {
      * @param type the {@link AttributeType} of interest
      * @return the total attribute value of that type
      */
-    public int calculateAttributeValue(AttributeType type) {
-        return (int) (getAdditionalAttributeValue(type) * (1 + ((double) getPercentAttributeValue(type)) / 100));
+    public double calculateAttributeValue(AttributeType type) {
+        return ((int) (getAdditionalAttributeValue(type) * (1 + getPercentAttributeValue(type) / 100)));
     }
 
     /**
