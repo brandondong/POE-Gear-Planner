@@ -1,5 +1,8 @@
 package Data;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Created by Brandon on 2016-02-19.
  *
@@ -7,22 +10,6 @@ package Data;
  */
 public enum ResistType {
     FIRE, COLD, LIGHTNING, CHAOS;
-
-    /**
-     *
-     * @return the unique identifier representing additional resistance of this type
-     */
-    public String getAdditionalId() {
-        return String.format("+%%.1f%%%% to %s Resistance", this);
-    }
-
-    /**
-     *
-     * @return the unique identifier representing maximum resistance of this type
-     */
-    public String getMaxId() {
-        return String.format("+%%.1f%%%% to maximum %s Resistance", this);
-    }
 
     @Override
     public String toString() {

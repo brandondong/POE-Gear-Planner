@@ -12,16 +12,8 @@ public enum AttributeType {
      *
      * @return the unique identifier representing a flat addition of this type
      */
-    public String getAdditionalId() {
+    public String getId() {
         return String.format("+%%.1f to %s", this);
-    }
-
-    /**
-     *
-     * @return the unique identifier representing a percentage addition of this type
-     */
-    public String getPercentId() {
-        return String.format("%%.1f%%%% increased %s ", this);
     }
 
     @Override

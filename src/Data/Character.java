@@ -104,7 +104,7 @@ public class Character {
         CharacterStats combined = combinedStats();
         for (AttributeType type : AttributeType.values()) {
             builder.append("\n");
-            builder.append(new Stat(type.getAdditionalId(), combined.calculateAttributeValue(type)));
+            builder.append(new Stat(type.getId(), combined.calculateAttributeValue(type)));
         }
         builder.append("\n\n");
         builder.append(stats);

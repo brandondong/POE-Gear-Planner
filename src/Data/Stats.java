@@ -39,7 +39,15 @@ public class Stats implements Iterable<Stat> {
      * @return the additional resistance of that type
      */
     public double getAdditionalResistValue(ResistType type) {
-        return getStatValue(type.getAdditionalId());
+        double value = 0;
+        for (Stat stat : this) {
+            String id = stat.getId();
+            if ((id.contains(type.toString()) || id.contains("all"))
+                    && id.contains("Resistance") && !id.contains("maximum") && !id.contains("Minions")) {
+                value += stat.getValue();
+            }
+        }
+        return value;
     }
 
     /**
@@ -48,7 +56,15 @@ public class Stats implements Iterable<Stat> {
      * @return the maximum resistance of that type
      */
     public double getMaximumResistValue(ResistType type) {
-        return getStatValue(type.getMaxId());
+        double value = 0;
+        for (Stat stat : this) {
+            String id = stat.getId();
+            if ((id.contains(type.toString()) || id.contains("all"))
+                    && id.contains("Resistance") && id.contains("maximum") && !id.contains("Minions")) {
+                value += stat.getValue();
+            }
+        }
+        return value;
     }
 
     /**
@@ -57,7 +73,15 @@ public class Stats implements Iterable<Stat> {
      * @return the flat addition value of that type
      */
     public double getAdditionalAttributeValue(AttributeType type) {
-        return getStatValue(type.getAdditionalId());
+        double value = 0;
+        for (Stat stat : this) {
+            String id = stat.getId();
+            if ((id.contains(type.toString()) || id.contains("all Attributes"))
+                    && id.contains("to")) {
+                value += stat.getValue();
+            }
+        }
+        return value;
     }
 
     /**
@@ -66,7 +90,14 @@ public class Stats implements Iterable<Stat> {
      * @return the percentage addition value of that type
      */
     public double getPercentAttributeValue(AttributeType type) {
-        return getStatValue(type.getPercentId());
+        double value = 0;
+        for (Stat stat : this) {
+            String id = stat.getId();
+            if (id.contains(type.toString()) && id.contains("increased")) {
+                value += stat.getValue();
+            }
+        }
+        return value;
     }
 
     /**

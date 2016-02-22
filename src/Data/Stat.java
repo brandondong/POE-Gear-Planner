@@ -11,6 +11,8 @@ public class Stat {
 
     private double value;
 
+    private StatType type;
+
     /**
      *
      * @param description a description in the format of what you would see on the Passive Skill Tree
@@ -18,6 +20,7 @@ public class Stat {
     public Stat(String description) {
         id = parseId(description);
         value = parseValue(description);
+        classifyType();
     }
 
     /**
@@ -28,6 +31,7 @@ public class Stat {
     public Stat(String id, double value) {
         this.id = id;
         this.value = value;
+        classifyType();
     }
 
     /**
@@ -54,6 +58,26 @@ public class Stat {
         return String.format(id, value);
     }
 
+    private void classifyType() {
+        if (id.contains("Minions") || id.contains("Zombies") || id.contains("Spectres") || id.contains("Skeletons")) {
+            type = StatType.MINION;
+        } else if (id.contains("Aura") || id.contains("Reserved")) {
+            type = StatType.AURA;
+        } else if (id.contains("Curse")) {
+            type = StatType.CURSE;
+        } else if (id.contains("Mana")) {
+            type = StatType.MANA;
+        } else if (id.contains("Life") || id.contains("Shield") || id.contains("Resistance")
+                || id.contains("Armour") || id.contains("Evasion")
+                || id.contains("Block") || id.contains("Damage from Critical")) {
+            type = StatType.DEFENCE;
+        } else if (id.contains("Speed") || id.contains("Damage") || id.contains("Area") || id.contains("Critical")) {
+            type = StatType.OFFENCE;
+        } else {
+            type = StatType.MISCELLANEOUS;
+        }
+    }
+
     /**
      *
      * @return the unique identifier
@@ -68,6 +92,10 @@ public class Stat {
      */
     public double getValue() {
         return value;
+    }
+
+    public StatType getType() {
+        return type;
     }
 
     private String parseId(String description) {
