@@ -30,7 +30,7 @@ public class GameConstants {
 
     public static final JSONObject SKILL_TREE_DATA = getSkillTreeData();
 
-    public static final Map<Integer, Node> SKILL_TREE_NODES = getSkillTreeNodes();
+    public static final Map<Integer, SimpleNode> SKILL_TREE_NODES = getSkillTreeNodes();
 
     /**
      *
@@ -52,12 +52,12 @@ public class GameConstants {
      *
      * @return a map containing all the nodes of the Passive Skill Tree
      */
-    private static Map<Integer, Node> getSkillTreeNodes() {
+    private static Map<Integer, SimpleNode> getSkillTreeNodes() {
         try {
-            Map<Integer, Node> data = new HashMap<>();
+            Map<Integer, SimpleNode> data = new HashMap<>();
             JSONArray array = SKILL_TREE_DATA.getJSONArray("nodes");
             for (int i = 0; i < array.length(); i++) {
-                Node node = parseNode(array.getJSONObject(i));
+                SimpleNode node = parseNode(array.getJSONObject(i));
                 data.put(node.getId(), node);
             }
             return data;
@@ -67,15 +67,15 @@ public class GameConstants {
         return new HashMap<>();
     }
 
-    private static Node parseNode(JSONObject obj) throws JSONException {
+    private static SimpleNode parseNode(JSONObject obj) throws JSONException {
         int id = obj.getInt("id");
         JSONArray array = obj.getJSONArray("sd");
         if (obj.getBoolean("ks")) {
             return new KeystoneNode(id, obj.getString("dn"), array.getString(0));
         } else if (obj.getString("dn").equals("Jewel Socket")) {
-            return new Jewel(id);
+            return new SimpleNode(id);
         }
-        return new Node(id, parseStats(array));
+        return new StatsNode(id, parseStats(array));
     }
 
     private static Stats parseStats(JSONArray array) throws JSONException {

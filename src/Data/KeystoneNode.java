@@ -5,7 +5,7 @@ package Data;
  *
  * Represents a keystone node on the Passive Skill Tree
  */
-public class KeystoneNode extends Node {
+public class KeystoneNode extends SimpleNode {
 
     private String name;
 
@@ -18,7 +18,7 @@ public class KeystoneNode extends Node {
      * @param description the keystone description
      */
     public KeystoneNode(int id, String name, String description) {
-        super(id, new CharacterStats());
+        super(id);
         this.name = name;
         this.description = description;
     }

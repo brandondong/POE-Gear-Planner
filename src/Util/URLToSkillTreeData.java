@@ -39,14 +39,14 @@ public class URLToSkillTreeData {
         for (int i = 6; i + 1 < array.length; i += 2) {
             byte[] int16 = { array[i], array[i + 1] };
             int id = ByteBuffer.wrap(int16).getShort() & 0xffff;
-            Node node = GameConstants.SKILL_TREE_NODES.get(id);
+            SimpleNode node = GameConstants.SKILL_TREE_NODES.get(id);
             if (node != null) {
                 if (node instanceof KeystoneNode) {
                     character.addKeystone((KeystoneNode) node);
-                } else if (node instanceof Jewel) {
-                    character.incNumJewels();
+                } else if (node instanceof StatsNode) {
+                    character.addStats(((StatsNode) node).getStats());
                 } else {
-                    character.addStats(node.getStats());
+                    character.incNumJewels();
                 }
             }
         }
