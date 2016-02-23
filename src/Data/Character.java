@@ -1,8 +1,5 @@
 package Data;
 
-import Util.ProgramConstants;
-
-import java.security.Key;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -14,6 +11,8 @@ import java.util.Set;
  * Represents a character with information about stats, gems, and items
  */
 public class Character {
+
+    public static final String NEW_CHARACTER_NAME = "New Build";
 
     private CharacterClass characterClass;
 
@@ -31,7 +30,7 @@ public class Character {
 
     public Character(CharacterClass characterClass) {
         this.characterClass = characterClass;
-        name = ProgramConstants.NEW_CHARACTER_NAME;
+        name = NEW_CHARACTER_NAME;
         stats = new CharacterStats();
         keystones = new HashSet<>();
         items = new ArrayList<>();

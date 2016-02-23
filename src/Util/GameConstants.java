@@ -28,7 +28,7 @@ public class GameConstants {
 
     public static final String PASSIVE_TREE_URL_PREFIX = "passive-skill-tree/";
 
-    public static final JSONObject SKILL_TREE_DATA = getSkillTreeData();
+    public static final JSONObject SKILL_TREE_DATA = getJSONData("skilltree.json");
 
     public static final Map<Integer, SimpleNode> SKILL_TREE_NODES = getSkillTreeNodes();
 
@@ -36,13 +36,13 @@ public class GameConstants {
      *
      * @return the json data of the Passive Skill Tree
      */
-    private static JSONObject getSkillTreeData() {
+    private static JSONObject getJSONData(String file) {
         try {
-            return new JSONObject(FileUtils.readFileToString(new File("skilltree.json")));
+            return new JSONObject(FileUtils.readFileToString(new File(file)));
         } catch (JSONException e) {
-            Logger.addError("Error trying to parse skill tree data.", e);
+            Logger.addError(String.format("Error trying to parse %s.", file), e);
         } catch (IOException e) {
-            Logger.addError("Error trying to read skilltree.json.", e);
+            Logger.addError(String.format("Error trying to read %s.", file), e);
         }
         return null;
     }
