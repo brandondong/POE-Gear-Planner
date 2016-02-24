@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -16,6 +17,8 @@ import java.util.List;
 public class POEdbToJson {
 
     public static final String POEDB_GEM_PREFIX = "http://poedb.tw/us/gem.php?n=";
+
+    public static final String POEDB_GEM_LIST_PREFIX = "http://poedb.tw/us/gem.php?c=";
 
     public static void writeGemData(String name) throws Exception {
         String source = getUrlSource(createUrlFromGemName(name));
@@ -55,11 +58,31 @@ public class POEdbToJson {
         return l;
     }
 
+    public static List<String> getGemsList(String source) throws Exception {
+        List<String> l = new ArrayList<>();
+        while (source.contains("</a><td>")) {
+            int index = source.indexOf("</a><td>");
+            if (source.charAt(index - 1) != '>') {
+                int start = source.indexOf("width='16'/>");
+                l.add(source.substring(start + "width='16'/>".length(), index));
+            }
+            source = source.substring(index + "</a><td>".length());
+        }
+        return l;
+    }
+
     private POEdbToJson() {
         // prevent instantiation
     }
 
     public static void main(String[] args) throws Exception {
+        List<String> gems = new ArrayList<>();
+        for (String i : Arrays.asList("18", "19", "vaal")) {
+            String url = POEDB_GEM_LIST_PREFIX + i;
+            String source = getUrlSource(url);
+            gems.addAll(getGemsList(source));
+        }
+        System.out.println(gems);
         writeGemData("Fireball");
     }
 }

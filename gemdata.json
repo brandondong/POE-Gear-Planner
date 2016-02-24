@@ -1,0 +1,13 @@
+{
+  "Sample": {
+    "Strength": [
+      1, 2, 3, 4
+    ],
+    "Intelligence": [
+      1, 2
+    ],
+    "Dexterity": [
+
+    ]
+  }
+}
