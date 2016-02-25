@@ -1,8 +1,6 @@
 package Util;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
@@ -23,7 +21,56 @@ public class POEdbToJson {
     public static void writeGemData(String name) throws Exception {
         String source = getUrlSource(createUrlFromGemName(name));
         List<String> atts = getAttributes(source);
+        int count = countColumns(source);
         System.out.println(atts);
+        System.out.println(count);
+        writeToFile(atts, source, count, name);
+    }
+
+    private static int countColumns(String source) {
+        int count = 1;
+        int index = source.indexOf("<th>Level<th>") + "<th>".length();
+        source = source.substring(index);
+        while (source.indexOf("Experience") > 0) {
+            source = source.substring(source.indexOf("<th>") + "<th>".length());
+            count++;
+        }
+        return count;
+    }
+
+    private static void writeToFile(List<String> atts, String source, int cols, String name) throws Exception {
+        List<List<Integer>> map = new ArrayList<>();
+        for (int i = 0; i < atts.size(); i++) {
+            map.add(new ArrayList<Integer>());
+        }
+        int start = source.indexOf("Experience<tr><td align='center'>") + "Experience<tr><td align='center'>".length();
+        source = source.substring(start);
+        for (int n = 0; n < 20; n++) {
+            for (int i = 0; i < cols; i++) {
+                int index = source.indexOf("<td align='center'>") + "<td align='center'>".length();
+                if (i > 1 && i - 2 < atts.size()) {
+                    map.get(i - 2).add(Integer.valueOf(source.substring(0, source.indexOf("<td align='center'>"))));
+                }
+                source = source.substring(index);
+            }
+        }
+        writeToFile(atts, map, name);
+    }
+
+    private static void writeToFile(List<String> atts, List<List<Integer>> map, String name) throws Exception {
+        File file = new File("gemdata.json");
+        FileWriter fw = new FileWriter(file.getAbsoluteFile(), true);
+        BufferedWriter bw = new BufferedWriter(fw);
+        bw.write(String.format("\"%s\": {\n", name));
+        for (int i = 0; i < atts.size(); i++) {
+            bw.write(String.format("\"%s\": %s", atts.get(i), map.get(i)));
+            if (i < atts.size() - 1) {
+                bw.write(",");
+            }
+            bw.write("\n");
+        }
+        bw.write("}\n");
+        bw.close();
     }
 
     private static String createUrlFromGemName(String name) {
@@ -48,7 +95,7 @@ public class POEdbToJson {
     private static List<String> getAttributes(String source) {
         List<String> l = new ArrayList<>();
         int start = source.indexOf("Requires Level<th>") + "Requires Level<th>".length();
-        int end = source.indexOf("Mana Cost");
+        int end = source.indexOf("Mana Cost<th>");
         String atts = source.substring(start, end);
         while (atts.length() > 0) {
             int index = atts.indexOf("<th>");
@@ -58,6 +105,11 @@ public class POEdbToJson {
         return l;
     }
 
+    /**
+     *
+     * @param source the website source
+     * @return a list of gem names from the given website
+     */
     public static List<String> getGemsList(String source) throws Exception {
         List<String> l = new ArrayList<>();
         while (source.contains("</a><td>")) {
@@ -83,6 +135,9 @@ public class POEdbToJson {
             gems.addAll(getGemsList(source));
         }
         System.out.println(gems);
-        writeGemData("Fireball");
+        writeGemData("Dual Strike");
+//        for (String gem : gems) {
+//            writeGemData(gem);
+//        }
     }
 }
