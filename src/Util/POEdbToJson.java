@@ -18,6 +18,11 @@ public class POEdbToJson {
 
     public static final String POEDB_GEM_LIST_PREFIX = "http://poedb.tw/us/gem.php?c=";
 
+    /**
+     * Writes the gem attribute data into gemdata.json
+     *
+     * @param name the gem name
+     */
     public static void writeGemData(String name) throws Exception {
         String source = getUrlSource(createUrlFromGemName(name));
         List<String> atts = getAttributes(source);
@@ -49,7 +54,15 @@ public class POEdbToJson {
             for (int i = 0; i < cols; i++) {
                 int index = source.indexOf("<td align='center'>") + "<td align='center'>".length();
                 if (i > 1 && i - 2 < atts.size()) {
-                    map.get(i - 2).add(Integer.valueOf(source.substring(0, source.indexOf("<td align='center'>"))));
+                    try {
+                        String value = source.substring(0, source.indexOf("<td align='center'>"));
+                        if (value.length() > 0) {
+                            map.get(i - 2).add(Integer.valueOf(value));
+                        }
+                    } catch (Exception e) {
+                        writeToFile(atts, map, name);
+                        return;
+                    }
                 }
                 source = source.substring(index);
             }
@@ -69,7 +82,7 @@ public class POEdbToJson {
             }
             bw.write("\n");
         }
-        bw.write("}\n");
+        bw.write("},\n");
         bw.close();
     }
 
@@ -95,8 +108,15 @@ public class POEdbToJson {
     private static List<String> getAttributes(String source) {
         List<String> l = new ArrayList<>();
         int start = source.indexOf("Requires Level<th>") + "Requires Level<th>".length();
-        int end = source.indexOf("Mana Cost<th>");
+        int end = source.indexOf("Mana Multiplier<th>");
+        if (end == -1) {
+            end = source.indexOf("Mana Cost<th>");
+        }
+        if (end == -1) {
+            end = source.indexOf("Mana Reserved<th>");
+        }
         String atts = source.substring(start, end);
+        System.out.println(atts);
         while (atts.length() > 0) {
             int index = atts.indexOf("<th>");
             l.add(atts.substring(0, index));
@@ -135,9 +155,11 @@ public class POEdbToJson {
             gems.addAll(getGemsList(source));
         }
         System.out.println(gems);
-        writeGemData("Dual Strike");
-//        for (String gem : gems) {
-//            writeGemData(gem);
-//        }
+        for (int i = 0; i < gems.size(); i++) {
+            System.out.println(i);
+            String gem = gems.get(i);
+            System.out.println(gem);
+            writeGemData(gem);
+        }
     }
 }
