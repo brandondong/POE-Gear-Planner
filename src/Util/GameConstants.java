@@ -1,6 +1,6 @@
 package Util;
 
-import Data.*;
+import Model.*;
 import org.apache.commons.io.FileUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -8,8 +8,7 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by Brandon on 2016-02-19.
@@ -31,6 +30,8 @@ public class GameConstants {
     public static final JSONObject SKILL_TREE_DATA = getJSONData("skilltree.json");
 
     public static final Map<Integer, SimpleNode> SKILL_TREE_NODES = getSkillTreeNodes();
+
+    public static final Map<String, GemData> GEM_DATABASE = initGemData();
 
     /**
      *
@@ -63,8 +64,8 @@ public class GameConstants {
             return data;
         } catch (JSONException e) {
             Logger.addError("Could not parse node information from skilltree.json.", e);
+            return new HashMap<>();
         }
-        return new HashMap<>();
     }
 
     private static SimpleNode parseNode(JSONObject obj) throws JSONException {
@@ -86,7 +87,49 @@ public class GameConstants {
         return stats;
     }
 
+    /**
+     *
+     * @return a map containing all gem data
+     */
+    private static Map<String, GemData> initGemData() {
+        try {
+            Map<String, GemData> map = new HashMap<>();
+            JSONObject obj = getJSONData("gemdata.json");
+            for (Iterator<String> keys = obj.keys(); keys.hasNext();) {
+                String key = keys.next();
+                GemData data = getGemData(key, obj.getJSONObject(key));
+                map.put(key, data);
+            }
+            return map;
+        } catch (JSONException e) {
+            Logger.addError("Could not parse node information from gemdata.json.", e);
+            return new HashMap<>();
+        }
+    }
+
+    private static GemData getGemData(String name, JSONObject obj) throws JSONException {
+        GemData data = new GemData(name);
+        for (Iterator<String> keys = obj.keys(); keys.hasNext();) {
+            String key = keys.next();
+            data.addAttribute(AttributeType.valueOf(key.toUpperCase()), convertToList(obj.getJSONArray(key)));
+        }
+        return data;
+    }
+
+    private static List<Integer> convertToList(JSONArray array) throws JSONException {
+        List<Integer> list = new ArrayList<>();
+        for (int i = 0; i < array.length(); i++) {
+            list.add(array.getInt(i));
+        }
+        return list;
+    }
+
     private GameConstants() {
         // prevent instantiation
+    }
+
+    public static void main(String[] args) {
+        System.out.println(GEM_DATABASE.get("Raise Zombie").getAttributeAtLevel(AttributeType.INTELLIGENCE, 22));
+        System.out.println(GEM_DATABASE.get("Portal").getAttributeAtLevel(AttributeType.DEXTERITY, 70));
     }
 }

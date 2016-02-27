@@ -1,7 +1,7 @@
 package Util;
 
-import Data.*;
-import Data.Character;
+import Model.*;
+import Model.Character;
 
 import javax.xml.bind.DatatypeConverter;
 import java.nio.ByteBuffer;

@@ -8,7 +8,8 @@ package Util;
 public class Logger {
 
     public static void addError(String message, Exception e) {
-
+        System.out.println(message);
+        e.printStackTrace();
     }
 
     public static void addWarning(String message) {
