@@ -127,9 +127,4 @@ public class GameConstants {
     private GameConstants() {
         // prevent instantiation
     }
-
-    public static void main(String[] args) {
-        System.out.println(GEM_DATABASE.get("Raise Zombie").getAttributeAtLevel(AttributeType.INTELLIGENCE, 22));
-        System.out.println(GEM_DATABASE.get("Portal").getAttributeAtLevel(AttributeType.DEXTERITY, 70));
-    }
 }

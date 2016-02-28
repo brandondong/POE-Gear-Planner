@@ -16,6 +16,10 @@ public enum AttributeType {
         return String.format("+%%.1f to %s", this);
     }
 
+    public GemType getType() {
+        return GemType.valueOf(super.toString());
+    }
+
     @Override
     public String toString() {
         String name = super.toString();

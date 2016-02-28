@@ -37,6 +37,7 @@ public class GemData {
         if (!map.containsKey(type)) {
             return 0;
         }
+        level = Math.max(level, 1);
         List<Integer> list = map.get(type);
         if (level > list.size()) {
             return list.get(list.size() - 1);
@@ -59,7 +60,7 @@ public class GemData {
      *
      * @return the {@link AttributeType} which the gem requires
      */
-    public Set<AttributeType> getAttributes() {
+    public Set<AttributeType> getAttributeTypes() {
         return map.keySet();
     }
 
