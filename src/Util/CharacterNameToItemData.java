@@ -101,6 +101,10 @@ public class CharacterNameToItemData {
                 accountName, CHARACTER_NAME_PARAM, charName);
     }
 
+    private CharacterNameToItemData() {
+        // prevent instantiation
+    }
+
     public static void main(String[] args) {
         for (Item item : getItemsFromCharacter("agentvenom1", "WTBsurvivability")) {
             System.out.println(item + "\n");
