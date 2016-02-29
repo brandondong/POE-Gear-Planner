@@ -13,7 +13,7 @@ public class Logger {
     }
 
     public static void addWarning(String message) {
-
+        System.out.println(message);
     }
 
     private Logger() {

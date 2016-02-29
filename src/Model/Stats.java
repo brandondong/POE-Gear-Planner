@@ -118,6 +118,14 @@ public class Stats implements Iterable<Stat> {
 
     /**
      *
+     * @param description a description in the format of what you would see on the Passive Skill Tree
+     */
+    public void addStat(String description) {
+        addStat(new Stat(description));
+    }
+
+    /**
+     *
      * @param id the unique identifier of the stat
      * @param value the value of the stat to be added
      */

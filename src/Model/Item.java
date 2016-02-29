@@ -26,4 +26,9 @@ public class Item {
     public Requirements getRequirements() {
         return requirements;
     }
+
+    @Override
+    public String toString() {
+        return String.format("%s\n%s\n%s", name, requirements, stats);
+    }
 }

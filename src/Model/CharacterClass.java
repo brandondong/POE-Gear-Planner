@@ -44,6 +44,20 @@ public enum CharacterClass {
 
     /**
      *
+     * @param position the standard numerical value representing the class as defined in skilltree.json
+     * @return the {@link CharacterClass} representing the given input
+     */
+    public static CharacterClass getCharacterClass(int position) {
+        for (CharacterClass charClass : CharacterClass.values()) {
+            if (position == charClass.getPosition()) {
+                return charClass;
+            }
+        }
+        return CharacterClass.SCION;
+    }
+
+    /**
+     *
      * @return the corresponding number associated with the class as specified in skilltree.json
      */
     public int getPosition() {

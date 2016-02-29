@@ -52,7 +52,9 @@ public class Stat {
      * @return a description in the format of what you would see on the Passive Skill Tree
      */
     public String getDescription() {
-        if (value == (int) value) {
+        if (value == 0) {
+            return id;
+        } else if (value == (int) value) {
             return String.format(id.replace(".1f", "d"), (int) value);
         }
         return String.format(id, value);
@@ -69,7 +71,7 @@ public class Stat {
             type = StatType.MANA;
         } else if (id.contains("Life") || id.contains("Shield") || id.contains("Resistance")
                 || id.contains("Armour") || id.contains("Evasion")
-                || id.contains("Block") || id.contains("Damage from Critical")) {
+                || id.contains("Block") || id.contains("Damage from Critical") || id.contains("taken")) {
             type = StatType.DEFENCE;
         } else if (id.contains("Speed") || id.contains("Damage") || id.contains("Area") || id.contains("Critical")) {
             type = StatType.OFFENCE;

@@ -24,7 +24,7 @@ public class POEdbToJson {
      * @param name the gem name
      */
     public static void writeGemData(String name) throws Exception {
-        String source = getUrlSource(createUrlFromGemName(name));
+        String source = CommonUtil.getUrlSource(createUrlFromGemName(name));
         List<String> atts = getAttributes(source);
         int count = countColumns(source);
         System.out.println(atts);
@@ -91,20 +91,6 @@ public class POEdbToJson {
         return POEDB_GEM_PREFIX + name;
     }
 
-    private static String getUrlSource(String url) throws IOException {
-        URL site = new URL(url);
-        URLConnection c = site.openConnection();
-        BufferedReader in = new BufferedReader(new InputStreamReader(
-                c.getInputStream(), "UTF-8"));
-        String inputLine;
-        StringBuilder a = new StringBuilder();
-        while ((inputLine = in.readLine()) != null)
-            a.append(inputLine);
-        in.close();
-
-        return a.toString();
-    }
-
     private static List<String> getAttributes(String source) {
         List<String> l = new ArrayList<>();
         int start = source.indexOf("Requires Level<th>") + "Requires Level<th>".length();
@@ -151,7 +137,7 @@ public class POEdbToJson {
         List<String> gems = new ArrayList<>();
         for (String i : Arrays.asList("18", "19", "vaal")) {
             String url = POEDB_GEM_LIST_PREFIX + i;
-            String source = getUrlSource(url);
+            String source = CommonUtil.getUrlSource(url);
             gems.addAll(getGemsList(source));
         }
         System.out.println(gems);
