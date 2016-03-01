@@ -7,6 +7,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -112,11 +113,10 @@ public class CharacterNameToItemData {
 
     private static Stats getStats(JSONObject obj) throws JSONException {
         Stats stats = new Stats();
-        if (obj.has("implicitMods")) {
-            stats.addStats(getStats(obj.getJSONArray("implicitMods")));
-        }
-        if (obj.has("explicitMods")) {
-            stats.addStats(getStats(obj.getJSONArray("explicitMods")));
+        for (String param : Arrays.asList("implicitMods", "explicitMods", "craftedMods")) {
+            if (obj.has(param)) {
+                stats.addStats(getStats(obj.getJSONArray(param)));
+            }
         }
         return stats;
     }

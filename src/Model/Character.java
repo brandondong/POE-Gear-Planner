@@ -101,24 +101,22 @@ public class Character extends Equipment {
      */
     public String getInfo() {
         StringBuilder builder = new StringBuilder();
-        builder.append(name);
-        builder.append("\n");
-        builder.append(characterClass);
+        builder.append(name).append("\n").append(characterClass);
         CharacterStats combined = combinedStats();
         for (AttributeType type : AttributeType.values()) {
-            builder.append("\n");
-            builder.append(new Stat(type.getId(), combined.calculateAttributeValue(type)));
+            builder.append("\n").append(String.format("%d to %s", ((int) combined.calculateAttributeValue(type)), type));
         }
-        builder.append("\n\n");
-        builder.append(stats);
-        builder.append("\n");
+        builder.append("\n\nSTATS:\n").append(stats).append("\n");
         builder.append(String.format("Number of Jewel Sockets: %d", numJewels));
         if (!keystones.isEmpty()) {
             builder.append("\n");
             for (KeystoneNode keystone : keystones) {
-                builder.append("\n");
-                builder.append(keystone);
+                builder.append("\n").append(keystone);
             }
+        }
+        String items = super.toString();
+        if (items.length() > 0) {
+            builder.append("\n\n").append(items);
         }
         return builder.toString();
     }
