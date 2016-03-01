@@ -53,7 +53,7 @@ public class URLToSkillTreeData {
     }
 
     public static void main(String[] args) {
-        Character character = decodeURL("https://www.pathofexile.com/fullscreen-passive-skill-tree/AAAAAwABA3UDlgSzBg4J9gthDF8OPBQgFE0UcRZvGFYYkRo4Gj4abBynJKolvCcvJ-0o-jWSNuk6UjrhOyg8BTwtPfxBh0bXSshN41BHU6VYY1h3WfNaUl8EXz9gQ2P9ZlRmnmhlaHRo8moeajtuPXGFcg9yqXaseuZ7w3zZggeCm4LHgwmDX4PMjM-QVZErkc6Ub5SgmK2aO5tdna6f36IApleomqyqr2y3PrvtvJ--gMBmxFjE9sauz37SIdR82E3Yvdl82mLbT9-_4MPjauoY7w7vfPAf8i_yQfJF8pfz3fZI9zL46_no-tL8S_4K_o8=");
+        Character character = decodeURL("https://www.pathofexile.com/fullscreen-passive-skill-tree/AAAAAwMBAW8GSQceDXwQlxFQE2wV1xcvGFYYahpsGyUc3B0UHU8dqh3ZIvQo-iqYLKYsvzLRNAo1uTdmN4NDVEQERUdGcUlRSbFLrkyzTblSKVXgVmNXyVgHWFpakVxrZp5odGqsa9tsC20ZeC985X0Yf8aCx4RIhWCGrohAiEKLeox2jxqPRo_6kDOTJ5UumK2boZ2unjyhL6aspuunCKcrqH2qxLQMtzG4k76Kv5fBxcNtyT3K08y80B_T-9fP2QvZW9pi2t3fiuGI4vfpAuq66-7sGOyK74jv6_DV8h70cffB99f5N_no-oD60v5J");
         System.out.println(character);
     }
 }

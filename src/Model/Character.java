@@ -10,7 +10,7 @@ import java.util.Set;
  *
  * Represents a character with information about stats, gems, and items
  */
-public class Character {
+public class Character extends Equipment {
 
     public static final String NEW_CHARACTER_NAME = "New Build";
 
@@ -19,10 +19,6 @@ public class Character {
     private CharacterStats stats;
 
     private Set<KeystoneNode> keystones;
-
-    private List<Gem> gems;
-
-    private List<Item> items;
 
     private String name;
 
@@ -33,8 +29,6 @@ public class Character {
         name = NEW_CHARACTER_NAME;
         stats = new CharacterStats();
         keystones = new HashSet<>();
-        items = new ArrayList<>();
-        gems = new ArrayList<>();
     }
 
     /**

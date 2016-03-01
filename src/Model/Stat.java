@@ -1,5 +1,8 @@
 package Model;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * Created by Brandon on 2016-02-20.
  *
@@ -13,13 +16,23 @@ public class Stat {
 
     private StatType type;
 
+    private boolean isNumeric;
+
     /**
+     * Tries to parse the stat description into a formatted id and value
      *
      * @param description a description in the format of what you would see on the Passive Skill Tree
      */
     public Stat(String description) {
-        id = parseId(description);
-        value = parseValue(description);
+        if (description.matches(".*\\d+.*")) {
+            id = parseId(description);
+            value = parseValue(description);
+            isNumeric = true;
+        } else {
+            id = description;
+            value = 0;
+            isNumeric = false;
+        }
         classifyType();
     }
 
@@ -31,6 +44,7 @@ public class Stat {
     public Stat(String id, double value) {
         this.id = id;
         this.value = value;
+        isNumeric = true;
         classifyType();
     }
 
@@ -52,7 +66,7 @@ public class Stat {
      * @return a description in the format of what you would see on the Passive Skill Tree
      */
     public String getDescription() {
-        if (value == 0) {
+        if (!isNumeric) {
             return id;
         } else if (value == (int) value) {
             return String.format(id.replace(".1f", "d"), (int) value);
@@ -101,12 +115,13 @@ public class Stat {
     }
 
     private String parseId(String description) {
-        return description.replaceAll("%", "%%").replaceFirst("[\\d\\.]+", "%.1f");
+        return description.replaceFirst("%", "%%").replaceFirst("[\\d\\.]+", "%.1f");
     }
 
     private double parseValue(String description) {
-        if (description.matches(".*\\d+.*")) {
-            return Double.valueOf(description.replaceAll("[^\\d\\.]", ""));
+        Matcher m = Pattern.compile("[\\d\\.]+").matcher(description);
+        if (m.find()) {
+            return Double.valueOf(m.group());
         }
         return 0;
     }

@@ -22,19 +22,62 @@ public class CharacterNameToItemData {
 
     public static final String CHARACTER_NAME_PARAM = "character";
 
-    public static List<Item> getItemsFromCharacter(String accountName, String charName) {
+    /**
+     *
+     * @param accountName the name of the account
+     * @param charName the character name
+     * @return the {@link Equipment} in-game on that character
+     */
+    public static Equipment getEquipmentFromCharacter(String accountName, String charName) {
         try {
-            List<Item> items = new ArrayList<>();
+            Equipment equipment = new Equipment();
             String source = CommonUtil.getUrlSource(getUrl(accountName, charName));
-            JSONArray array = new JSONObject(source).getJSONArray("items");
-            for (int i = 0; i < array.length(); i++) {
-                addItem(array.getJSONObject(i), items);
-            }
-            return items;
+            equipment.addItems(getItemsFromCharacter(source));
+            equipment.addGems(getGemsFromCharacter(source));
+            return equipment;
         } catch (Exception e) {
-            Logger.addError("Failed to retrieve character item information.", e);
-            return new ArrayList<>();
+            Logger.addError("Failed to retrieve character information.", e);
+            return new Equipment();
         }
+    }
+
+    private static List<Item> getItemsFromCharacter(String source) throws JSONException {
+        List<Item> items = new ArrayList<>();
+        JSONArray array = new JSONObject(source).getJSONArray("items");
+        for (int i = 0; i < array.length(); i++) {
+            addItem(array.getJSONObject(i), items);
+        }
+        return items;
+    }
+
+    private static List<Gem> getGemsFromCharacter(String source) throws JSONException {
+        List<Gem> gems = new ArrayList<>();
+        JSONArray array = new JSONObject(source).getJSONArray("items");
+        for (int i = 0; i < array.length(); i++) {
+            addGems(array.getJSONObject(i).getJSONArray("socketedItems"), gems);
+        }
+        return gems;
+    }
+
+    private static void addGems(JSONArray array, List<Gem> gems) throws JSONException {
+        for (int i = 0; i < array.length(); i++) {
+            addGem(array.getJSONObject(i), gems);
+        }
+    }
+
+    private static void addGem(JSONObject obj, List<Gem> gems) throws JSONException {
+        gems.add(new Gem(obj.getString("typeLine"), getLevel(obj.getJSONArray("properties"))));
+    }
+
+    private static int getLevel(JSONArray array) throws JSONException {
+        for (int i = 0; i < array.length(); i++) {
+            JSONObject obj = array.getJSONObject(i);
+            if (obj.getString("name").equals("Level")) {
+                String value = obj.getJSONArray("values").getJSONArray(0).getString(0);
+                return Integer.valueOf(value.replace(" (Max)", ""));
+            }
+        }
+        return 0;
     }
 
     private static void addItem(JSONObject obj, List<Item> items) throws JSONException {
@@ -86,16 +129,6 @@ public class CharacterNameToItemData {
         return stats;
     }
 
-    public static List<Gem> getGemsFromCharacter(String accountName, String charName) {
-        try {
-            String source = CommonUtil.getUrlSource(getUrl(accountName, charName));
-        } catch (Exception e) {
-            Logger.addWarning("Failed to retrieve character item information.");
-            return new ArrayList<>();
-        }
-        return null;
-    }
-
     private static String getUrl(String accountName, String charName) {
         return String.format("%s%s=%s&%s=%s", GET_ITEMS_URL_PREFIX, ACCOUNT_NAME_PARAM,
                 accountName, CHARACTER_NAME_PARAM, charName);
@@ -106,8 +139,6 @@ public class CharacterNameToItemData {
     }
 
     public static void main(String[] args) {
-        for (Item item : getItemsFromCharacter("agentvenom1", "WTBsurvivability")) {
-            System.out.println(item + "\n");
-        }
+        System.out.println(getEquipmentFromCharacter("agentvenom1", "WTBsurvivability"));
     }
 }

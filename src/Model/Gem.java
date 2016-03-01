@@ -68,6 +68,11 @@ public class Gem {
         return requirements;
     }
 
+    @Override
+    public String toString() {
+        return String.format("%s, level %d", name, level);
+    }
+
     public static void main(String[] args) {
         Gem gem = new Gem("Essence Drain", -1);
         System.out.println(gem.getName());
