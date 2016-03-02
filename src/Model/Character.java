@@ -36,13 +36,14 @@ public class Character extends Equipment {
      * @return <code>true</code> if the character meets the attribute requirements of their items and gems
      */
     public boolean hasAttributeRequirements() {
+        CharacterStats combined = combinedStats();
         for (Item item : items) {
-            if (!combinedStats().hasRequiredAttributes(item.getRequirements())) {
+            if (!combined.hasRequiredAttributes(item.getRequirements())) {
                 return false;
             }
         }
         for (Gem gem : gems) {
-            if (!combinedStats().hasRequiredAttributes(gem.getRequirements())) {
+            if (!combined.hasRequiredAttributes(gem.getRequirements())) {
                 return false;
             }
         }
@@ -61,6 +62,12 @@ public class Character extends Equipment {
             combined.addStats(item.getStats());
         }
         return combined;
+    }
+
+    public int getLifeAtLevel(int level) {
+        CharacterStats combined = combinedStats();
+        return (int) ((38 + (level * 12) + (combined.calculateAttributeValue(AttributeType.STRENGTH) / 2) +
+                        combined.getFlatLifeValue()) * (1 + ((double) combined.getPercentLifeValue()) / 100));
     }
 
     public void addStats(Stats other) {
@@ -104,7 +111,7 @@ public class Character extends Equipment {
         builder.append(name).append("\n").append(characterClass);
         CharacterStats combined = combinedStats();
         for (AttributeType type : AttributeType.values()) {
-            builder.append("\n").append(String.format("%d to %s", ((int) combined.calculateAttributeValue(type)), type));
+            builder.append("\n").append(String.format("%d to %s", combined.calculateAttributeValue(type), type));
         }
         builder.append("\n\nSTATS:\n").append(stats).append("\n");
         builder.append(String.format("Number of Jewel Sockets: %d", numJewels));

@@ -68,8 +68,8 @@ public class Stats implements Iterable<Stat> {
      * @param type the {@link AttributeType} of interest
      * @return the flat addition value of that type
      */
-    public double getAdditionalAttributeValue(AttributeType type) {
-        double value = 0;
+    public int getAdditionalAttributeValue(AttributeType type) {
+        int value = 0;
         for (Stat stat : this) {
             String id = stat.getId();
             if ((id.contains(type.toString()) || id.contains("all Attributes"))
@@ -85,11 +85,30 @@ public class Stats implements Iterable<Stat> {
      * @param type the {@link AttributeType} of interest
      * @return the percentage addition value of that type
      */
-    public double getPercentAttributeValue(AttributeType type) {
-        double value = 0;
+    public int getPercentAttributeValue(AttributeType type) {
+        int value = 0;
         for (Stat stat : this) {
             String id = stat.getId();
             if (id.contains(type.toString()) && id.contains("increased")) {
+                value += stat.getValue();
+            }
+        }
+        return value;
+    }
+
+    public int getFlatLifeValue() {
+        return getValueWithKeyphrase("to maximum Life");
+    }
+
+    public int getPercentLifeValue() {
+        return getValueWithKeyphrase("increased maximum Life");
+    }
+
+    private int getValueWithKeyphrase(String phrase) {
+        int value = 0;
+        for (Stat stat : this) {
+            String id = stat.getId();
+            if (id.contains(phrase)) {
                 value += stat.getValue();
             }
         }
@@ -101,8 +120,8 @@ public class Stats implements Iterable<Stat> {
      * @param type the {@link AttributeType} of interest
      * @return the total attribute value of that type
      */
-    public double calculateAttributeValue(AttributeType type) {
-        return ((int) (getAdditionalAttributeValue(type) * (1 + getPercentAttributeValue(type) / 100)));
+    public int calculateAttributeValue(AttributeType type) {
+        return ((int) (getAdditionalAttributeValue(type) * (1 + ((double) getPercentAttributeValue(type)) / 100)));
     }
 
     /**

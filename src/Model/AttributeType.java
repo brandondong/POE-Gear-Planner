@@ -26,7 +26,7 @@ public enum AttributeType {
      * @return the matching {@link AttributeType} for the abbreviation
      * @throws IllegalArgumentException if abbreviation matches none
      */
-    public static AttributeType getTypeFromAbbreviation(String s) throws IllegalArgumentException {
+    public static AttributeType getTypeFromAbbreviation(String s) {
         if (s.equals("Str")) {
             return STRENGTH;
         } else if (s.equals("Dex")) {
