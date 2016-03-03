@@ -50,6 +50,10 @@ public class Character extends Equipment {
         return true;
     }
 
+    public boolean hasUncappedResistances(Difficulty difficulty) {
+        return stats.hasUncappedResistances(difficulty);
+    }
+
     /**
      *
      * @return a new set of stats representing the character's stats considering passives, gear, and base stats
@@ -112,6 +116,10 @@ public class Character extends Equipment {
         CharacterStats combined = combinedStats();
         for (AttributeType type : AttributeType.values()) {
             builder.append("\n").append(String.format("%d to %s", combined.calculateAttributeValue(type), type));
+        }
+        builder.append("\n");
+        for (ResistType type : ResistType.values()) {
+            builder.append("\n").append(String.format("%d %s Resistance", combined.getEffectiveResist(type, Difficulty.MERCILESS), type));
         }
         builder.append("\n\nSTATS:\n").append(stats).append("\n");
         builder.append(String.format("Number of Jewel Sockets: %d", numJewels));

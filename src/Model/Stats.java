@@ -38,7 +38,7 @@ public class Stats implements Iterable<Stat> {
      * @param type the {@link ResistType} of interest
      * @return the additional resistance of that type
      */
-    public double getAdditionalResistValue(ResistType type) {
+    public int getAdditionalResistValue(ResistType type) {
         return getResistValue(type, false);
     }
 
@@ -47,12 +47,12 @@ public class Stats implements Iterable<Stat> {
      * @param type the {@link ResistType} of interest
      * @return the maximum resistance of that type
      */
-    public double getMaximumResistValue(ResistType type) {
+    public int getMaximumResistValue(ResistType type) {
         return getResistValue(type, true);
     }
 
-    private double getResistValue(ResistType type, boolean isMaximum) {
-        double value = 0;
+    private int getResistValue(ResistType type, boolean isMaximum) {
+        int value = 0;
         for (Stat stat : this) {
             String id = stat.getId();
             if ((id.contains(type.toString()) || id.contains("all")) && id.contains("Resistance")

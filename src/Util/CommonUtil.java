@@ -1,5 +1,6 @@
 package Util;
 
+import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -31,5 +32,13 @@ public class CommonUtil {
         in.close();
 
         return a.toString();
+    }
+
+    public static void openWebpage(String urlString) {
+        try {
+            Desktop.getDesktop().browse(new URL(urlString).toURI());
+        } catch (Exception e) {
+            Logger.addError("Could not open webpage.", e);
+        }
     }
 }
