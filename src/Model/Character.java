@@ -22,6 +22,8 @@ public class Character extends Equipment {
 
     private String name;
 
+    private int numNodes;
+
     private int numJewels;
 
     public Character(CharacterClass characterClass) {
@@ -29,6 +31,8 @@ public class Character extends Equipment {
         name = NEW_CHARACTER_NAME;
         stats = new CharacterStats();
         keystones = new HashSet<>();
+        numNodes = 0;
+        numJewels = 0;
     }
 
     /**
@@ -82,6 +86,10 @@ public class Character extends Equipment {
         keystones.add(node);
     }
 
+    public void incNumNodes() {
+        numNodes++;
+    }
+
     public void incNumJewels() {
         numJewels++;
     }
@@ -104,6 +112,10 @@ public class Character extends Equipment {
 
     public int getNumJewels() {
         return numJewels;
+    }
+
+    public int getPredictedLevel() {
+        return Math.max(1, numNodes - 20);
     }
 
     /**

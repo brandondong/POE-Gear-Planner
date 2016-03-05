@@ -1,5 +1,6 @@
 package Model;
 
+import Util.CommonUtil;
 import Util.GameConstants;
 
 /**
@@ -24,5 +25,10 @@ public enum Difficulty {
      */
     public int getResistancePenalty() {
         return resistancePenalty;
+    }
+
+    @Override
+    public String toString() {
+        return CommonUtil.formatUppercaseString(super.toString());
     }
 }

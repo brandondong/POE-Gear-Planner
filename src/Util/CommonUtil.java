@@ -41,4 +41,13 @@ public class CommonUtil {
             Logger.addError("Could not open webpage.", e);
         }
     }
+
+    /**
+     *
+     * @param name a string that is all upper case
+     * @return the given string with only the first letter as an upper case
+     */
+    public static String formatUppercaseString(String name) {
+        return name.substring(0, 1) + name.substring(1).toLowerCase();
+    }
 }
