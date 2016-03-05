@@ -19,6 +19,7 @@ public class Main extends JFrame {
 
     private void init() {
         getContentPane().add(new SkillTreeFormPart());
+        getContentPane().add(new BuildsListPart());
     }
 
     public static void main(String[] args) throws Exception {
