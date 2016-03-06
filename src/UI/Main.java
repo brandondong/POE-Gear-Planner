@@ -1,6 +1,7 @@
 package UI;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * Created by Brandon on 2016-03-03.
@@ -18,8 +19,10 @@ public class Main extends JFrame {
     }
 
     private void init() {
-        getContentPane().add(new SkillTreeFormPart());
-        getContentPane().add(new BuildsListPart());
+        setLayout(new FlowLayout());
+        add(new SkillTreeFormPart());
+        add(new BuildsListPart());
+        add(new GemListPart());
     }
 
     public static void main(String[] args) throws Exception {
