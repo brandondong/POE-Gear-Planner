@@ -4,8 +4,8 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridBagLayout ) {
-			"$columnSpecs": "0, 0:1.0, 0, 0, 0"
-			"$rowSpecs": "0, 0, 0:1.0"
+			"$columnSpecs": "0, 0, 0, 0:1.0, 0"
+			"$rowSpecs": "0, 0, 0, 0:1.0"
 			"$hGap": 5
 			"$vGap": 5
 			"$alignLeft": true
@@ -13,7 +13,7 @@ new FormModel {
 		} ) {
 			name: "this"
 			"border": new javax.swing.border.CompoundBorder( new javax.swing.border.TitledBorder( null, "Gems", 0, 0 ), new javax.swing.border.EmptyBorder( 5, 5, 5, 5 ) )
-			"preferredSize": new java.awt.Dimension( 350, 291 )
+			"preferredSize": new java.awt.Dimension( 400, 300 )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label1"
 				"text": "Gem name:"
@@ -23,25 +23,28 @@ new FormModel {
 				"editable": true
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
 				"gridx": 1
+				"gridwidth": 2
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label2"
 				"text": "Level:"
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
-				"gridx": 2
+				"gridy": 1
 			} )
 			add( new FormComponent( "javax.swing.JSpinner" ) {
 				name: "spinnerLevel"
 				"preferredSize": new java.awt.Dimension( 46, 26 )
 				"minimumSize": new java.awt.Dimension( 46, 20 )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
-				"gridx": 3
+				"gridx": 1
+				"gridy": 1
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "button1"
 				"text": "Add"
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
 				"gridx": 4
+				"gridy": 1
 			} )
 			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 				name: "scrollPane1"
@@ -50,7 +53,7 @@ new FormModel {
 				} )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
 				"gridwidth": 4
-				"gridy": 1
+				"gridy": 2
 				"gridheight": 2
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
@@ -58,7 +61,7 @@ new FormModel {
 				"text": "Remove"
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
 				"gridx": 4
-				"gridy": 1
+				"gridy": 2
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )

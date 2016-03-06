@@ -23,6 +23,7 @@ public class Main extends JFrame {
         add(new SkillTreeFormPart());
         add(new BuildsListPart());
         add(new GemListPart());
+        add(new GearListPart());
     }
 
     public static void main(String[] args) throws Exception {

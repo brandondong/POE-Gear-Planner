@@ -24,7 +24,7 @@ public class GemListPart extends JPanel {
     }
 
     private void initComboGemNames() {
-        for (GemData data : GameConstants.GEM_DATABASE.values()) {
+        for (String data : GameConstants.GEM_DATABASE.keySet()) {
             comboGemNames.addItem(data);
         }
     }
@@ -56,7 +56,7 @@ public class GemListPart extends JPanel {
         setBorder(new CompoundBorder(
             new TitledBorder(null, "Gems", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION),
             new EmptyBorder(5, 5, 5, 5)));
-        setPreferredSize(new Dimension(350, 291));
+        setPreferredSize(new Dimension(400, 300));
 
         // JFormDesigner evaluation mark
         setBorder(new javax.swing.border.CompoundBorder(
@@ -67,9 +67,9 @@ public class GemListPart extends JPanel {
 
         setLayout(new GridBagLayout());
         ((GridBagLayout)getLayout()).columnWidths = new int[] {0, 0, 0, 0, 0, 0};
-        ((GridBagLayout)getLayout()).rowHeights = new int[] {0, 0, 0, 0};
-        ((GridBagLayout)getLayout()).columnWeights = new double[] {0.0, 1.0, 0.0, 0.0, 0.0, 1.0E-4};
-        ((GridBagLayout)getLayout()).rowWeights = new double[] {0.0, 0.0, 1.0, 1.0E-4};
+        ((GridBagLayout)getLayout()).rowHeights = new int[] {0, 0, 0, 0, 0};
+        ((GridBagLayout)getLayout()).columnWeights = new double[] {0.0, 0.0, 0.0, 1.0, 0.0, 1.0E-4};
+        ((GridBagLayout)getLayout()).rowWeights = new double[] {0.0, 0.0, 0.0, 1.0, 1.0E-4};
 
         //---- label1 ----
         label1.setText("Gem name:");
@@ -79,26 +79,26 @@ public class GemListPart extends JPanel {
 
         //---- comboGemNames ----
         comboGemNames.setEditable(true);
-        add(comboGemNames, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0,
+        add(comboGemNames, new GridBagConstraints(1, 0, 2, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 5, 5), 0, 0));
 
         //---- label2 ----
         label2.setText("Level:");
-        add(label2, new GridBagConstraints(2, 0, 1, 1, 0.0, 0.0,
+        add(label2, new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 5, 5), 0, 0));
 
         //---- spinnerLevel ----
         spinnerLevel.setPreferredSize(new Dimension(46, 26));
         spinnerLevel.setMinimumSize(new Dimension(46, 20));
-        add(spinnerLevel, new GridBagConstraints(3, 0, 1, 1, 0.0, 0.0,
+        add(spinnerLevel, new GridBagConstraints(1, 1, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 5, 5), 0, 0));
 
         //---- button1 ----
         button1.setText("Add");
-        add(button1, new GridBagConstraints(4, 0, 1, 1, 0.0, 0.0,
+        add(button1, new GridBagConstraints(4, 1, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 5, 0), 0, 0));
 
@@ -106,13 +106,13 @@ public class GemListPart extends JPanel {
         {
             scrollPane1.setViewportView(list1);
         }
-        add(scrollPane1, new GridBagConstraints(0, 1, 4, 2, 0.0, 0.0,
+        add(scrollPane1, new GridBagConstraints(0, 2, 4, 2, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 0, 5), 0, 0));
 
         //---- button2 ----
         button2.setText("Remove");
-        add(button2, new GridBagConstraints(4, 1, 1, 1, 0.0, 0.0,
+        add(button2, new GridBagConstraints(4, 2, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 5, 0), 0, 0));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
