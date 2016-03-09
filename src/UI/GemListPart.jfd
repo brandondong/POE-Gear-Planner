@@ -12,7 +12,7 @@ new FormModel {
 			"$alignTop": true
 		} ) {
 			name: "this"
-			"border": new javax.swing.border.CompoundBorder( new javax.swing.border.TitledBorder( null, "Gems", 0, 0 ), new javax.swing.border.EmptyBorder( 5, 5, 5, 5 ) )
+			"border": new javax.swing.border.CompoundBorder( new javax.swing.border.TitledBorder( null, "Gems", 0, 0, new java.awt.Font( "Segoe UI", 1, 12 ), null ), new javax.swing.border.EmptyBorder( 5, 5, 5, 5 ) )
 			"preferredSize": new java.awt.Dimension( 400, 300 )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label1"
@@ -33,7 +33,7 @@ new FormModel {
 			} )
 			add( new FormComponent( "javax.swing.JSpinner" ) {
 				name: "spinnerLevel"
-				"preferredSize": new java.awt.Dimension( 46, 26 )
+				"preferredSize": new java.awt.Dimension( 46, 18 )
 				"minimumSize": new java.awt.Dimension( 46, 20 )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
 				"gridx": 1

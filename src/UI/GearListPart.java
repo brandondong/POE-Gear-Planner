@@ -26,9 +26,10 @@ public class GearListPart extends JPanel {
 
         //======== this ========
         setBorder(new CompoundBorder(
-            new TitledBorder(null, "Gear", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION),
+            new TitledBorder(null, "Gear", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION,
+                new Font("Segoe UI", Font.BOLD, 12)),
             new EmptyBorder(5, 5, 5, 5)));
-        setPreferredSize(new Dimension(350, 391));
+        setPreferredSize(new Dimension(450, 391));
 
         // JFormDesigner evaluation mark
         setBorder(new javax.swing.border.CompoundBorder(

@@ -54,7 +54,8 @@ public class GemListPart extends JPanel {
 
         //======== this ========
         setBorder(new CompoundBorder(
-            new TitledBorder(null, "Gems", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION),
+            new TitledBorder(null, "Gems", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION,
+                new Font("Segoe UI", Font.BOLD, 12)),
             new EmptyBorder(5, 5, 5, 5)));
         setPreferredSize(new Dimension(400, 300));
 
@@ -90,7 +91,7 @@ public class GemListPart extends JPanel {
             new Insets(0, 0, 5, 5), 0, 0));
 
         //---- spinnerLevel ----
-        spinnerLevel.setPreferredSize(new Dimension(46, 26));
+        spinnerLevel.setPreferredSize(new Dimension(46, 18));
         spinnerLevel.setMinimumSize(new Dimension(46, 20));
         add(spinnerLevel, new GridBagConstraints(1, 1, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,

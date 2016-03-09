@@ -64,7 +64,8 @@ public class SkillTreeFormPart extends JPanel {
         spinnerLevel = new JSpinner();
 
         //======== this ========
-        setBorder(new TitledBorder("Passive Skill Tree"));
+        setBorder(new TitledBorder(null, "Passive Skill Tree", TitledBorder.LEADING, TitledBorder.DEFAULT_POSITION,
+            new Font("Segoe UI", Font.BOLD, 12)));
         setPreferredSize(new Dimension(352, 539));
 
         // JFormDesigner evaluation mark

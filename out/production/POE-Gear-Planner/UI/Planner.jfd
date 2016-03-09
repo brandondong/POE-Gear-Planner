@@ -4,10 +4,10 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class java.awt.GridBagLayout ) {
-			"$columnSpecs": "0, 0, 0, 0"
-			"$rowSpecs": "0, 0"
-			"$hGap": 5
-			"$vGap": 5
+			"$columnSpecs": "0:1.0, 0:1.0, 0:1.0"
+			"$rowSpecs": "0:1.0, 0:1.0"
+			"$hGap": 10
+			"$vGap": 10
 			"$alignLeft": true
 			"$alignTop": true
 		} ) {
@@ -21,7 +21,7 @@ new FormModel {
 			} )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridBagLayout ) {
 				"$columnSpecs": "0, 0:1.0"
-				"$rowSpecs": "0, 0, 0"
+				"$rowSpecs": "0, 0, 0:1.0"
 				"$hGap": 5
 				"$vGap": 5
 				"$alignLeft": true
@@ -37,31 +37,38 @@ new FormModel {
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
 					"gridx": 1
 				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label2"
+					"border": new javax.swing.border.CompoundBorder( new javax.swing.border.TitledBorder( "" ), new javax.swing.border.EmptyBorder( 5, 5, 5, 5 ) )
+					"text": "All item requirements are met."
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+					"gridy": 1
+					"gridwidth": 2
+				} )
 				add( new FormComponent( "UI.GearListPart" ) {
 					name: "gearListPart1"
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
-					"gridy": 1
+					"gridy": 2
 					"gridwidth": 2
 				} )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
 				"gridx": 1
 				"gridheight": 2
 			} )
-			add( new FormComponent( "UI.BuildsListPart" ) {
-				name: "buildsListPart1"
-			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
-				"gridx": 2
-			} )
 			add( new FormComponent( "UI.GemListPart" ) {
 				name: "gemListPart1"
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
 				"gridx": 2
+			} )
+			add( new FormComponent( "UI.BuildsListPart" ) {
+				name: "buildsListPart1"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+				"gridx": 2
 				"gridy": 1
-				"gridwidth": 2
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 1045, 535 )
+			"size": new java.awt.Dimension( 950, 535 )
 		} )
 	}
 }

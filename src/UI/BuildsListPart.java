@@ -27,9 +27,11 @@ public class BuildsListPart extends JPanel {
 
         //======== this ========
         setBorder(new CompoundBorder(
-            new TitledBorder(null, "Builds", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION),
+            new TitledBorder(null, "Builds", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION,
+                new Font("Segoe UI", Font.BOLD, 12)),
             new EmptyBorder(5, 5, 5, 5)));
         setPreferredSize(new Dimension(250, 291));
+        setMinimumSize(new Dimension(242, 164));
 
         // JFormDesigner evaluation mark
         setBorder(new javax.swing.border.CompoundBorder(

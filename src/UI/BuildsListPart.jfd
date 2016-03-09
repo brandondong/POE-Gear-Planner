@@ -12,8 +12,9 @@ new FormModel {
 			"$alignTop": true
 		} ) {
 			name: "this"
-			"border": new javax.swing.border.CompoundBorder( new javax.swing.border.TitledBorder( null, "Builds", 0, 0 ), new javax.swing.border.EmptyBorder( 5, 5, 5, 5 ) )
+			"border": new javax.swing.border.CompoundBorder( new javax.swing.border.TitledBorder( null, "Builds", 0, 0, new java.awt.Font( "Segoe UI", 1, 12 ), null ), new javax.swing.border.EmptyBorder( 5, 5, 5, 5 ) )
 			"preferredSize": new java.awt.Dimension( 250, 291 )
+			"minimumSize": new java.awt.Dimension( 242, 164 )
 			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 				name: "scrollPane1"
 				add( new FormComponent( "javax.swing.JList" ) {

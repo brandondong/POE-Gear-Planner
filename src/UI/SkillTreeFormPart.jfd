@@ -12,7 +12,7 @@ new FormModel {
 			"$alignTop": true
 		} ) {
 			name: "this"
-			"border": new javax.swing.border.TitledBorder( "Passive Skill Tree" )
+			"border": new javax.swing.border.TitledBorder( null, "Passive Skill Tree", 4, 0, new java.awt.Font( "Segoe UI", 1, 12 ), null )
 			"preferredSize": new java.awt.Dimension( 352, 539 )
 			add( new FormComponent( "javax.swing.JTextField" ) {
 				name: "textField1"

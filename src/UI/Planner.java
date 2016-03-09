@@ -6,6 +6,7 @@ package UI;
 
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.border.*;
 
 /**
  * @author Brandon Dong
@@ -22,22 +23,23 @@ public class Planner extends JFrame {
         panel1 = new JPanel();
         label1 = new JLabel();
         textField1 = new JTextField();
+        label2 = new JLabel();
         gearListPart1 = new GearListPart();
-        buildsListPart1 = new BuildsListPart();
         gemListPart1 = new GemListPart();
+        buildsListPart1 = new BuildsListPart();
 
         //======== this ========
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setTitle("Path of Exile Gear Planner");
         Container contentPane = getContentPane();
         contentPane.setLayout(new GridBagLayout());
-        ((GridBagLayout)contentPane.getLayout()).columnWidths = new int[] {0, 0, 0, 0, 0};
+        ((GridBagLayout)contentPane.getLayout()).columnWidths = new int[] {0, 0, 0, 0};
         ((GridBagLayout)contentPane.getLayout()).rowHeights = new int[] {0, 0, 0};
-        ((GridBagLayout)contentPane.getLayout()).columnWeights = new double[] {0.0, 0.0, 0.0, 0.0, 1.0E-4};
-        ((GridBagLayout)contentPane.getLayout()).rowWeights = new double[] {0.0, 0.0, 1.0E-4};
+        ((GridBagLayout)contentPane.getLayout()).columnWeights = new double[] {1.0, 1.0, 1.0, 1.0E-4};
+        ((GridBagLayout)contentPane.getLayout()).rowWeights = new double[] {1.0, 1.0, 1.0E-4};
         contentPane.add(skillTreeFormPart1, new GridBagConstraints(0, 0, 1, 2, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-            new Insets(0, 0, 0, 5), 0, 0));
+            new Insets(0, 0, 0, 10), 0, 0));
 
         //======== panel1 ========
         {
@@ -53,7 +55,7 @@ public class Planner extends JFrame {
             ((GridBagLayout)panel1.getLayout()).columnWidths = new int[] {0, 0, 0};
             ((GridBagLayout)panel1.getLayout()).rowHeights = new int[] {0, 0, 0, 0};
             ((GridBagLayout)panel1.getLayout()).columnWeights = new double[] {0.0, 1.0, 1.0E-4};
-            ((GridBagLayout)panel1.getLayout()).rowWeights = new double[] {0.0, 0.0, 0.0, 1.0E-4};
+            ((GridBagLayout)panel1.getLayout()).rowWeights = new double[] {0.0, 0.0, 1.0, 1.0E-4};
 
             //---- label1 ----
             label1.setText("Build name:");
@@ -63,17 +65,26 @@ public class Planner extends JFrame {
             panel1.add(textField1, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 5, 0), 0, 0));
-            panel1.add(gearListPart1, new GridBagConstraints(0, 1, 2, 1, 0.0, 0.0,
+
+            //---- label2 ----
+            label2.setBorder(new CompoundBorder(
+                new TitledBorder(""),
+                new EmptyBorder(5, 5, 5, 5)));
+            label2.setText("All item requirements are met.");
+            panel1.add(label2, new GridBagConstraints(0, 1, 2, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 5, 0), 0, 0));
+            panel1.add(gearListPart1, new GridBagConstraints(0, 2, 2, 1, 0.0, 0.0,
+                GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+                new Insets(0, 0, 0, 0), 0, 0));
         }
         contentPane.add(panel1, new GridBagConstraints(1, 0, 1, 2, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-            new Insets(0, 0, 0, 5), 0, 0));
-        contentPane.add(buildsListPart1, new GridBagConstraints(2, 0, 1, 1, 0.0, 0.0,
+            new Insets(0, 0, 0, 10), 0, 0));
+        contentPane.add(gemListPart1, new GridBagConstraints(2, 0, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-            new Insets(0, 0, 5, 5), 0, 0));
-        contentPane.add(gemListPart1, new GridBagConstraints(2, 1, 2, 1, 0.0, 0.0,
+            new Insets(0, 0, 10, 0), 0, 0));
+        contentPane.add(buildsListPart1, new GridBagConstraints(2, 1, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 0, 0), 0, 0));
         pack();
@@ -87,9 +98,10 @@ public class Planner extends JFrame {
     private JPanel panel1;
     private JLabel label1;
     private JTextField textField1;
+    private JLabel label2;
     private GearListPart gearListPart1;
-    private BuildsListPart buildsListPart1;
     private GemListPart gemListPart1;
+    private BuildsListPart buildsListPart1;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
     public static void main(String[] args) throws Exception {
