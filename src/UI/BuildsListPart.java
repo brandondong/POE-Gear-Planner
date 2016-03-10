@@ -4,7 +4,12 @@
 
 package UI;
 
+import Model.*;
+import Model.Character;
+
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.border.*;
 
@@ -12,18 +17,50 @@ import javax.swing.border.*;
  * @author Brandon Dong
  */
 public class BuildsListPart extends JPanel {
-    public BuildsListPart() {
+
+    private BuildsModel model;
+
+    private Planner planner;
+
+    public BuildsListPart(BuildsModel model, Planner planner) {
+        this.model = model;
+        this.planner = planner;
         initComponents();
+        initListItems();
+        initButtonCreate();
+    }
+
+    private void initButtonCreate() {
+        buttonCreate.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                model.addCharacter();
+                refresh();
+                planner.refreshSelected();
+            }
+        });
+    }
+
+    public void refresh() {
+        initListItems();
+    }
+
+    private void initListItems() {
+        DefaultListModel<String> listModel = new DefaultListModel<>();
+        for (Character character : model) {
+            listModel.addElement(character.getName());
+        }
+        listItems.setModel(listModel);
     }
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - Brandon Dong
         scrollPane1 = new JScrollPane();
-        list1 = new JList();
-        button3 = new JButton();
-        button2 = new JButton();
-        button1 = new JButton();
+        listItems = new JList();
+        buttonEdit = new JButton();
+        buttonRemove = new JButton();
+        buttonCreate = new JButton();
 
         //======== this ========
         setBorder(new CompoundBorder(
@@ -33,13 +70,6 @@ public class BuildsListPart extends JPanel {
         setPreferredSize(new Dimension(250, 291));
         setMinimumSize(new Dimension(242, 164));
 
-        // JFormDesigner evaluation mark
-        setBorder(new javax.swing.border.CompoundBorder(
-            new javax.swing.border.TitledBorder(new javax.swing.border.EmptyBorder(0, 0, 0, 0),
-                "JFormDesigner Evaluation", javax.swing.border.TitledBorder.CENTER,
-                javax.swing.border.TitledBorder.BOTTOM, new java.awt.Font("Dialog", java.awt.Font.BOLD, 12),
-                java.awt.Color.red), getBorder())); addPropertyChangeListener(new java.beans.PropertyChangeListener(){public void propertyChange(java.beans.PropertyChangeEvent e){if("border".equals(e.getPropertyName()))throw new RuntimeException();}});
-
         setLayout(new GridBagLayout());
         ((GridBagLayout)getLayout()).columnWidths = new int[] {0, 0, 0, 0};
         ((GridBagLayout)getLayout()).rowHeights = new int[] {0, 0, 0, 0, 0};
@@ -48,27 +78,27 @@ public class BuildsListPart extends JPanel {
 
         //======== scrollPane1 ========
         {
-            scrollPane1.setViewportView(list1);
+            scrollPane1.setViewportView(listItems);
         }
         add(scrollPane1, new GridBagConstraints(0, 0, 2, 3, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 5, 5), 0, 0));
 
-        //---- button3 ----
-        button3.setText("Edit");
-        add(button3, new GridBagConstraints(2, 0, 1, 1, 0.0, 0.0,
+        //---- buttonEdit ----
+        buttonEdit.setText("Edit");
+        add(buttonEdit, new GridBagConstraints(2, 0, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 5, 0), 0, 0));
 
-        //---- button2 ----
-        button2.setText("Remove");
-        add(button2, new GridBagConstraints(2, 1, 1, 1, 0.0, 0.0,
+        //---- buttonRemove ----
+        buttonRemove.setText("Remove");
+        add(buttonRemove, new GridBagConstraints(2, 1, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 5, 0), 0, 0));
 
-        //---- button1 ----
-        button1.setText("Create new build");
-        add(button1, new GridBagConstraints(0, 3, 1, 1, 0.0, 0.0,
+        //---- buttonCreate ----
+        buttonCreate.setText("Create new build");
+        add(buttonCreate, new GridBagConstraints(0, 3, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 0, 5), 0, 0));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
@@ -77,9 +107,9 @@ public class BuildsListPart extends JPanel {
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // Generated using JFormDesigner Evaluation license - Brandon Dong
     private JScrollPane scrollPane1;
-    private JList list1;
-    private JButton button3;
-    private JButton button2;
-    private JButton button1;
+    private JList listItems;
+    private JButton buttonEdit;
+    private JButton buttonRemove;
+    private JButton buttonCreate;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

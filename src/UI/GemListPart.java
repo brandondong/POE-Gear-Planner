@@ -49,7 +49,7 @@ public class GemListPart extends JPanel {
         spinnerLevel = new JSpinner();
         button1 = new JButton();
         scrollPane1 = new JScrollPane();
-        list1 = new JList();
+        tree1 = new JTree();
         button2 = new JButton();
 
         //======== this ========
@@ -105,7 +105,7 @@ public class GemListPart extends JPanel {
 
         //======== scrollPane1 ========
         {
-            scrollPane1.setViewportView(list1);
+            scrollPane1.setViewportView(tree1);
         }
         add(scrollPane1, new GridBagConstraints(0, 2, 4, 2, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
@@ -127,7 +127,7 @@ public class GemListPart extends JPanel {
     private JSpinner spinnerLevel;
     private JButton button1;
     private JScrollPane scrollPane1;
-    private JList list1;
+    private JTree tree1;
     private JButton button2;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

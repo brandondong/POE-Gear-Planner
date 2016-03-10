@@ -110,6 +110,10 @@ public class Character extends Equipment {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public int getNumJewels() {
         return numJewels;
     }
