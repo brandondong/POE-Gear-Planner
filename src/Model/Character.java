@@ -154,6 +154,6 @@ public class Character extends Equipment {
 
     @Override
     public String toString() {
-        return getInfo();
+        return getName();
     }
 }

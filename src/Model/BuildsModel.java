@@ -30,8 +30,25 @@ public class BuildsModel implements Iterable<Character> {
         selected = other;
     }
 
+    public void removeCharacter(Character other) {
+        if (other == selected) {
+            characters.remove(other);
+            selected = characters.get(0);
+        } else {
+            characters.remove(other);
+        }
+    }
+
     public Character getSelected() {
         return selected;
+    }
+
+    public void setSelected(Character other) {
+        selected = other;
+    }
+
+    public int numCharacters() {
+        return characters.size();
     }
 
     @Override

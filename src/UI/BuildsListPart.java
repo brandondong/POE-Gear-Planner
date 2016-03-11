@@ -12,6 +12,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.border.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 /**
  * @author Brandon Dong
@@ -28,6 +30,38 @@ public class BuildsListPart extends JPanel {
         initComponents();
         initListItems();
         initButtonCreate();
+        initButtonEdit();
+        initButtonRemove();
+    }
+
+    private void initButtonRemove() {
+        refreshButtonRemove();
+        buttonRemove.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                model.removeCharacter((Character) listItems.getSelectedValue());
+                planner.refreshSelected();
+            }
+        });
+    }
+
+    private void refreshButtonRemove() {
+        buttonRemove.setEnabled(listItems.getSelectedValue() != null && model.numCharacters() > 1);
+    }
+
+    private void refreshButtonEdit() {
+        buttonEdit.setEnabled(listItems.getSelectedValue() != null);
+    }
+
+    private void initButtonEdit() {
+        refreshButtonEdit();
+        buttonEdit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                model.setSelected((Character) listItems.getSelectedValue());
+                planner.refreshSelected();
+            }
+        });
     }
 
     private void initButtonCreate() {
@@ -35,22 +69,29 @@ public class BuildsListPart extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 model.addCharacter();
-                refresh();
+                refreshListItems();
                 planner.refreshSelected();
             }
         });
     }
 
-    public void refresh() {
-        initListItems();
+    public void refreshListItems() {
+        DefaultListModel<Character> listModel = new DefaultListModel<>();
+        for (Character character : model) {
+            listModel.addElement(character);
+        }
+        listItems.setModel(listModel);
     }
 
     private void initListItems() {
-        DefaultListModel<String> listModel = new DefaultListModel<>();
-        for (Character character : model) {
-            listModel.addElement(character.getName());
-        }
-        listItems.setModel(listModel);
+        refreshListItems();
+        listItems.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                refreshButtonEdit();
+                refreshButtonRemove();
+            }
+        });
     }
 
     private void initComponents() {

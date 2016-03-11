@@ -55,7 +55,7 @@ public class Planner extends JFrame {
                 } else {
                     model.getSelected().setName(Character.NEW_CHARACTER_NAME);
                 }
-                buildsListPart1.refresh();
+                buildsListPart1.refreshListItems();
             }
         });
     }
