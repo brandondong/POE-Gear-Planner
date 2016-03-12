@@ -60,8 +60,12 @@ public class Planner extends JFrame {
         });
     }
 
+    /**
+     * Refreshes the UI when a new build is selected
+     */
     public void refreshSelected() {
         refreshBuildName();
+        buildsListPart1.refreshListItems();
     }
 
     private void refreshBuildName() {

@@ -69,7 +69,6 @@ public class BuildsListPart extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 model.addCharacter();
-                refreshListItems();
                 planner.refreshSelected();
             }
         });
@@ -92,6 +91,18 @@ public class BuildsListPart extends JPanel {
                 refreshButtonRemove();
             }
         });
+        listItems.setCellRenderer(new BuildCellRenderer());
+    }
+
+    private class BuildCellRenderer extends DefaultListCellRenderer {
+        @Override
+        public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+            Component label = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+            if (value == model.getSelected()) {
+                ((JLabel) label).setText(String.format("* %s", value));
+            }
+            return label;
+        }
     }
 
     private void initComponents() {
@@ -102,6 +113,8 @@ public class BuildsListPart extends JPanel {
         buttonEdit = new JButton();
         buttonRemove = new JButton();
         buttonCreate = new JButton();
+        hSpacer1 = new JPanel(null);
+        label1 = new JLabel();
 
         //======== this ========
         setBorder(new CompoundBorder(
@@ -112,34 +125,43 @@ public class BuildsListPart extends JPanel {
         setMinimumSize(new Dimension(242, 164));
 
         setLayout(new GridBagLayout());
-        ((GridBagLayout)getLayout()).columnWidths = new int[] {0, 0, 0, 0};
+        ((GridBagLayout)getLayout()).columnWidths = new int[] {0, 0, 0, 0, 0, 0};
         ((GridBagLayout)getLayout()).rowHeights = new int[] {0, 0, 0, 0, 0};
-        ((GridBagLayout)getLayout()).columnWeights = new double[] {0.0, 1.0, 0.0, 1.0E-4};
+        ((GridBagLayout)getLayout()).columnWeights = new double[] {0.0, 0.0, 0.0, 1.0, 0.0, 1.0E-4};
         ((GridBagLayout)getLayout()).rowWeights = new double[] {0.0, 0.0, 1.0, 0.0, 1.0E-4};
 
         //======== scrollPane1 ========
         {
             scrollPane1.setViewportView(listItems);
         }
-        add(scrollPane1, new GridBagConstraints(0, 0, 2, 3, 0.0, 0.0,
+        add(scrollPane1, new GridBagConstraints(0, 0, 4, 3, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 5, 5), 0, 0));
 
         //---- buttonEdit ----
         buttonEdit.setText("Edit");
-        add(buttonEdit, new GridBagConstraints(2, 0, 1, 1, 0.0, 0.0,
+        add(buttonEdit, new GridBagConstraints(4, 0, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 5, 0), 0, 0));
 
         //---- buttonRemove ----
         buttonRemove.setText("Remove");
-        add(buttonRemove, new GridBagConstraints(2, 1, 1, 1, 0.0, 0.0,
+        add(buttonRemove, new GridBagConstraints(4, 1, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 5, 0), 0, 0));
 
         //---- buttonCreate ----
         buttonCreate.setText("Create new build");
         add(buttonCreate, new GridBagConstraints(0, 3, 1, 1, 0.0, 0.0,
+            GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+            new Insets(0, 0, 0, 5), 0, 0));
+        add(hSpacer1, new GridBagConstraints(1, 3, 1, 1, 0.0, 0.0,
+            GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+            new Insets(0, 0, 0, 5), 0, 0));
+
+        //---- label1 ----
+        label1.setText("* Currently selected");
+        add(label1, new GridBagConstraints(2, 3, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 0, 5), 0, 0));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
@@ -152,5 +174,7 @@ public class BuildsListPart extends JPanel {
     private JButton buttonEdit;
     private JButton buttonRemove;
     private JButton buttonCreate;
+    private JPanel hSpacer1;
+    private JLabel label1;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

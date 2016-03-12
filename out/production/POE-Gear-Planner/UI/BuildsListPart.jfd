@@ -4,7 +4,7 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridBagLayout ) {
-			"$columnSpecs": "0, 0:1.0, 0"
+			"$columnSpecs": "0, 0, 0, 0:1.0, 0"
 			"$rowSpecs": "0, 0, 0:1.0, 0"
 			"$hGap": 5
 			"$vGap": 5
@@ -22,25 +22,38 @@ new FormModel {
 				} )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
 				"gridheight": 3
-				"gridwidth": 2
+				"gridwidth": 4
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "buttonEdit"
 				"text": "Edit"
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
-				"gridx": 2
+				"gridx": 4
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "buttonRemove"
 				"text": "Remove"
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
-				"gridx": 2
+				"gridx": 4
 				"gridy": 1
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "buttonCreate"
 				"text": "Create new build"
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+				"gridy": 3
+			} )
+			add( new FormComponent( "com.jformdesigner.designer.wrapper.HSpacer" ) {
+				name: "hSpacer1"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+				"gridx": 1
+				"gridy": 3
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label1"
+				"text": "* Currently selected"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+				"gridx": 2
 				"gridy": 3
 			} )
 		}, new FormLayoutConstraints( null ) {
