@@ -14,8 +14,6 @@ public class Stat {
 
     private double value;
 
-    private StatType type;
-
     private boolean isNumeric;
 
     /**
@@ -33,7 +31,6 @@ public class Stat {
             value = 0;
             isNumeric = false;
         }
-        classifyType();
     }
 
     /**
@@ -45,7 +42,6 @@ public class Stat {
         this.id = id;
         this.value = value;
         isNumeric = true;
-        classifyType();
     }
 
     /**
@@ -74,26 +70,6 @@ public class Stat {
         return String.format(id, value);
     }
 
-    private void classifyType() {
-        if (id.contains("Minions") || id.contains("Zombies") || id.contains("Spectres") || id.contains("Skeletons")) {
-            type = StatType.MINION;
-        } else if (id.contains("Aura") || id.contains("Reserved")) {
-            type = StatType.AURA;
-        } else if (id.contains("Curse")) {
-            type = StatType.CURSE;
-        } else if (id.contains("Mana")) {
-            type = StatType.MANA;
-        } else if (id.contains("Life") || id.contains("Shield") || id.contains("Resistance")
-                || id.contains("Armour") || id.contains("Evasion")
-                || id.contains("Block") || id.contains("Damage from Critical") || id.contains("taken")) {
-            type = StatType.DEFENCE;
-        } else if (id.contains("Speed") || id.contains("Damage") || id.contains("Area") || id.contains("Critical")) {
-            type = StatType.OFFENCE;
-        } else {
-            type = StatType.MISCELLANEOUS;
-        }
-    }
-
     /**
      *
      * @return the unique identifier
@@ -110,8 +86,28 @@ public class Stat {
         return value;
     }
 
+    /**
+     *
+     * @return the {@link StatType} based on the stat description
+     */
     public StatType getType() {
-        return type;
+        if (id.contains("Minions") || id.contains("Zombies") || id.contains("Spectres") || id.contains("Skeletons")) {
+            return StatType.MINION;
+        } else if (id.contains("Aura") || id.contains("Reserved")) {
+            return StatType.AURA;
+        } else if (id.contains("Curse")) {
+            return StatType.CURSE;
+        } else if (id.contains("Mana")) {
+            return StatType.MANA;
+        } else if (id.contains("Life") || id.contains("Shield") || id.contains("Resistance")
+                || id.contains("Armour") || id.contains("Evasion")
+                || id.contains("Block") || id.contains("Damage from Critical") || id.contains("taken")) {
+            return StatType.DEFENCE;
+        } else if (id.contains("Speed") || id.contains("Damage") || id.contains("Area") || id.contains("Critical")) {
+            return StatType.OFFENCE;
+        } else {
+            return StatType.MISCELLANEOUS;
+        }
     }
 
     private String parseId(String description) {

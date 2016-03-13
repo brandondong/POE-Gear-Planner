@@ -40,7 +40,7 @@ new FormModel {
 				"gridy": 1
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
-				name: "button1"
+				name: "buttonAdd"
 				"text": "Add"
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
 				"gridx": 4
@@ -48,8 +48,8 @@ new FormModel {
 			} )
 			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 				name: "scrollPane1"
-				add( new FormComponent( "javax.swing.JTree" ) {
-					name: "tree1"
+				add( new FormComponent( "javax.swing.JList" ) {
+					name: "listGems"
 				} )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
 				"gridwidth": 4
@@ -57,7 +57,7 @@ new FormModel {
 				"gridheight": 2
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
-				name: "button2"
+				name: "buttonRemove"
 				"text": "Remove"
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
 				"gridx": 4

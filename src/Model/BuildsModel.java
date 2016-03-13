@@ -1,6 +1,7 @@
 package Model;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
@@ -36,6 +37,12 @@ public class BuildsModel implements Iterable<Character> {
             selected = characters.get(0);
         } else {
             characters.remove(other);
+        }
+    }
+
+    public void removeCharacters(Collection<Character> remove) {
+        for (Character c : remove) {
+            removeCharacter(c);
         }
     }
 

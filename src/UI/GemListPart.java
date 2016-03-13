@@ -47,10 +47,10 @@ public class GemListPart extends JPanel {
         comboGemNames = new JComboBox();
         label2 = new JLabel();
         spinnerLevel = new JSpinner();
-        button1 = new JButton();
+        buttonAdd = new JButton();
         scrollPane1 = new JScrollPane();
-        tree1 = new JTree();
-        button2 = new JButton();
+        listGems = new JList();
+        buttonRemove = new JButton();
 
         //======== this ========
         setBorder(new CompoundBorder(
@@ -97,23 +97,23 @@ public class GemListPart extends JPanel {
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 5, 5), 0, 0));
 
-        //---- button1 ----
-        button1.setText("Add");
-        add(button1, new GridBagConstraints(4, 1, 1, 1, 0.0, 0.0,
+        //---- buttonAdd ----
+        buttonAdd.setText("Add");
+        add(buttonAdd, new GridBagConstraints(4, 1, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 5, 0), 0, 0));
 
         //======== scrollPane1 ========
         {
-            scrollPane1.setViewportView(tree1);
+            scrollPane1.setViewportView(listGems);
         }
         add(scrollPane1, new GridBagConstraints(0, 2, 4, 2, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 0, 5), 0, 0));
 
-        //---- button2 ----
-        button2.setText("Remove");
-        add(button2, new GridBagConstraints(4, 2, 1, 1, 0.0, 0.0,
+        //---- buttonRemove ----
+        buttonRemove.setText("Remove");
+        add(buttonRemove, new GridBagConstraints(4, 2, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 5, 0), 0, 0));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
@@ -125,9 +125,9 @@ public class GemListPart extends JPanel {
     private JComboBox comboGemNames;
     private JLabel label2;
     private JSpinner spinnerLevel;
-    private JButton button1;
+    private JButton buttonAdd;
     private JScrollPane scrollPane1;
-    private JTree tree1;
-    private JButton button2;
+    private JList listGems;
+    private JButton buttonRemove;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

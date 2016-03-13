@@ -16,21 +16,21 @@ new FormModel {
 			"preferredSize": new java.awt.Dimension( 450, 391 )
 			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 				name: "scrollPane1"
-				add( new FormComponent( "javax.swing.JTree" ) {
-					name: "tree1"
+				add( new FormComponent( "javax.swing.JList" ) {
+					name: "listGear"
 				} )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
 				"gridwidth": 2
 				"gridheight": 2
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
-				name: "button2"
+				name: "buttonRemove"
 				"text": "Remove"
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
 				"gridx": 2
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
-				name: "button1"
+				name: "buttonAdd"
 				"text": "Add new item"
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
 				"gridy": 2

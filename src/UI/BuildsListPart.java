@@ -10,6 +10,7 @@ import Model.Character;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.event.ListSelectionEvent;
@@ -39,14 +40,16 @@ public class BuildsListPart extends JPanel {
         buttonRemove.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                model.removeCharacter((Character) listItems.getSelectedValue());
+                List<Character> selection = listItems.getSelectedValuesList();
+                model.removeCharacters(selection);
                 planner.refreshSelected();
             }
         });
     }
 
     private void refreshButtonRemove() {
-        buttonRemove.setEnabled(listItems.getSelectedValue() != null && model.numCharacters() > 1);
+        buttonRemove.setEnabled(listItems.getSelectedValue() != null &&
+                listItems.getSelectedValuesList().size() < model.numCharacters());
     }
 
     private void refreshButtonEdit() {
