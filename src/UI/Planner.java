@@ -63,25 +63,33 @@ public class Planner extends JFrame {
     /**
      * Refreshes the UI when a new build is selected
      */
-    public void refreshSelected() {
+    public void refreshBuildSelected() {
         refreshBuildName();
         buildsListPart1.refreshListItems();
+    }
+
+    public void refreshItemSelected() {
+    }
+
+    public void refreshItemsChanged() {
+        gemListPart1.refreshListGems();
     }
 
     private void refreshBuildName() {
         textFieldBuildName.setText(model.getSelected().getName());
     }
-
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - Brandon Dong
         skillTreeFormPart1 = new SkillTreeFormPart();
         panel1 = new JPanel();
         labelBuildName = new JLabel();
+        hSpacer1 = new JPanel(null);
         textFieldBuildName = new JTextField();
         label2 = new JLabel();
         gearListPart1 = new GearListPart();
-        gemListPart1 = new GemListPart();
+        gemListPart1 = new GemListPart(model, this);
+        itemInfoPart1 = new ItemInfoPart();
         buildsListPart1 = new BuildsListPart(model, this);
 
         //======== this ========
@@ -108,36 +116,43 @@ public class Planner extends JFrame {
                     java.awt.Color.red), panel1.getBorder())); panel1.addPropertyChangeListener(new java.beans.PropertyChangeListener(){public void propertyChange(java.beans.PropertyChangeEvent e){if("border".equals(e.getPropertyName()))throw new RuntimeException();}});
 
             panel1.setLayout(new GridBagLayout());
-            ((GridBagLayout)panel1.getLayout()).columnWidths = new int[] {0, 0, 0};
-            ((GridBagLayout)panel1.getLayout()).rowHeights = new int[] {0, 0, 0, 0};
-            ((GridBagLayout)panel1.getLayout()).columnWeights = new double[] {0.0, 1.0, 1.0E-4};
-            ((GridBagLayout)panel1.getLayout()).rowWeights = new double[] {0.0, 0.0, 1.0, 1.0E-4};
+            ((GridBagLayout)panel1.getLayout()).columnWidths = new int[] {0, 0, 0, 0, 0};
+            ((GridBagLayout)panel1.getLayout()).rowHeights = new int[] {0, 0, 0, 0, 0};
+            ((GridBagLayout)panel1.getLayout()).columnWeights = new double[] {0.0, 0.0, 1.0, 0.0, 1.0E-4};
+            ((GridBagLayout)panel1.getLayout()).rowWeights = new double[] {0.0, 0.0, 1.0, 1.0, 1.0E-4};
 
             //---- labelBuildName ----
             labelBuildName.setText("Build name:");
+            labelBuildName.setFont(new Font("Tahoma", Font.BOLD, 11));
             panel1.add(labelBuildName, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 5, 5), 0, 0));
-            panel1.add(textFieldBuildName, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0,
+            panel1.add(hSpacer1, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-                new Insets(0, 0, 5, 0), 0, 0));
+                new Insets(0, 0, 5, 5), 0, 0));
+            panel1.add(textFieldBuildName, new GridBagConstraints(2, 0, 1, 1, 0.0, 0.0,
+                GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+                new Insets(0, 0, 5, 5), 0, 0));
 
             //---- label2 ----
             label2.setBorder(new CompoundBorder(
                 new TitledBorder(""),
                 new EmptyBorder(5, 5, 5, 5)));
             label2.setText("All item requirements are met.");
-            panel1.add(label2, new GridBagConstraints(0, 1, 2, 1, 0.0, 0.0,
+            panel1.add(label2, new GridBagConstraints(0, 1, 3, 1, 0.0, 0.0,
+                GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+                new Insets(0, 0, 5, 5), 0, 0));
+            panel1.add(gearListPart1, new GridBagConstraints(0, 2, 4, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 5, 0), 0, 0));
-            panel1.add(gearListPart1, new GridBagConstraints(0, 2, 2, 1, 0.0, 0.0,
+            panel1.add(gemListPart1, new GridBagConstraints(0, 3, 4, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 0, 0), 0, 0));
         }
         contentPane.add(panel1, new GridBagConstraints(1, 0, 1, 2, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 0, 10), 0, 0));
-        contentPane.add(gemListPart1, new GridBagConstraints(2, 0, 1, 1, 0.0, 0.0,
+        contentPane.add(itemInfoPart1, new GridBagConstraints(2, 0, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 10, 0), 0, 0));
         contentPane.add(buildsListPart1, new GridBagConstraints(2, 1, 1, 1, 0.0, 0.0,
@@ -147,17 +162,20 @@ public class Planner extends JFrame {
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
-
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // Generated using JFormDesigner Evaluation license - Brandon Dong
     private SkillTreeFormPart skillTreeFormPart1;
     private JPanel panel1;
     private JLabel labelBuildName;
+    private JPanel hSpacer1;
     private JTextField textFieldBuildName;
     private JLabel label2;
     private GearListPart gearListPart1;
     private GemListPart gemListPart1;
+    private ItemInfoPart itemInfoPart1;
+
     private BuildsListPart buildsListPart1;
+
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
     public static void main(String[] args) throws Exception {

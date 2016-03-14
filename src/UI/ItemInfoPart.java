@@ -24,8 +24,10 @@ public class ItemInfoPart extends JPanel {
 
         //======== this ========
         setBorder(new CompoundBorder(
-            new TitledBorder("Item Information"),
+            new TitledBorder(null, "Item Information", TitledBorder.LEADING, TitledBorder.DEFAULT_POSITION,
+                new Font("Tahoma", Font.BOLD, 11)),
             new EmptyBorder(5, 5, 5, 5)));
+        setPreferredSize(new Dimension(28, 200));
 
         // JFormDesigner evaluation mark
         setBorder(new javax.swing.border.CompoundBorder(

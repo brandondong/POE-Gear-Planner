@@ -4,23 +4,85 @@
 
 package UI;
 
+import Model.BuildsModel;
+import Model.Gem;
 import Util.GameConstants;
 import Util.GemData;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 /**
  * @author Brandon Dong
  */
 public class GemListPart extends JPanel {
-    public GemListPart() {
+
+    private BuildsModel model;
+
+    private Planner planner;
+
+    public GemListPart(BuildsModel model, Planner planner) {
+        this.model = model;
+        this.planner = planner;
         initComponents();
         initSpinnerLevel();
         initComboGemNames();
+        initListGems();
+        initButtonRemove();
+        initButtonAdd();
+    }
+
+    private void initButtonAdd() {
+        buttonAdd.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Gem gem = new Gem((String) comboGemNames.getSelectedItem(), (Integer) spinnerLevel.getValue());
+                model.getSelected().addGem(gem);
+                planner.refreshItemsChanged();
+            }
+        });
+    }
+
+    private void initButtonRemove() {
+        refreshButtonRemove();
+        buttonRemove.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                model.getSelected().removeGems(listGems.getSelectedValuesList());
+                planner.refreshItemsChanged();
+            }
+        });
+    }
+
+    private void refreshButtonRemove() {
+        buttonRemove.setEnabled(listGems.getSelectedValue() != null &&
+                listGems.getSelectedValuesList().size() < model.getSelected().getGems().size());
+    }
+
+    private void initListGems() {
+        refreshListGems();
+        listGems.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                planner.refreshItemSelected();
+                refreshButtonRemove();
+            }
+        });
+    }
+
+    public void refreshListGems() {
+        DefaultListModel<Gem> gemModel = new DefaultListModel<>();
+        for (Gem gem : model.getSelected().getGems()) {
+            gemModel.addElement(gem);
+        }
+        listGems.setModel(gemModel);
     }
 
     private void initComboGemNames() {

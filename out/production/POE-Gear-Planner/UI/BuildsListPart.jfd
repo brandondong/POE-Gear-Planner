@@ -13,7 +13,7 @@ new FormModel {
 		} ) {
 			name: "this"
 			"border": new javax.swing.border.CompoundBorder( new javax.swing.border.TitledBorder( null, "Builds", 0, 0, new java.awt.Font( "Segoe UI", 1, 12 ), null ), new javax.swing.border.EmptyBorder( 5, 5, 5, 5 ) )
-			"preferredSize": new java.awt.Dimension( 250, 291 )
+			"preferredSize": new java.awt.Dimension( 300, 191 )
 			"minimumSize": new java.awt.Dimension( 242, 164 )
 			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 				name: "scrollPane1"
@@ -55,6 +55,7 @@ new FormModel {
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
 				"gridx": 2
 				"gridy": 3
+				"gridwidth": 3
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )

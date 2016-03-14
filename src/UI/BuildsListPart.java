@@ -42,7 +42,7 @@ public class BuildsListPart extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 List<Character> selection = listItems.getSelectedValuesList();
                 model.removeCharacters(selection);
-                planner.refreshSelected();
+                planner.refreshBuildSelected();
             }
         });
     }
@@ -62,7 +62,7 @@ public class BuildsListPart extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 model.setSelected((Character) listItems.getSelectedValue());
-                planner.refreshSelected();
+                planner.refreshBuildSelected();
             }
         });
     }
@@ -72,7 +72,7 @@ public class BuildsListPart extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 model.addCharacter();
-                planner.refreshSelected();
+                planner.refreshBuildSelected();
             }
         });
     }
@@ -124,7 +124,7 @@ public class BuildsListPart extends JPanel {
             new TitledBorder(null, "Builds", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION,
                 new Font("Segoe UI", Font.BOLD, 12)),
             new EmptyBorder(5, 5, 5, 5)));
-        setPreferredSize(new Dimension(250, 291));
+        setPreferredSize(new Dimension(300, 191));
         setMinimumSize(new Dimension(242, 164));
 
         setLayout(new GridBagLayout());
@@ -164,9 +164,9 @@ public class BuildsListPart extends JPanel {
 
         //---- label1 ----
         label1.setText("* Currently selected");
-        add(label1, new GridBagConstraints(2, 3, 1, 1, 0.0, 0.0,
+        add(label1, new GridBagConstraints(2, 3, 3, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-            new Insets(0, 0, 0, 5), 0, 0));
+            new Insets(0, 0, 0, 0), 0, 0));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 

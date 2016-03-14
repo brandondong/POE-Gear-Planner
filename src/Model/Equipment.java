@@ -44,6 +44,10 @@ public class Equipment {
         gems.addAll(other);
     }
 
+    public void removeGems(Collection<Gem> other) {
+        gems.removeAll(other);
+    }
+
     public void addItems(Collection<Item> other) {
         items.addAll(other);
     }
