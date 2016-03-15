@@ -66,9 +66,11 @@ public class Planner extends JFrame {
     public void refreshBuildSelected() {
         refreshBuildName();
         buildsListPart1.refreshListItems();
+        gemListPart1.refreshListGems();
     }
 
     public void refreshItemSelected() {
+        itemInfoPart1.refreshDisplay();
     }
 
     public void refreshItemsChanged() {
@@ -78,6 +80,7 @@ public class Planner extends JFrame {
     private void refreshBuildName() {
         textFieldBuildName.setText(model.getSelected().getName());
     }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - Brandon Dong
@@ -89,7 +92,7 @@ public class Planner extends JFrame {
         label2 = new JLabel();
         gearListPart1 = new GearListPart();
         gemListPart1 = new GemListPart(model, this);
-        itemInfoPart1 = new ItemInfoPart();
+        itemInfoPart1 = new ItemInfoPart(model);
         buildsListPart1 = new BuildsListPart(model, this);
 
         //======== this ========

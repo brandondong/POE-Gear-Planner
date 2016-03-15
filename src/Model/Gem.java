@@ -3,12 +3,14 @@ package Model;
 import Util.GameConstants;
 import Util.GemData;
 
+import javax.swing.text.StyledDocument;
+
 /**
  * Created by Brandon on 2016-02-20.
  *
  * Represents a skill gem
  */
-public class Gem {
+public class Gem implements DisplayableItem {
 
     private Requirements requirements;
 
@@ -78,5 +80,10 @@ public class Gem {
         System.out.println(gem.getName());
         System.out.println(gem.getType());
         System.out.println(gem.getRequirements());
+    }
+
+    @Override
+    public void displayItem(StyledDocument document) {
+
     }
 }

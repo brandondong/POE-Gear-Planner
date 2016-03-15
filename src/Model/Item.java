@@ -1,11 +1,13 @@
 package Model;
 
+import javax.swing.text.StyledDocument;
+
 /**
  * Created by Brandon on 2016-02-20.
  *
  * Represents an item with stats and requirements
  */
-public class Item {
+public class Item implements DisplayableItem {
 
     private Requirements requirements;
 
@@ -30,5 +32,10 @@ public class Item {
     @Override
     public String toString() {
         return String.format("%s\n%s\n%s", name, requirements, stats);
+    }
+
+    @Override
+    public void displayItem(StyledDocument document) {
+
     }
 }

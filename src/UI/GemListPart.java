@@ -5,6 +5,7 @@
 package UI;
 
 import Model.BuildsModel;
+import Model.DisplayableItem;
 import Model.Gem;
 import Util.GameConstants;
 import Util.GemData;
@@ -62,8 +63,7 @@ public class GemListPart extends JPanel {
     }
 
     private void refreshButtonRemove() {
-        buttonRemove.setEnabled(listGems.getSelectedValue() != null &&
-                listGems.getSelectedValuesList().size() < model.getSelected().getGems().size());
+        buttonRemove.setEnabled(listGems.getSelectedValue() != null);
     }
 
     private void initListGems() {
@@ -71,7 +71,11 @@ public class GemListPart extends JPanel {
         listGems.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
-                planner.refreshItemSelected();
+                Object value = listGems.getSelectedValue();
+                if (value != null) {
+                    model.setSelectedItem((DisplayableItem) value);
+                    planner.refreshItemSelected();
+                }
                 refreshButtonRemove();
             }
         });

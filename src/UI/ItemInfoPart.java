@@ -4,16 +4,28 @@
 
 package UI;
 
+import Model.BuildsModel;
+
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.*;
+import javax.swing.text.StyledDocument;
 
 /**
  * @author Brandon Dong
  */
 public class ItemInfoPart extends JPanel {
-    public ItemInfoPart() {
+
+    private BuildsModel model;
+
+    public ItemInfoPart(BuildsModel model) {
+        this.model = model;
         initComponents();
+    }
+
+    public void refreshDisplay() {
+        StyledDocument doc = textPane1.getStyledDocument();
+        model.getSelectedItem().displayItem(doc);
     }
 
     private void initComponents() {
@@ -54,10 +66,10 @@ public class ItemInfoPart extends JPanel {
             new Insets(0, 0, 0, 0), 0, 0));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
-
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // Generated using JFormDesigner Evaluation license - Brandon Dong
     private JScrollPane scrollPane1;
+
     private JTextPane textPane1;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

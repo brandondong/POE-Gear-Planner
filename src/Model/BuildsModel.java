@@ -16,6 +16,8 @@ public class BuildsModel implements Iterable<Character> {
 
     private Character selected;
 
+    private DisplayableItem selectedItem;
+
     public BuildsModel() {
         characters = new ArrayList<>();
         selected = new Character(CharacterClass.SCION);
@@ -50,8 +52,16 @@ public class BuildsModel implements Iterable<Character> {
         return selected;
     }
 
+    public DisplayableItem getSelectedItem() {
+        return selectedItem;
+    }
+
     public void setSelected(Character other) {
         selected = other;
+    }
+
+    public void setSelectedItem(DisplayableItem selectedItem) {
+        this.selectedItem = selectedItem;
     }
 
     public int numCharacters() {
