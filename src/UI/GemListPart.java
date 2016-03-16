@@ -79,6 +79,7 @@ public class GemListPart extends JPanel {
                 refreshButtonRemove();
             }
         });
+        listGems.setCellRenderer(new gemCellRenderer());
     }
 
     public void refreshListGems() {
@@ -104,6 +105,15 @@ public class GemListPart extends JPanel {
                 spinnerLevel.setValue(Math.max(1, value));
             }
         });
+    }
+
+    private class gemCellRenderer extends DefaultListCellRenderer {
+        @Override
+        public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+            Component label = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+            label.setForeground(((Gem) value).getType().getColor());
+            return label;
+        }
     }
 
     private void initComponents() {
@@ -184,7 +194,6 @@ public class GemListPart extends JPanel {
             new Insets(0, 0, 5, 0), 0, 0));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
-
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // Generated using JFormDesigner Evaluation license - Brandon Dong
     private JLabel label1;
@@ -194,6 +203,7 @@ public class GemListPart extends JPanel {
     private JButton buttonAdd;
     private JScrollPane scrollPane1;
     private JList listGems;
+
     private JButton buttonRemove;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }
