@@ -8,7 +8,6 @@ import Model.BuildsModel;
 import Model.DisplayableItem;
 import Model.Gem;
 import Util.GameConstants;
-import Util.GemData;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -27,9 +26,9 @@ public class GemListPart extends JPanel {
 
     private BuildsModel model;
 
-    private Planner planner;
+    private BuildPlanner planner;
 
-    public GemListPart(BuildsModel model, Planner planner) {
+    public GemListPart(BuildsModel model, BuildPlanner planner) {
         this.model = model;
         this.planner = planner;
         initComponents();
@@ -111,7 +110,9 @@ public class GemListPart extends JPanel {
         @Override
         public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
             Component label = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-            label.setForeground(((Gem) value).getType().getColor());
+            if (!isSelected) {
+                label.setForeground(((Gem) value).getType().getColor());
+            }
             return label;
         }
     }

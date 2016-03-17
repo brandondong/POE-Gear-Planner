@@ -23,9 +23,9 @@ public class BuildsListPart extends JPanel {
 
     private BuildsModel model;
 
-    private Planner planner;
+    private BuildPlanner planner;
 
-    public BuildsListPart(BuildsModel model, Planner planner) {
+    public BuildsListPart(BuildsModel model, BuildPlanner planner) {
         this.model = model;
         this.planner = planner;
         initComponents();

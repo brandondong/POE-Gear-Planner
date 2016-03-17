@@ -5,7 +5,7 @@ new FormModel {
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridBagLayout ) {
 			"$columnSpecs": "0:1.0"
-			"$rowSpecs": "0:1.0"
+			"$rowSpecs": "0, 0:1.0"
 			"$hGap": 5
 			"$vGap": 5
 			"$alignLeft": true
@@ -14,13 +14,30 @@ new FormModel {
 			name: "this"
 			"border": new javax.swing.border.CompoundBorder( new javax.swing.border.TitledBorder( null, "Item Information", 4, 0, new java.awt.Font( "Tahoma", 1, 11 ), null ), new javax.swing.border.EmptyBorder( 5, 5, 5, 5 ) )
 			"preferredSize": new java.awt.Dimension( 28, 200 )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridBagLayout ) {
+				"$columnSpecs": "0:1.0"
+				"$rowSpecs": "0"
+				"$hGap": 5
+				"$vGap": 5
+				"$alignLeft": true
+				"$alignTop": true
+			} ) {
+				name: "panel1"
+				"border": new javax.swing.border.CompoundBorder( new javax.swing.border.TitledBorder( "" ), new javax.swing.border.EmptyBorder( 5, 5, 5, 5 ) )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label1"
+					"text": "No item selected."
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) )
 			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 				name: "scrollPane1"
 				add( new FormComponent( "javax.swing.JTextPane" ) {
 					name: "textPane1"
 					"editable": false
 				} )
-			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+				"gridy": 1
+			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
 			"size": new java.awt.Dimension( 400, 300 )

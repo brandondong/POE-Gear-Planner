@@ -8,10 +8,6 @@ import Model.*;
 import Model.Character;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.event.DocumentEvent;
@@ -20,11 +16,11 @@ import javax.swing.event.DocumentListener;
 /**
  * @author Brandon Dong
  */
-public class Planner extends JFrame {
+public class BuildPlanner extends JFrame {
 
     private BuildsModel model;
 
-    public Planner(BuildsModel model) {
+    public BuildPlanner(BuildsModel model) {
         this.model = model;
         initComponents();
         initBuildName();
@@ -97,7 +93,7 @@ public class Planner extends JFrame {
 
         //======== this ========
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Path of Exile Gear Planner");
+        setTitle("Path of Exile Gear BuildPlanner");
         Container contentPane = getContentPane();
         contentPane.setLayout(new GridBagLayout());
         ((GridBagLayout)contentPane.getLayout()).columnWidths = new int[] {0, 0, 0, 0};
@@ -183,6 +179,6 @@ public class Planner extends JFrame {
 
     public static void main(String[] args) throws Exception {
         UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName()); //for testing
-        new Planner(new BuildsModel()).setVisible(true);
+        new BuildPlanner(new BuildsModel()).setVisible(true);
     }
 }
