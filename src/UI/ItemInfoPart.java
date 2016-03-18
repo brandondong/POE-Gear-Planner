@@ -5,10 +5,12 @@
 package UI;
 
 import Model.BuildsModel;
+import Util.Logger;
 
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.*;
+import javax.swing.text.BadLocationException;
 import javax.swing.text.StyledDocument;
 
 /**
@@ -24,8 +26,11 @@ public class ItemInfoPart extends JPanel {
     }
 
     public void refreshDisplay() {
-        StyledDocument doc = textPane1.getStyledDocument();
-        model.getSelectedItem().displayItem(doc);
+        try {
+            textPane1.setStyledDocument(model.getSelectedItem().displayItem());
+        } catch (BadLocationException e) {
+            Logger.addError("Could not show selected item", e);
+        }
     }
 
     private void initComponents() {

@@ -3,7 +3,8 @@ package Model;
 import Util.GameConstants;
 import Util.GemData;
 
-import javax.swing.text.StyledDocument;
+import javax.swing.text.*;
+import java.awt.*;
 
 /**
  * Created by Brandon on 2016-02-20.
@@ -75,15 +76,21 @@ public class Gem implements DisplayableItem {
         return String.format("%s, level %d", name, level);
     }
 
+    @Override
+    public StyledDocument displayItem() throws BadLocationException {
+        SimpleAttributeSet keyWord = new SimpleAttributeSet();
+        StyleConstants.setForeground(keyWord, Color.RED);
+        StyleConstants.setBackground(keyWord, Color.YELLOW);
+        StyleConstants.setBold(keyWord, true);
+        StyledDocument doc = new DefaultStyledDocument();
+        doc.insertString(0, toString(), keyWord);
+        return doc;
+    }
+
     public static void main(String[] args) {
         Gem gem = new Gem("Essence Drain", -1);
         System.out.println(gem.getName());
         System.out.println(gem.getType());
         System.out.println(gem.getRequirements());
-    }
-
-    @Override
-    public void displayItem(StyledDocument document) {
-
     }
 }

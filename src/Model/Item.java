@@ -35,7 +35,7 @@ public class Item implements DisplayableItem {
     }
 
     @Override
-    public void displayItem(StyledDocument document) {
-
+    public StyledDocument displayItem() {
+        return null;
     }
 }

@@ -1,5 +1,6 @@
 package Model;
 
+import javax.swing.text.BadLocationException;
 import javax.swing.text.StyledDocument;
 
 /**
@@ -11,7 +12,7 @@ public interface DisplayableItem {
 
     /**
      *
-     * @param document the document of the text pane to be displayed on
+     * @return a styled document to be displayed representing this item
      */
-    void displayItem(StyledDocument document);
+    StyledDocument displayItem() throws BadLocationException;
 }
