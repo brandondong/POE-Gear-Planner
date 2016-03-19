@@ -12,12 +12,18 @@ import Util.GameConstants;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Document;
+import javax.swing.text.PlainDocument;
 
 /**
  * @author Brandon Dong
@@ -90,9 +96,47 @@ public class GemListPart extends JPanel {
     }
 
     private void initComboGemNames() {
-        for (String data : GameConstants.GEM_DATABASE.keySet()) {
-            comboGemNames.addItem(data);
+        comboGemNames.setModel(getDefaultModel());
+        JTextField textField = (JTextField) comboGemNames.getEditor().getEditorComponent();
+        textField.setDocument(new SearchDocument());
+    }
+
+    private class SearchDocument extends PlainDocument {
+        @Override
+        public void insertString(int offs, String str, AttributeSet a) throws BadLocationException {
+            super.insertString(offs, str, a);
+            String gemName = lookupItem(getText(0, getLength()));
+            if (gemName != null) {
+                comboGemNames.setSelectedItem(gemName);
+                super.remove(0, getLength());
+                super.insertString(0, gemName, a);
+                JTextField editor = (JTextField) comboGemNames.getEditor().getEditorComponent();
+                editor.setSelectionStart(offs + str.length());
+                editor.setSelectionEnd(getLength());
+                comboGemNames.showPopup();
+            } else {
+                comboGemNames.hidePopup();
+            }
         }
+
+        private String lookupItem(String str) {
+            for (int i = 0; i < comboGemNames.getModel().getSize(); i++) {
+                String gem = (String) comboGemNames.getItemAt(i);
+                if (gem.toLowerCase().startsWith(str.toLowerCase())) {
+                    return gem;
+                }
+            }
+            return null;
+        }
+    }
+
+    private ComboBoxModel getDefaultModel() {
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
+        for (String data : GameConstants.GEM_DATABASE.keySet()) {
+            model.addElement(data);
+
+        }
+        return model;
     }
 
     private void initSpinnerLevel() {
@@ -105,7 +149,6 @@ public class GemListPart extends JPanel {
             }
         });
     }
-
     private class gemCellRenderer extends DefaultListCellRenderer {
         @Override
         public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
@@ -115,8 +158,8 @@ public class GemListPart extends JPanel {
             }
             return label;
         }
-    }
 
+    }
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - Brandon Dong
@@ -196,6 +239,7 @@ public class GemListPart extends JPanel {
     private JSpinner spinnerLevel;
     private JButton buttonAdd;
     private JScrollPane scrollPane1;
+
     private JList listGems;
 
     private JButton buttonRemove;
