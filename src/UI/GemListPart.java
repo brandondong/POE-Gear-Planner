@@ -8,12 +8,15 @@ import Model.BuildsModel;
 import Model.DisplayableItem;
 import Model.Gem;
 import Util.GameConstants;
+import Util.Logger;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.*;
+import java.util.List;
 import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.event.ChangeEvent;
@@ -46,6 +49,7 @@ public class GemListPart extends JPanel {
     }
 
     private void initButtonAdd() {
+        refreshButtonAdd((String) comboGemNames.getSelectedItem());
         buttonAdd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -54,6 +58,10 @@ public class GemListPart extends JPanel {
                 planner.refreshItemsChanged();
             }
         });
+    }
+
+    private void refreshButtonAdd(String text) {
+        buttonAdd.setEnabled(GameConstants.GEM_DATABASE.containsKey(text));
     }
 
     private void initButtonRemove() {
@@ -97,19 +105,39 @@ public class GemListPart extends JPanel {
 
     private void initComboGemNames() {
         comboGemNames.setModel(getDefaultModel());
-        JTextField textField = (JTextField) comboGemNames.getEditor().getEditorComponent();
+        final JTextField textField = (JTextField) comboGemNames.getEditor().getEditorComponent();
         textField.setDocument(new SearchDocument());
+        textField.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    buttonAdd.doClick();
+                    textField.setSelectionStart(textField.getText().length());
+                }
+            }
+        });
     }
 
     private class SearchDocument extends PlainDocument {
+
+        private SearchDocument() {
+            Object selection = comboGemNames.getSelectedItem();
+            if (selection != null) {
+                try {
+                    setText(selection.toString(), null);
+                } catch (BadLocationException e) {
+                    Logger.addError("Could not initialize gem combo box", e);
+                }
+            }
+        }
+
         @Override
         public void insertString(int offs, String str, AttributeSet a) throws BadLocationException {
             super.insertString(offs, str, a);
             String gemName = lookupItem(getText(0, getLength()));
             if (gemName != null) {
                 comboGemNames.setSelectedItem(gemName);
-                super.remove(0, getLength());
-                super.insertString(0, gemName, a);
+                setText(gemName, a);
                 JTextField editor = (JTextField) comboGemNames.getEditor().getEditorComponent();
                 editor.setSelectionStart(offs + str.length());
                 editor.setSelectionEnd(getLength());
@@ -117,13 +145,32 @@ public class GemListPart extends JPanel {
             } else {
                 comboGemNames.hidePopup();
             }
+            refreshButtonAdd(getText(0, getLength()));
+        }
+
+        @Override
+        public void remove(int offs, int len) throws BadLocationException {
+            super.remove(offs, len);
+            if (getLength() == 0) {
+                comboGemNames.hidePopup();
+            } else if (lookupItem(getText(0, getLength())) != null) {
+                comboGemNames.showPopup();
+            }
+            refreshButtonAdd(getText(0, getLength()));
+        }
+
+        private void setText(String str, AttributeSet a) throws BadLocationException {
+            super.remove(0, getLength());
+            super.insertString(0, str, a);
         }
 
         private String lookupItem(String str) {
-            for (int i = 0; i < comboGemNames.getModel().getSize(); i++) {
-                String gem = (String) comboGemNames.getItemAt(i);
-                if (gem.toLowerCase().startsWith(str.toLowerCase())) {
-                    return gem;
+            if (str.length() > 0) {
+                for (int i = 0; i < comboGemNames.getModel().getSize(); i++) {
+                    String gem = (String) comboGemNames.getItemAt(i);
+                    if (gem.toLowerCase().startsWith(str.toLowerCase())) {
+                        return gem;
+                    }
                 }
             }
             return null;
@@ -132,9 +179,10 @@ public class GemListPart extends JPanel {
 
     private ComboBoxModel getDefaultModel() {
         DefaultComboBoxModel model = new DefaultComboBoxModel();
-        for (String data : GameConstants.GEM_DATABASE.keySet()) {
+        List<String> keys = new ArrayList<>(GameConstants.GEM_DATABASE.keySet());
+        Collections.sort(keys);
+        for (String data : keys) {
             model.addElement(data);
-
         }
         return model;
     }

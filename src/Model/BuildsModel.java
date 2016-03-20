@@ -20,12 +20,12 @@ public class BuildsModel implements Iterable<Character> {
 
     public BuildsModel() {
         characters = new ArrayList<>();
-        selected = new Character(CharacterClass.SCION);
+        selected = new Character();
         characters.add(selected);
     }
 
     public void addCharacter() {
-        addCharacter(new Character(CharacterClass.SCION));
+        addCharacter(new Character());
     }
 
     public void addCharacter(Character other) {

@@ -26,8 +26,8 @@ public class Character extends Equipment {
 
     private int numJewels;
 
-    public Character(CharacterClass characterClass) {
-        this.characterClass = characterClass;
+    public Character() {
+        characterClass = CharacterClass.SCION;
         name = NEW_CHARACTER_NAME;
         stats = new CharacterStats();
         keystones = new HashSet<>();
@@ -96,6 +96,10 @@ public class Character extends Equipment {
 
     public CharacterClass getCharacterClass() {
         return characterClass;
+    }
+
+    public void setCharacterClass(CharacterClass characterClass) {
+        this.characterClass = characterClass;
     }
 
     public CharacterStats getStats() {

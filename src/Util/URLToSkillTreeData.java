@@ -20,13 +20,14 @@ public class URLToSkillTreeData {
     public static Character decodeURL(String url) {
         try {
             byte[] array = decodeURLIntoBase64(url);
-            Character character = new Character(CharacterClass.getCharacterClass(array[4]));
+            Character character = new Character();
+            character.setCharacterClass(CharacterClass.getCharacterClass(array[4]));
             addStatsAndKeystones(array, character);
             return character;
         } catch (Exception e) {
             Logger.addWarning("Invalid URL. Must be a Passive Skill Tree URL from pathofexile.com");
         }
-        return new Character(CharacterClass.SCION);
+        return new Character();
     }
 
     private static byte[] decodeURLIntoBase64(String url) {
