@@ -23,13 +23,20 @@ public class ItemInfoPart extends JPanel {
     public ItemInfoPart(BuildsModel model) {
         this.model = model;
         initComponents();
+        initDisplay();
+    }
+
+    private void initDisplay() {
+        refreshDisplay();
     }
 
     public void refreshDisplay() {
-        try {
-            textPane1.setStyledDocument(model.getSelectedItem().displayItem());
-        } catch (BadLocationException e) {
-            Logger.addError("Could not show selected item", e);
+        if (model.getSelectedItem() != null) {
+            try {
+                textPane1.setStyledDocument(model.getSelectedItem().displayItem());
+            } catch (BadLocationException e) {
+                Logger.addError("Could not show selected item", e);
+            }
         }
     }
 

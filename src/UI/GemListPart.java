@@ -25,7 +25,6 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
-import javax.swing.text.Document;
 import javax.swing.text.PlainDocument;
 
 /**
@@ -92,7 +91,7 @@ public class GemListPart extends JPanel {
                 refreshButtonRemove();
             }
         });
-        listGems.setCellRenderer(new gemCellRenderer());
+        listGems.setCellRenderer(new GemCellRenderer());
     }
 
     public void refreshListGems() {
@@ -197,7 +196,7 @@ public class GemListPart extends JPanel {
             }
         });
     }
-    private class gemCellRenderer extends DefaultListCellRenderer {
+    private class GemCellRenderer extends DefaultListCellRenderer {
         @Override
         public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
             Component label = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);

@@ -79,9 +79,9 @@ public class Gem implements DisplayableItem {
     @Override
     public StyledDocument displayItem() throws BadLocationException {
         SimpleAttributeSet keyWord = new SimpleAttributeSet();
-        StyleConstants.setForeground(keyWord, Color.RED);
-        StyleConstants.setBackground(keyWord, Color.YELLOW);
+        StyleConstants.setForeground(keyWord, getType().getColor());
         StyleConstants.setBold(keyWord, true);
+        StyleConstants.setFontSize(keyWord, 18);
         StyledDocument doc = new DefaultStyledDocument();
         doc.insertString(0, toString(), keyWord);
         return doc;

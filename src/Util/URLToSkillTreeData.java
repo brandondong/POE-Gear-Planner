@@ -12,22 +12,22 @@ import java.nio.ByteBuffer;
  * Helper class for converting a Passive Skill Tree URL into character data
  */
 public class URLToSkillTreeData {
+
     /**
      *
-     * @param url A Passive Skill Tree URL
-     * @return character data from the skill tree created by the URL
+     * @param url the Passive Skill Tree URL of the character
+     * @param character the {@link Character} to be populated
+     * @return <code>true</code> if the skill tree data was successfully added
      */
-    public static Character decodeURL(String url) {
+    public static boolean decodeURL(String url, Character character) {
         try {
             byte[] array = decodeURLIntoBase64(url);
-            Character character = new Character();
             character.setCharacterClass(CharacterClass.getCharacterClass(array[4]));
             addStatsAndKeystones(array, character);
-            return character;
+            return true;
         } catch (Exception e) {
-            Logger.addWarning("Invalid URL. Must be a Passive Skill Tree URL from pathofexile.com");
+            return false;
         }
-        return new Character();
     }
 
     private static byte[] decodeURLIntoBase64(String url) {
@@ -55,7 +55,8 @@ public class URLToSkillTreeData {
     }
 
     public static void main(String[] args) {
-        Character character = decodeURL("https://www.pathofexile.com/fullscreen-passive-skill-tree/AAAAAwMBAW8GSQceDXwQlxFQE2wV1xcvGFYYahpsGyUc3B0UHU8dqh3ZIvQo-iqYLKYsvzLRNAo1uTdmN4NDVEQERUdGcUlRSbFLrkyzTblSKVXgVmNXyVgHWFpakVxrZp5odGqsa9tsC20ZeC985X0Yf8aCx4RIhWCGrohAiEKLeox2jxqPRo_6kDOTJ5UumK2boZ2unjyhL6aspuunCKcrqH2qxLQMtzG4k76Kv5fBxcNtyT3K08y80B_T-9fP2QvZW9pi2t3fiuGI4vfpAuq66-7sGOyK74jv6_DV8h70cffB99f5N_no-oD60v5J");
+        Character character = new Character();
+        decodeURL("https://www.pathofexile.com/fullscreen-passive-skill-tree/AAAAAwMBAW8GSQceDXwQlxFQE2wV1xcvGFYYahpsGyUc3B0UHU8dqh3ZIvQo-iqYLKYsvzLRNAo1uTdmN4NDVEQERUdGcUlRSbFLrkyzTblSKVXgVmNXyVgHWFpakVxrZp5odGqsa9tsC20ZeC985X0Yf8aCx4RIhWCGrohAiEKLeox2jxqPRo_6kDOTJ5UumK2boZ2unjyhL6aspuunCKcrqH2qxLQMtzG4k76Kv5fBxcNtyT3K08y80B_T-9fP2QvZW9pi2t3fiuGI4vfpAuq66-7sGOyK74jv6_DV8h70cffB99f5N_no-oD60v5J", character);
         character.addEquipement(CharacterNameToItemData.getEquipmentFromCharacter("agentvenom1", "WTBsurvivability"));
         System.out.println(character);
         System.out.println(character.getLifeAtLevel(95));
