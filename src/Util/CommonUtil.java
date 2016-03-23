@@ -1,5 +1,8 @@
 package Util;
 
+import javax.swing.text.AttributeSet;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
 import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -49,5 +52,21 @@ public class CommonUtil {
      */
     public static String formatUppercaseString(String name) {
         return name.substring(0, 1) + name.substring(1).toLowerCase();
+    }
+
+    public static AttributeSet getLargeFont() {
+        return getLargeFont(Color.BLACK);
+    }
+
+    public static AttributeSet getLargeFont(Color c) {
+        SimpleAttributeSet keyWord = new SimpleAttributeSet();
+        StyleConstants.setForeground(keyWord, c);
+        StyleConstants.setBold(keyWord, true);
+        StyleConstants.setFontSize(keyWord, 12);
+        return keyWord;
+    }
+
+    private CommonUtil() {
+        // prevent instantiation
     }
 }

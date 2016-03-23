@@ -110,6 +110,11 @@ public class GemListPart extends JPanel {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    Object item = comboGemNames.getSelectedItem();
+                    if (item != null) {
+                        textField.setText((String) item);
+                        refreshButtonAdd((String) item);
+                    }
                     buttonAdd.doClick();
                     textField.setSelectionStart(textField.getText().length());
                 }
