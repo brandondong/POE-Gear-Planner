@@ -111,12 +111,12 @@ public class GemListPart extends JPanel {
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     Object item = comboGemNames.getSelectedItem();
-                    if (item != null) {
+                    if (item != null && (comboGemNames.isPopupVisible() || buttonAdd.isEnabled())) {
                         textField.setText((String) item);
+                        textField.setSelectionStart(textField.getText().length());
                         refreshButtonAdd((String) item);
+                        buttonAdd.doClick();
                     }
-                    buttonAdd.doClick();
-                    textField.setSelectionStart(textField.getText().length());
                 }
             }
         });
