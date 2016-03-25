@@ -80,7 +80,8 @@ public class Gem implements DisplayableItem {
     @Override
     public StyledDocument displayItem() throws BadLocationException {
         StyledDocument doc = new DefaultStyledDocument();
-        doc.insertString(0, toString(), CommonUtil.getLargeFont(getType().getColor()));
+        doc.insertString(0, String.format("%s\nLevel %d\n", name, level), CommonUtil.getLargeFont(getType().getColor()));
+        doc.insertString(doc.getLength(), requirements.toString(), CommonUtil.getRegularFont());
         return doc;
     }
 

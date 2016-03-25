@@ -17,6 +17,8 @@ import java.net.URLConnection;
  */
 public class CommonUtil {
 
+    public static final Color DEFAULT_TEXT_COLOR = Color.black;
+
     /**
      *
      * @param url the website url
@@ -55,13 +57,24 @@ public class CommonUtil {
     }
 
     public static AttributeSet getLargeFont() {
-        return getLargeFont(Color.BLACK);
+        return getLargeFont(DEFAULT_TEXT_COLOR);
     }
 
     public static AttributeSet getLargeFont(Color c) {
         SimpleAttributeSet keyWord = new SimpleAttributeSet();
         StyleConstants.setForeground(keyWord, c);
         StyleConstants.setBold(keyWord, true);
+        StyleConstants.setFontSize(keyWord, 15);
+        return keyWord;
+    }
+
+    public static AttributeSet getRegularFont() {
+        return getRegularFont(DEFAULT_TEXT_COLOR);
+    }
+
+    public static AttributeSet getRegularFont(Color c) {
+        SimpleAttributeSet keyWord = new SimpleAttributeSet();
+        StyleConstants.setForeground(keyWord, c);
         StyleConstants.setFontSize(keyWord, 12);
         return keyWord;
     }
