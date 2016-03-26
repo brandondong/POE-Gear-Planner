@@ -75,6 +75,7 @@ public class CommonUtil {
     public static AttributeSet getRegularFont(Color c) {
         SimpleAttributeSet keyWord = new SimpleAttributeSet();
         StyleConstants.setForeground(keyWord, c);
+        StyleConstants.setLeftIndent(keyWord, 20);
         StyleConstants.setFontSize(keyWord, 12);
         return keyWord;
     }
