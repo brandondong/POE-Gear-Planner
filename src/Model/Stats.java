@@ -174,6 +174,9 @@ public class Stats implements Iterable<Stat> {
             builder.append(stat.toString());
             builder.append("\n");
         }
-        return builder.substring(0, builder.length() - 1);
+        if (builder.length() > 0) {
+            return builder.substring(0, builder.length() - 1);
+        }
+        return "No Passive Skill Tree stats allocated";
     }
 }

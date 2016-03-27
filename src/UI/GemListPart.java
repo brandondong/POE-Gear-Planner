@@ -7,6 +7,7 @@ package UI;
 import Model.BuildsModel;
 import Model.DisplayableItem;
 import Model.Gem;
+import Util.CommonUtil;
 import Util.GameConstants;
 import Util.Logger;
 
@@ -45,6 +46,21 @@ public class GemListPart extends JPanel {
         initListGems();
         initButtonRemove();
         initButtonAdd();
+        initButtonOpen();
+    }
+
+    private void initButtonOpen() {
+        refreshButtonOpen();
+        buttonOpen.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                CommonUtil.openWebpage(listGems.getSelectedValuesList());
+            }
+        });
+    }
+
+    private void refreshButtonOpen() {
+        buttonOpen.setEnabled(listGems.getSelectedValue() != null);
     }
 
     private void initButtonAdd() {
@@ -89,6 +105,7 @@ public class GemListPart extends JPanel {
                     planner.refreshItemSelected();
                 }
                 refreshButtonRemove();
+                refreshButtonOpen();
             }
         });
         listGems.setCellRenderer(new GemCellRenderer());
@@ -223,19 +240,21 @@ public class GemListPart extends JPanel {
         scrollPane1 = new JScrollPane();
         listGems = new JList();
         buttonRemove = new JButton();
+        panel1 = new JPanel();
+        buttonOpen = new JButton();
 
         //======== this ========
         setBorder(new CompoundBorder(
-            new TitledBorder(null, "Gems", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION,
-                new Font("Segoe UI", Font.BOLD, 12)),
-            new EmptyBorder(5, 5, 5, 5)));
+                new TitledBorder(null, "Gems", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION,
+                        new Font("Segoe UI", Font.BOLD, 12)),
+                new EmptyBorder(5, 5, 5, 5)));
         setPreferredSize(new Dimension(400, 300));
 
         setLayout(new GridBagLayout());
         ((GridBagLayout)getLayout()).columnWidths = new int[] {0, 0, 0, 0, 0, 0};
-        ((GridBagLayout)getLayout()).rowHeights = new int[] {0, 0, 0, 0, 0};
+        ((GridBagLayout)getLayout()).rowHeights = new int[] {0, 0, 0, 0, 0, 0};
         ((GridBagLayout)getLayout()).columnWeights = new double[] {0.0, 0.0, 0.0, 1.0, 0.0, 1.0E-4};
-        ((GridBagLayout)getLayout()).rowWeights = new double[] {0.0, 0.0, 0.0, 1.0, 1.0E-4};
+        ((GridBagLayout)getLayout()).rowWeights = new double[] {0.0, 0.0, 0.0, 1.0, 0.0, 1.0E-4};
 
         //---- label1 ----
         label1.setText("Gem name:");
@@ -246,21 +265,21 @@ public class GemListPart extends JPanel {
         //---- comboGemNames ----
         comboGemNames.setEditable(true);
         add(comboGemNames, new GridBagConstraints(1, 0, 2, 1, 0.0, 0.0,
-            GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-            new Insets(0, 0, 5, 5), 0, 0));
+                GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+                new Insets(0, 0, 5, 5), 0, 0));
 
         //---- label2 ----
         label2.setText("Level:");
         add(label2, new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0,
-            GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-            new Insets(0, 0, 5, 5), 0, 0));
+                GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+                new Insets(0, 0, 5, 5), 0, 0));
 
         //---- spinnerLevel ----
         spinnerLevel.setPreferredSize(new Dimension(46, 18));
         spinnerLevel.setMinimumSize(new Dimension(46, 20));
         add(spinnerLevel, new GridBagConstraints(1, 1, 1, 1, 0.0, 0.0,
-            GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-            new Insets(0, 0, 5, 5), 0, 0));
+                GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+                new Insets(0, 0, 5, 5), 0, 0));
 
         //---- buttonAdd ----
         buttonAdd.setText("Add");
@@ -274,13 +293,31 @@ public class GemListPart extends JPanel {
         }
         add(scrollPane1, new GridBagConstraints(0, 2, 4, 2, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-            new Insets(0, 0, 0, 5), 0, 0));
+            new Insets(0, 0, 5, 5), 0, 0));
 
         //---- buttonRemove ----
         buttonRemove.setText("Remove");
         add(buttonRemove, new GridBagConstraints(4, 2, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 5, 0), 0, 0));
+
+        //======== panel1 ========
+        {
+            panel1.setLayout(new GridBagLayout());
+            ((GridBagLayout)panel1.getLayout()).columnWidths = new int[] {0, 0};
+            ((GridBagLayout)panel1.getLayout()).rowHeights = new int[] {0, 0};
+            ((GridBagLayout)panel1.getLayout()).columnWeights = new double[] {0.0, 1.0E-4};
+            ((GridBagLayout)panel1.getLayout()).rowWeights = new double[] {0.0, 1.0E-4};
+
+            //---- buttonOpen ----
+            buttonOpen.setText("Open in browser");
+            panel1.add(buttonOpen, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,
+                GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+                new Insets(0, 0, 0, 0), 0, 0));
+        }
+        add(panel1, new GridBagConstraints(0, 4, 5, 1, 0.0, 0.0,
+            GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+            new Insets(0, 0, 0, 0), 0, 0));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
@@ -291,9 +328,9 @@ public class GemListPart extends JPanel {
     private JSpinner spinnerLevel;
     private JButton buttonAdd;
     private JScrollPane scrollPane1;
-
     private JList listGems;
-
     private JButton buttonRemove;
+    private JPanel panel1;
+    private JButton buttonOpen;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

@@ -1,5 +1,7 @@
 package Util;
 
+import Model.Gem;
+
 import javax.swing.text.AttributeSet;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
@@ -9,6 +11,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by Brandon on 2016-02-28.
@@ -18,6 +23,8 @@ import java.net.URLConnection;
 public class CommonUtil {
 
     public static final Color DEFAULT_TEXT_COLOR = Color.black;
+
+    public static final String WIKI_PREFIX = "http://pathofexile.gamepedia.com/";
 
     /**
      *
@@ -37,6 +44,16 @@ public class CommonUtil {
         in.close();
 
         return a.toString();
+    }
+
+    public static void openWebpage(Collection<Gem> gems) {
+        Set<String> urls = new HashSet<>();
+        for (Gem gem : gems) {
+            urls.add(String.format("%s%s", WIKI_PREFIX, gem.getName().replace(" ", "_")));
+        }
+        for (String url : urls) {
+            openWebpage(url);
+        }
     }
 
     public static void openWebpage(String urlString) {

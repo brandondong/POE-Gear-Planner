@@ -84,11 +84,4 @@ public class Gem implements DisplayableItem {
         doc.insertString(doc.getLength(), requirements.toString(), CommonUtil.getRegularFont());
         return doc;
     }
-
-    public static void main(String[] args) {
-        Gem gem = new Gem("Essence Drain", -1);
-        System.out.println(gem.getName());
-        System.out.println(gem.getType());
-        System.out.println(gem.getRequirements());
-    }
 }
