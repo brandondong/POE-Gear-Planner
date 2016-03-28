@@ -50,7 +50,8 @@ public class SkillTreeFormPart extends JPanel {
         // Generated using JFormDesigner Evaluation license - Brandon Dong
         textField1 = new JTextField();
         button1 = new JButton();
-        label1 = new JLabel();
+        panel2 = new JPanel();
+        labelValidate = new JLabel();
         scrollPane1 = new JScrollPane();
         textPane1 = new JTextPane();
         panel1 = new JPanel();
@@ -90,9 +91,24 @@ public class SkillTreeFormPart extends JPanel {
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 5, 0), 0, 0));
 
-        //---- label1 ----
-        label1.setText("Copy and paste your Path of Exile skill tree URL above");
-        add(label1, new GridBagConstraints(0, 1, 2, 1, 0.0, 0.0,
+        //======== panel2 ========
+        {
+            panel2.setBorder(new CompoundBorder(
+                new TitledBorder(""),
+                new EmptyBorder(5, 5, 5, 5)));
+            panel2.setLayout(new GridBagLayout());
+            ((GridBagLayout)panel2.getLayout()).columnWidths = new int[] {0, 0};
+            ((GridBagLayout)panel2.getLayout()).rowHeights = new int[] {0, 0};
+            ((GridBagLayout)panel2.getLayout()).columnWeights = new double[] {0.0, 1.0E-4};
+            ((GridBagLayout)panel2.getLayout()).rowWeights = new double[] {0.0, 1.0E-4};
+
+            //---- labelValidate ----
+            labelValidate.setText("Copy and paste your Path of Exile skill tree URL above");
+            panel2.add(labelValidate, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,
+                GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+                new Insets(0, 0, 0, 0), 0, 0));
+        }
+        add(panel2, new GridBagConstraints(0, 1, 2, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 5, 0), 0, 0));
 
@@ -173,7 +189,8 @@ public class SkillTreeFormPart extends JPanel {
     // Generated using JFormDesigner Evaluation license - Brandon Dong
     private JTextField textField1;
     private JButton button1;
-    private JLabel label1;
+    private JPanel panel2;
+    private JLabel labelValidate;
     private JScrollPane scrollPane1;
     private JTextPane textPane1;
     private JPanel panel1;
