@@ -1,5 +1,6 @@
 package Model;
 
+import Util.CommonUtil;
 import Util.GameConstants;
 import Util.Logger;
 import org.json.JSONException;
@@ -62,5 +63,10 @@ public enum CharacterClass {
      */
     public int getPosition() {
         return position;
+    }
+
+    @Override
+    public String toString() {
+        return CommonUtil.formatUppercaseString(super.toString());
     }
 }

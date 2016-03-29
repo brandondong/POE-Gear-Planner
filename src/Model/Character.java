@@ -156,6 +156,10 @@ public class Character extends Equipment {
         return builder.toString();
     }
 
+    public String getDisplayString() {
+        return String.format("%s (%s)", toString(), characterClass);
+    }
+
     @Override
     public String toString() {
         return getName();

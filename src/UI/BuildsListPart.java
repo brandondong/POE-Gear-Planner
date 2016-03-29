@@ -53,7 +53,7 @@ public class BuildsListPart extends JPanel {
     }
 
     private void refreshButtonEdit() {
-        buttonEdit.setEnabled(listItems.getSelectedValue() != null);
+        buttonEdit.setEnabled(listItems.getSelectedValue() != null && listItems.getSelectedValue() != model.getSelected());
     }
 
     private void initButtonEdit() {
@@ -94,18 +94,18 @@ public class BuildsListPart extends JPanel {
                 refreshButtonRemove();
             }
         });
-        listItems.setCellRenderer(new BuildCellRenderer());
-    }
-
-    private class BuildCellRenderer extends DefaultListCellRenderer {
-        @Override
-        public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-            Component label = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-            if (value == model.getSelected()) {
-                ((JLabel) label).setText(String.format("* %s", value));
+        listItems.setCellRenderer(new DefaultListCellRenderer() {
+            @Override
+            public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+                JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                String text = ((Character) value).getDisplayString();
+                if (value == model.getSelected()) {
+                    text = String.format("* %s", text);
+                }
+                label.setText(text);
+                return label;
             }
-            return label;
-        }
+        });
     }
 
     private void initComponents() {
