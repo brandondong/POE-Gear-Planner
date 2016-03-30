@@ -16,6 +16,8 @@ public class Character extends Equipment {
 
     private CharacterClass characterClass;
 
+    private Ascendancy ascendancy;
+
     private CharacterStats stats;
 
     private Set<KeystoneNode> keystones;
@@ -27,7 +29,6 @@ public class Character extends Equipment {
     private int numJewels;
 
     public Character() {
-        characterClass = CharacterClass.SCION;
         name = NEW_CHARACTER_NAME;
         stats = new CharacterStats();
         keystones = new HashSet<>();
@@ -122,6 +123,10 @@ public class Character extends Equipment {
         return numJewels;
     }
 
+    public void setAscendancy(Ascendancy ascendancy) {
+        this.ascendancy = ascendancy;
+    }
+
     public int getPredictedLevel() {
         return Math.max(1, numNodes - 20);
     }
@@ -132,7 +137,7 @@ public class Character extends Equipment {
      */
     public String getInfo() {
         StringBuilder builder = new StringBuilder();
-        builder.append(name).append("\n").append(characterClass);
+        builder.append(name).append("\n").append(characterClass).append("\n").append(ascendancy);
         CharacterStats combined = combinedStats();
         for (AttributeType type : AttributeType.values()) {
             builder.append("\n").append(String.format("%d to %s", combined.calculateAttributeValue(type), type));
@@ -157,7 +162,12 @@ public class Character extends Equipment {
     }
 
     public String getDisplayString() {
-        return String.format("%s (%s)", toString(), characterClass);
+        if (ascendancy != null) {
+            return String.format("%s (%s)", toString(), ascendancy);
+        } else if (characterClass != null) {
+            return String.format("%s (%s)", toString(), characterClass);
+        }
+        return toString();
     }
 
     @Override

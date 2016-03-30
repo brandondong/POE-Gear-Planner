@@ -54,7 +54,7 @@ public enum CharacterClass {
                 return charClass;
             }
         }
-        return CharacterClass.SCION;
+        return null;
     }
 
     /**

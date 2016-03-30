@@ -22,7 +22,9 @@ public class URLToSkillTreeData {
     public static boolean decodeURL(String url, Character character) {
         try {
             byte[] array = decodeURLIntoBase64(url);
-            character.setCharacterClass(CharacterClass.getCharacterClass(array[4]));
+            CharacterClass charClass = CharacterClass.getCharacterClass(array[4]);
+            character.setCharacterClass(charClass);
+            character.setAscendancy(Ascendancy.getAscendancy(array[5], charClass));
             addStatsAndKeystones(array, character);
             return true;
         } catch (Exception e) {
@@ -37,7 +39,7 @@ public class URLToSkillTreeData {
     }
 
     private static void addStatsAndKeystones(byte[] array, Character character) {
-        for (int i = 6; i + 1 < array.length; i += 2) {
+        for (int i = 7; i + 1 < array.length; i += 2) {
             byte[] int16 = { array[i], array[i + 1] };
             int id = ByteBuffer.wrap(int16).getShort() & 0xffff;
             SimpleNode node = GameConstants.SKILL_TREE_NODES.get(id);
@@ -56,7 +58,7 @@ public class URLToSkillTreeData {
 
     public static void main(String[] args) {
         Character character = new Character();
-        decodeURL("https://www.pathofexile.com/passive-skill-tree/AAAABAMAAN-K6QI=", character);
+        decodeURL("https://www.pathofexile.com/fullscreen-passive-skill-tree/AAAABAABAQ==", character);
         //character.addEquipement(CharacterNameToItemData.getEquipmentFromCharacter("agentvenom1", "WTBsurvivability"));
         System.out.println(character.getInfo());
         System.out.println(character.getLifeAtLevel(95));
