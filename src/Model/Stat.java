@@ -10,6 +10,8 @@ import java.util.regex.Pattern;
  */
 public class Stat {
 
+    private static final Pattern VALUE_PATTERN = Pattern.compile("[\\d\\.]+");
+
     private String id;
 
     private double value;
@@ -115,7 +117,7 @@ public class Stat {
     }
 
     private double parseValue(String description) {
-        Matcher m = Pattern.compile("[\\d\\.]+").matcher(description);
+        Matcher m = VALUE_PATTERN.matcher(description);
         if (m.find()) {
             return Double.valueOf(m.group());
         }

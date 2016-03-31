@@ -25,8 +25,6 @@ public class GameConstants {
 
     public static final int BASE_RESISTANCE_CAP = 75;
 
-    public static final String PASSIVE_TREE_URL_PREFIX = "passive-skill-tree/";
-
     public static final JSONObject SKILL_TREE_DATA = getJSONData("skilltree.json");
 
     public static final Map<Integer, SimpleNode> SKILL_TREE_NODES = getSkillTreeNodes();
@@ -75,8 +73,18 @@ public class GameConstants {
             return new KeystoneNode(id, obj.getString("dn"), array.getString(0));
         } else if (obj.getString("dn").equals("Jewel Socket")) {
             return new SimpleNode(id);
+        } else if (obj.getBoolean("not") && obj.has("ascendancyName")) {
+            return new AscendancyNode(id, obj.getString("dn"), parseDescription(array));
         }
         return new StatsNode(id, parseStats(array));
+    }
+
+    private static List<String> parseDescription(JSONArray array) throws JSONException {
+        List<String> description = new ArrayList<>();
+        for (int i = 0; i < array.length(); i++) {
+            description.add(array.getString(i));
+        }
+        return description;
     }
 
     private static Stats parseStats(JSONArray array) throws JSONException {
