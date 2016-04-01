@@ -60,6 +60,8 @@ public class URLToSkillTreeData {
                     character.addKeystone((KeystoneNode) node);
                 } else if (node instanceof StatsNode) {
                     character.addStats(((StatsNode) node).getStats());
+                } else if (node instanceof AscendancyNode) {
+                    character.addAscendancy((AscendancyNode) node);
                 } else {
                     character.incNumJewels();
                 }

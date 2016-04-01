@@ -22,6 +22,8 @@ public class Character extends Equipment {
 
     private Set<KeystoneNode> keystones;
 
+    private Set<AscendancyNode> ascendancyNodes;
+
     private String name;
 
     private int numNodes;
@@ -32,6 +34,7 @@ public class Character extends Equipment {
         name = NEW_CHARACTER_NAME;
         stats = new CharacterStats();
         keystones = new HashSet<>();
+        ascendancyNodes = new HashSet<>();
         numNodes = 0;
         numJewels = 0;
     }
@@ -85,6 +88,10 @@ public class Character extends Equipment {
 
     public void addKeystone(KeystoneNode node) {
         keystones.add(node);
+    }
+
+    public void addAscendancy(AscendancyNode node) {
+        ascendancyNodes.add(node);
     }
 
     public void incNumNodes() {
@@ -152,6 +159,12 @@ public class Character extends Equipment {
             builder.append("\n");
             for (KeystoneNode keystone : keystones) {
                 builder.append("\n").append(keystone);
+            }
+        }
+        if (!ascendancyNodes.isEmpty()) {
+            builder.append("\n");
+            for (AscendancyNode node : ascendancyNodes) {
+                builder.append("\n").append(node);
             }
         }
         String items = super.toString();
