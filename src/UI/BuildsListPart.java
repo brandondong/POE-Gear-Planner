@@ -61,7 +61,7 @@ public class BuildsListPart extends JPanel {
         buttonEdit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                model.setSelected((Character) listItems.getSelectedValue());
+                model.setSelected(listItems.getSelectedValue());
                 planner.refreshBuildSelected();
             }
         });
@@ -173,7 +173,7 @@ public class BuildsListPart extends JPanel {
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // Generated using JFormDesigner Evaluation license - Brandon Dong
     private JScrollPane scrollPane1;
-    private JList listItems;
+    private JList<Character> listItems;
     private JButton buttonEdit;
     private JButton buttonRemove;
     private JButton buttonCreate;

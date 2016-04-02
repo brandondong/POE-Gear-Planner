@@ -188,7 +188,7 @@ public class GemListPart extends JPanel {
         private String lookupItem(String str) {
             if (str.length() > 0) {
                 for (int i = 0; i < comboGemNames.getModel().getSize(); i++) {
-                    String gem = (String) comboGemNames.getItemAt(i);
+                    String gem = comboGemNames.getItemAt(i);
                     if (gem.toLowerCase().startsWith(str.toLowerCase())) {
                         return gem;
                     }
@@ -198,8 +198,8 @@ public class GemListPart extends JPanel {
         }
     }
 
-    private ComboBoxModel getDefaultModel() {
-        DefaultComboBoxModel model = new DefaultComboBoxModel();
+    private ComboBoxModel<String> getDefaultModel() {
+        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
         List<String> keys = new ArrayList<>(GameConstants.GEM_DATABASE.keySet());
         Collections.sort(keys);
         for (String data : keys) {
@@ -323,12 +323,12 @@ public class GemListPart extends JPanel {
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // Generated using JFormDesigner Evaluation license - Brandon Dong
     private JLabel label1;
-    private JComboBox comboGemNames;
+    private JComboBox<String> comboGemNames;
     private JLabel label2;
     private JSpinner spinnerLevel;
     private JButton buttonAdd;
     private JScrollPane scrollPane1;
-    private JList listGems;
+    private JList<Gem> listGems;
     private JButton buttonRemove;
     private JPanel panel1;
     private JButton buttonOpen;

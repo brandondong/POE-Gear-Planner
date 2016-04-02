@@ -18,7 +18,7 @@ new FormModel {
 				name: "textField1"
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) )
 			add( new FormComponent( "javax.swing.JButton" ) {
-				name: "button1"
+				name: "buttonLoad"
 				"text": "Load"
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
 				"gridx": 1
@@ -44,7 +44,7 @@ new FormModel {
 			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 				name: "scrollPane1"
 				add( new FormComponent( "javax.swing.JTextPane" ) {
-					name: "textPane1"
+					name: "textPaneInfo"
 					"editable": false
 				} )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {

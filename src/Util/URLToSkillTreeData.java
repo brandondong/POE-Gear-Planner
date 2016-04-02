@@ -25,6 +25,7 @@ public class URLToSkillTreeData {
      */
     public static boolean decodeURL(String url, Character character) {
         try {
+            character.setUrl(url);
             byte[] array = decodeURLIntoBase64(url);
             CharacterClass charClass = CharacterClass.getCharacterClass(array[4]);
             character.setCharacterClass(charClass);
@@ -41,7 +42,7 @@ public class URLToSkillTreeData {
         if (m.find()) {
             return DatatypeConverter.parseBase64Binary(m.group(1).replace("-", "+").replace("_", "/"));
         }
-        return null;
+        return new byte[0];
     }
 
     private static void addStatsAndKeystones(byte[] array, Character character) {

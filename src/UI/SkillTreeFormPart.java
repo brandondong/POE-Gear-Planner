@@ -3,6 +3,10 @@ package UI;
 import Model.Difficulty;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.event.ChangeEvent;
@@ -10,8 +14,6 @@ import javax.swing.event.ChangeListener;
 /*
  * Created by JFormDesigner on Fri Mar 04 01:34:48 PST 2016
  */
-
-
 
 /**
  * @author Brandon Dong
@@ -21,7 +23,26 @@ public class SkillTreeFormPart extends JPanel {
 		initComponents();
         initComboDifficulty();
         initSpinnerLevel();
+        initButtonLoad();
+        initTextField();
 	}
+
+    private void initTextField() {
+        textField1.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                refreshButtonLoad();
+            }
+        });
+    }
+
+    private void initButtonLoad() {
+        refreshButtonLoad();
+    }
+
+    private void refreshButtonLoad() {
+        buttonLoad.setEnabled(!textField1.getText().isEmpty());
+    }
 
     private void initSpinnerLevel() {
         spinnerLevel.setValue(1);
@@ -49,11 +70,11 @@ public class SkillTreeFormPart extends JPanel {
 		// JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - Brandon Dong
         textField1 = new JTextField();
-        button1 = new JButton();
+        buttonLoad = new JButton();
         panel2 = new JPanel();
         labelValidate = new JLabel();
         scrollPane1 = new JScrollPane();
-        textPane1 = new JTextPane();
+        textPaneInfo = new JTextPane();
         panel1 = new JPanel();
         label2 = new JLabel();
         label3 = new JLabel();
@@ -85,9 +106,9 @@ public class SkillTreeFormPart extends JPanel {
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 5, 5), 0, 0));
 
-        //---- button1 ----
-        button1.setText("Load");
-        add(button1, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0,
+        //---- buttonLoad ----
+        buttonLoad.setText("Load");
+        add(buttonLoad, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 5, 0), 0, 0));
 
@@ -115,9 +136,9 @@ public class SkillTreeFormPart extends JPanel {
         //======== scrollPane1 ========
         {
 
-            //---- textPane1 ----
-            textPane1.setEditable(false);
-            scrollPane1.setViewportView(textPane1);
+            //---- textPaneInfo ----
+            textPaneInfo.setEditable(false);
+            scrollPane1.setViewportView(textPaneInfo);
         }
         add(scrollPane1, new GridBagConstraints(0, 2, 2, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
@@ -188,11 +209,11 @@ public class SkillTreeFormPart extends JPanel {
 	// JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // Generated using JFormDesigner Evaluation license - Brandon Dong
     private JTextField textField1;
-    private JButton button1;
+    private JButton buttonLoad;
     private JPanel panel2;
     private JLabel labelValidate;
     private JScrollPane scrollPane1;
-    private JTextPane textPane1;
+    private JTextPane textPaneInfo;
     private JPanel panel1;
     private JLabel label2;
     private JLabel label3;

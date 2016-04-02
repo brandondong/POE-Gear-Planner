@@ -30,6 +30,8 @@ public class Character extends Equipment {
 
     private int numJewels;
 
+    private String url;
+
     public Character() {
         name = NEW_CHARACTER_NAME;
         stats = new CharacterStats();
@@ -136,6 +138,14 @@ public class Character extends Equipment {
 
     public int getPredictedLevel() {
         return Math.max(1, numNodes - 20);
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     /**
