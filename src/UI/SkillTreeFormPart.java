@@ -1,5 +1,6 @@
 package UI;
 
+import Model.BuildsModel;
 import Model.Difficulty;
 
 import java.awt.*;
@@ -19,15 +20,46 @@ import javax.swing.event.ChangeListener;
  * @author Brandon Dong
  */
 public class SkillTreeFormPart extends JPanel {
-	public SkillTreeFormPart() {
+
+    private static final String EMPTY_URL = "Copy and paste your Path of Exile Skill Tree URL above";
+
+    private static final String INVALID_URL = "Failed to load Passive Skill Tree URL";
+
+    private static final String VALID_URL = "Passive Skill Tree URL loaded successfully";
+
+    private BuildsModel model;
+
+	public SkillTreeFormPart(BuildsModel model) {
+        this.model = model;
 		initComponents();
         initComboDifficulty();
         initSpinnerLevel();
         initButtonLoad();
         initTextField();
+        initLabelValidate();
 	}
 
+    public void refreshSettings() {
+        refreshTextField();
+        refreshLabelValidate();
+    }
+
+    private void initLabelValidate() {
+        refreshLabelValidate();
+    }
+
+    private void refreshLabelValidate() {
+        if (model.getSelected().getUrl().isEmpty()) {
+            labelValidate.setText(EMPTY_URL);
+        } else if (model.getSelected().isLoadedURL()) {
+            labelValidate.setText(VALID_URL);
+        } else {
+            labelValidate.setText(INVALID_URL);
+        }
+    }
+
     private void initTextField() {
+        refreshTextField();
         textField1.addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent e) {
@@ -36,8 +68,19 @@ public class SkillTreeFormPart extends JPanel {
         });
     }
 
+    private void refreshTextField() {
+        textField1.setText(model.getSelected().getUrl());
+    }
+
     private void initButtonLoad() {
         refreshButtonLoad();
+        buttonLoad.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                model.getSelected().setUrl(textField1.getText());
+                refreshLabelValidate();
+            }
+        });
     }
 
     private void refreshButtonLoad() {
@@ -220,7 +263,7 @@ public class SkillTreeFormPart extends JPanel {
     private JLabel label4;
     private JRadioButton radioButton1;
     private JRadioButton radioButton2;
-    private JComboBox comboDifficulty;
+    private JComboBox<Difficulty> comboDifficulty;
     private JPanel hSpacer1;
     private JSpinner spinnerLevel;
 	// JFormDesigner - End of variables declaration  //GEN-END:variables

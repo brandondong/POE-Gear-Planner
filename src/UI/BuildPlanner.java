@@ -63,6 +63,7 @@ public class BuildPlanner extends JFrame {
         refreshBuildName();
         buildsListPart1.refreshListItems();
         gemListPart1.refreshListGems();
+        skillTreeFormPart1.refreshSettings();
     }
 
     public void refreshItemSelected() {
@@ -80,7 +81,7 @@ public class BuildPlanner extends JFrame {
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - Brandon Dong
-        skillTreeFormPart1 = new SkillTreeFormPart();
+        skillTreeFormPart1 = new SkillTreeFormPart(model);
         panel1 = new JPanel();
         labelBuildName = new JLabel();
         hSpacer1 = new JPanel(null);
