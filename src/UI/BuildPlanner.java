@@ -8,6 +8,8 @@ import Model.*;
 import Model.Character;
 
 import java.awt.*;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.event.DocumentEvent;
@@ -20,8 +22,11 @@ public class BuildPlanner extends JFrame {
 
     private BuildsModel model;
 
+    private Map<Character, SkillTreePreferences> preferences;
+
     public BuildPlanner(BuildsModel model) {
         this.model = model;
+        preferences = new HashMap<>();
         initComponents();
         initBuildName();
     }
@@ -64,6 +69,7 @@ public class BuildPlanner extends JFrame {
         buildsListPart1.refreshListItems();
         gemListPart1.refreshListGems();
         skillTreeFormPart1.refreshSettings();
+        itemInfoPart1.refreshDisplay();
     }
 
     public void refreshItemSelected() {
@@ -78,10 +84,18 @@ public class BuildPlanner extends JFrame {
         textFieldBuildName.setText(model.getSelected().getName());
     }
 
+    public SkillTreePreferences getPreferences() {
+        Character selected = model.getSelected();
+        if (preferences.get(selected) == null) {
+            preferences.put(selected, new SkillTreePreferences());
+        }
+        return preferences.get(selected);
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - Brandon Dong
-        skillTreeFormPart1 = new SkillTreeFormPart(model);
+        skillTreeFormPart1 = new SkillTreeFormPart(this);
         panel1 = new JPanel();
         labelBuildName = new JLabel();
         hSpacer1 = new JPanel(null);
@@ -89,7 +103,7 @@ public class BuildPlanner extends JFrame {
         label2 = new JLabel();
         gearListPart1 = new GearListPart();
         gemListPart1 = new GemListPart(model, this);
-        itemInfoPart1 = new ItemInfoPart(model);
+        itemInfoPart1 = new ItemInfoPart(this);
         buildsListPart1 = new BuildsListPart(model, this);
 
         //======== this ========

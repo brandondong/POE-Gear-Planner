@@ -99,9 +99,9 @@ public class GemListPart extends JPanel {
         listGems.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
-                Object value = listGems.getSelectedValue();
+                Gem value = listGems.getSelectedValue();
                 if (value != null) {
-                    model.setSelectedItem((DisplayableItem) value);
+                    planner.getPreferences().setSelected(value);
                     planner.refreshItemSelected();
                 }
                 refreshButtonRemove();

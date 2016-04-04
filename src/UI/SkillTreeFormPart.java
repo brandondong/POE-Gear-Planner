@@ -27,10 +27,10 @@ public class SkillTreeFormPart extends JPanel {
 
     private static final String VALID_URL = "Passive Skill Tree URL loaded successfully";
 
-    private BuildsModel model;
+    private BuildPlanner planner;
 
-	public SkillTreeFormPart(BuildsModel model) {
-        this.model = model;
+	public SkillTreeFormPart(BuildPlanner planner) {
+        this.planner = planner;
 		initComponents();
         initComboDifficulty();
         initSpinnerLevel();
@@ -49,9 +49,9 @@ public class SkillTreeFormPart extends JPanel {
     }
 
     private void refreshLabelValidate() {
-        if (model.getSelected().getUrl().isEmpty()) {
+        if (planner.getPreferences().getUrl().isEmpty()) {
             labelValidate.setText(EMPTY_URL);
-        } else if (model.getSelected().isLoadedURL()) {
+        } else if (planner.getPreferences().isUrlLoaded()) {
             labelValidate.setText(VALID_URL);
         } else {
             labelValidate.setText(INVALID_URL);
@@ -69,7 +69,7 @@ public class SkillTreeFormPart extends JPanel {
     }
 
     private void refreshTextField() {
-        textField1.setText(model.getSelected().getUrl());
+        textField1.setText(planner.getPreferences().getUrl());
     }
 
     private void initButtonLoad() {
@@ -77,7 +77,7 @@ public class SkillTreeFormPart extends JPanel {
         buttonLoad.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                model.getSelected().setUrl(textField1.getText());
+                planner.getPreferences().setUrl(textField1.getText());
                 refreshLabelValidate();
             }
         });
@@ -132,13 +132,6 @@ public class SkillTreeFormPart extends JPanel {
         setBorder(new TitledBorder(null, "Passive Skill Tree", TitledBorder.LEADING, TitledBorder.DEFAULT_POSITION,
             new Font("Segoe UI", Font.BOLD, 12)));
         setPreferredSize(new Dimension(352, 539));
-
-        // JFormDesigner evaluation mark
-        setBorder(new javax.swing.border.CompoundBorder(
-            new javax.swing.border.TitledBorder(new javax.swing.border.EmptyBorder(0, 0, 0, 0),
-                "JFormDesigner Evaluation", javax.swing.border.TitledBorder.CENTER,
-                javax.swing.border.TitledBorder.BOTTOM, new java.awt.Font("Dialog", java.awt.Font.BOLD, 12),
-                java.awt.Color.red), getBorder())); addPropertyChangeListener(new java.beans.PropertyChangeListener(){public void propertyChange(java.beans.PropertyChangeEvent e){if("border".equals(e.getPropertyName()))throw new RuntimeException();}});
 
         setLayout(new GridBagLayout());
         ((GridBagLayout)getLayout()).columnWidths = new int[] {0, 0, 0};

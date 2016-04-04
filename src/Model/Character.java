@@ -30,10 +30,6 @@ public class Character extends Equipment {
 
     private int numJewels;
 
-    private String url;
-
-    private boolean loadedURL;
-
     public Character() {
         name = NEW_CHARACTER_NAME;
         stats = new CharacterStats();
@@ -41,8 +37,6 @@ public class Character extends Equipment {
         ascendancyNodes = new HashSet<>();
         numNodes = 0;
         numJewels = 0;
-        url = "";
-        loadedURL = false;
     }
 
     /**
@@ -142,22 +136,6 @@ public class Character extends Equipment {
 
     public int getPredictedLevel() {
         return Math.max(1, numNodes - 20);
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public boolean isLoadedURL() {
-        return loadedURL;
-    }
-
-    public void setLoadedURL(boolean loadedURL) {
-        this.loadedURL = loadedURL;
     }
 
     /**

@@ -25,43 +25,25 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="BuildsListPart.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/UI/BuildsListPart.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="74" column="47" selection-start-line="74" selection-start-column="47" selection-end-line="74" selection-end-column="47" />
-              <folding>
-                <marker date="1459581362593" expanded="false" signature="3504:6256" placeholder="// JFormDesigner - Component initialization - DO NOT MODIFY" />
-                <marker date="1459581362593" expanded="true" signature="6268:6724" placeholder="// JFormDesigner - Variables declaration - DO NOT MODIFY" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="URLToSkillTreeData.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Util/URLToSkillTreeData.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="29" column="82" selection-start-line="29" selection-start-column="82" selection-end-line="29" selection-end-column="82" />
+              <caret line="17" column="57" selection-start-line="17" selection-start-column="57" selection-end-line="17" selection-end-column="57" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SkillTreeFormPart.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="SkillTreeFormPart.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/UI/SkillTreeFormPart.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.23448277">
-              <caret line="23" column="101" selection-start-line="23" selection-start-column="101" selection-end-line="23" selection-end-column="101" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="20" column="3" selection-start-line="20" selection-start-column="3" selection-end-line="20" selection-end-column="3" />
               <folding>
-                <element signature="e#1194#1195#0" expanded="true" />
-                <element signature="e#1232#1233#0" expanded="true" />
-                <element signature="e#1852#1853#0" expanded="true" />
-                <element signature="e#1916#1917#0" expanded="true" />
-                <element signature="e#2021#2252#0" expanded="true" />
-                <element signature="e#2251#2252#0" expanded="true" />
-                <marker date="1459655562210" expanded="true" signature="3126:10019" placeholder="// JFormDesigner - Component initialization - DO NOT MODIFY" />
-                <marker date="1459655562210" expanded="true" signature="10025:10747" placeholder="// JFormDesigner - Variables declaration - DO NOT MODIFY" />
+                <element signature="method#initComponents#0;class#SkillTreeFormPart#0" expanded="false" />
+                <marker date="1459717920044" expanded="true" signature="3156:9408" placeholder="// JFormDesigner - Component initialization - DO NOT MODIFY" />
+                <marker date="1459717920044" expanded="true" signature="9414:10136" placeholder="// JFormDesigner - Variables declaration - DO NOT MODIFY" />
               </folding>
             </state>
           </provider>
@@ -71,8 +53,34 @@
         <entry file="file://$PROJECT_DIR$/src/Model/BuildsModel.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="18" column="41" selection-start-line="18" selection-start-column="41" selection-end-line="18" selection-end-column="41" />
-              <folding />
+              <caret line="31" column="5" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="5" />
+              <folding>
+                <element signature="e#531#532#0" expanded="true" />
+                <element signature="e#576#577#0" expanded="true" />
+                <element signature="e#1113#1114#0" expanded="true" />
+                <element signature="e#1144#1145#0" expanded="true" />
+                <element signature="e#1192#1193#0" expanded="true" />
+                <element signature="e#1224#1225#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Character.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Model/Character.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="137" column="42" selection-start-line="137" selection-start-column="42" selection-end-line="137" selection-end-column="42" />
+              <folding>
+                <element signature="e#3171#3172#0" expanded="true" />
+                <element signature="e#3203#3204#0" expanded="true" />
+                <element signature="e#3236#3237#0" expanded="true" />
+                <element signature="e#3268#3269#0" expanded="true" />
+                <element signature="e#3324#3325#0" expanded="true" />
+                <element signature="e#3368#3369#0" expanded="true" />
+                <element signature="e#3406#3407#0" expanded="true" />
+                <element signature="e#3455#3456#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -81,26 +89,51 @@
         <entry file="file://$PROJECT_DIR$/src/UI/BuildPlanner.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="56" column="5" selection-start-line="56" selection-start-column="5" selection-end-line="56" selection-end-column="5" />
+              <caret line="61" column="5" selection-start-line="61" selection-start-column="5" selection-end-line="61" selection-end-column="5" />
               <folding>
+                <element signature="e#2180#2181#0" expanded="true" />
+                <element signature="e#2253#2254#0" expanded="true" />
                 <element signature="method#initComponents#0;class#BuildPlanner#0" expanded="false" />
-                <marker date="1459655465815" expanded="true" signature="2110:7019" placeholder="// JFormDesigner - Component initialization - DO NOT MODIFY" />
-                <marker date="1459655465815" expanded="false" signature="7030:7628" placeholder="// JFormDesigner - Variables declaration - DO NOT MODIFY" />
+                <marker date="1459718284917" expanded="true" signature="2576:7483" placeholder="// JFormDesigner - Component initialization - DO NOT MODIFY" />
+                <marker date="1459718284917" expanded="false" signature="7494:8092" placeholder="// JFormDesigner - Variables declaration - DO NOT MODIFY" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ItemInfoPart.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/UI/ItemInfoPart.java">
+      <file leaf-file-name="SkillTreePreferences.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/UI/SkillTreePreferences.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="30" column="5" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="5" />
+              <caret line="12" column="23" selection-start-line="12" selection-start-column="23" selection-end-line="12" selection-end-column="23" />
               <folding>
-                <element signature="e#553#554#0" expanded="true" />
-                <element signature="e#585#586#0" expanded="true" />
-                <marker date="1458979243742" expanded="false" signature="962:3416" placeholder="// JFormDesigner - Component initialization - DO NOT MODIFY" />
-                <marker date="1458979243742" expanded="false" signature="3427:3774" placeholder="// JFormDesigner - Variables declaration - DO NOT MODIFY" />
+                <element signature="e#410#411#0" expanded="true" />
+                <element signature="e#441#442#0" expanded="true" />
+                <element signature="e#498#499#0" expanded="true" />
+                <element signature="e#538#539#0" expanded="true" />
+                <element signature="e#574#575#0" expanded="true" />
+                <element signature="e#608#609#0" expanded="true" />
+                <element signature="e#663#664#0" expanded="true" />
+                <element signature="e#709#710#0" expanded="true" />
+                <element signature="e#739#740#0" expanded="true" />
+                <element signature="e#765#766#0" expanded="true" />
+                <element signature="e#803#804#0" expanded="true" />
+                <element signature="e#833#834#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ItemInfoPart.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/UI/ItemInfoPart.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.5923345">
+              <caret line="36" column="98" selection-start-line="36" selection-start-column="98" selection-end-line="36" selection-end-column="98" />
+              <folding>
+                <element signature="e#610#611#0" expanded="true" />
+                <element signature="e#642#643#0" expanded="true" />
+                <marker date="1459718364477" expanded="false" signature="1136:3590" placeholder="// JFormDesigner - Component initialization - DO NOT MODIFY" />
+                <marker date="1459718364477" expanded="false" signature="3601:3948" placeholder="// JFormDesigner - Variables declaration - DO NOT MODIFY" />
               </folding>
             </state>
           </provider>
@@ -110,10 +143,10 @@
         <entry file="file://$PROJECT_DIR$/src/UI/GemListPart.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="144" column="54" selection-start-line="144" selection-start-column="54" selection-end-line="144" selection-end-column="54" />
+              <caret line="103" column="64" selection-start-line="103" selection-start-column="64" selection-end-line="103" selection-end-column="64" />
               <folding>
-                <marker date="1459581240017" expanded="false" signature="8012:12138" placeholder="// JFormDesigner - Component initialization - DO NOT MODIFY" />
-                <marker date="1459581240017" expanded="true" signature="12149:12700" placeholder="// JFormDesigner - Variables declaration - DO NOT MODIFY" />
+                <marker date="1459718105773" expanded="false" signature="8006:12132" placeholder="// JFormDesigner - Component initialization - DO NOT MODIFY" />
+                <marker date="1459718105773" expanded="true" signature="12143:12694" placeholder="// JFormDesigner - Variables declaration - DO NOT MODIFY" />
               </folding>
             </state>
           </provider>
@@ -149,7 +182,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/Data/StatsNode.java" />
         <option value="$PROJECT_DIR$/src/Util/ProgramConstants.java" />
         <option value="$PROJECT_DIR$/src/Data/Character.java" />
         <option value="$PROJECT_DIR$/gemdata.json" />
@@ -180,8 +212,6 @@
         <option value="$PROJECT_DIR$/src/UI/ItemInfoPart.jfd" />
         <option value="$PROJECT_DIR$/src/Model/DisplayableItem.java" />
         <option value="$PROJECT_DIR$/src/Model/Item.java" />
-        <option value="$PROJECT_DIR$/src/Model/BuildsModel.java" />
-        <option value="$PROJECT_DIR$/src/UI/ItemInfoPart.java" />
         <option value="$PROJECT_DIR$/data.json" />
         <option value="$PROJECT_DIR$/src/Model/Stats.java" />
         <option value="$PROJECT_DIR$/src/UI/GemListPart.jfd" />
@@ -193,13 +223,16 @@
         <option value="$PROJECT_DIR$/src/Model/KeystoneNode.java" />
         <option value="$PROJECT_DIR$/src/Util/GameConstants.java" />
         <option value="$PROJECT_DIR$/src/Model/AscendancyNode.java" />
-        <option value="$PROJECT_DIR$/src/Util/URLToSkillTreeData.java" />
         <option value="$PROJECT_DIR$/src/UI/SkillTreeFormPart.jfd" />
-        <option value="$PROJECT_DIR$/src/UI/GemListPart.java" />
         <option value="$PROJECT_DIR$/src/UI/BuildsListPart.java" />
+        <option value="$PROJECT_DIR$/src/UI/SkillTreePreferences.java" />
         <option value="$PROJECT_DIR$/src/Model/Character.java" />
-        <option value="$PROJECT_DIR$/src/UI/BuildPlanner.java" />
+        <option value="$PROJECT_DIR$/src/Util/URLToSkillTreeData.java" />
         <option value="$PROJECT_DIR$/src/UI/SkillTreeFormPart.java" />
+        <option value="$PROJECT_DIR$/src/Model/BuildsModel.java" />
+        <option value="$PROJECT_DIR$/src/UI/GemListPart.java" />
+        <option value="$PROJECT_DIR$/src/UI/BuildPlanner.java" />
+        <option value="$PROJECT_DIR$/src/UI/ItemInfoPart.java" />
       </list>
     </option>
   </component>
@@ -235,6 +268,36 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="PackagesPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="POE-Gear-Planner" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="POE-Gear-Planner" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="POE-Gear-Planner" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="POE-Gear-Planner" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Data" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -309,36 +372,6 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="Model" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="Scratches" />
-      <pane id="Scope" />
-      <pane id="PackagesPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="POE-Gear-Planner" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="POE-Gear-Planner" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="POE-Gear-Planner" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="POE-Gear-Planner" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Data" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -634,6 +667,7 @@
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25237092" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Problems" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32739422" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -646,7 +680,6 @@
       <window_info id="Dynamic Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32814237" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -667,13 +700,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Model/GemType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/UI/ItemInfoPart.jfd">
       <provider selected="true" editor-type-id="JFormDesigner">
         <state paletteWidth="0" propertiesWidth="0" />
@@ -683,20 +709,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="47" column="30" selection-start-line="47" selection-start-column="30" selection-end-line="47" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Model/DisplayableItem.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="14" column="71" selection-start-line="14" selection-start-column="71" selection-end-line="14" selection-end-column="71" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Model/Item.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="38" column="20" selection-start-line="38" selection-start-column="20" selection-end-line="38" selection-end-column="20" />
         </state>
       </provider>
     </entry>
@@ -934,17 +946,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/UI/GemListPart.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="144" column="54" selection-start-line="144" selection-start-column="54" selection-end-line="144" selection-end-column="54" />
-          <folding>
-            <marker date="1459581240017" expanded="false" signature="8012:12138" placeholder="// JFormDesigner - Component initialization - DO NOT MODIFY" />
-            <marker date="1459581240017" expanded="true" signature="12149:12700" placeholder="// JFormDesigner - Variables declaration - DO NOT MODIFY" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.7.0_79/src.zip!/javax/swing/JList.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33333334">
@@ -957,8 +958,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="74" column="47" selection-start-line="74" selection-start-column="47" selection-end-line="74" selection-end-column="47" />
           <folding>
-            <marker date="1459581362593" expanded="false" signature="3504:6256" placeholder="// JFormDesigner - Component initialization - DO NOT MODIFY" />
-            <marker date="1459581362593" expanded="true" signature="6268:6724" placeholder="// JFormDesigner - Variables declaration - DO NOT MODIFY" />
+            <marker date="1459581362593" expanded="false" signature="-1:-1" placeholder="// JFormDesigner - Component initialization - DO NOT MODIFY" />
+            <marker date="1459581362593" expanded="true" signature="-1:-1" placeholder="// JFormDesigner - Variables declaration - DO NOT MODIFY" />
           </folding>
         </state>
       </provider>
@@ -968,37 +969,10 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/UI/ItemInfoPart.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="30" column="5" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="5" />
-          <folding>
-            <element signature="e#553#554#0" expanded="true" />
-            <element signature="e#585#586#0" expanded="true" />
-            <marker date="1458979243742" expanded="false" signature="962:3416" placeholder="// JFormDesigner - Component initialization - DO NOT MODIFY" />
-            <marker date="1458979243742" expanded="false" signature="3427:3774" placeholder="// JFormDesigner - Variables declaration - DO NOT MODIFY" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Model/Character.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.42988506">
-          <caret line="113" column="0" selection-start-line="113" selection-start-column="0" selection-end-line="113" selection-end-column="0" />
-          <folding>
-            <element signature="e#3717#3718#0" expanded="true" />
-            <element signature="e#3749#3750#0" expanded="true" />
-            <element signature="e#3800#3801#0" expanded="true" />
-            <element signature="e#3842#3843#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Model/SimpleNode.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.21494253">
           <caret line="11" column="31" selection-start-line="11" selection-start-column="31" selection-end-line="11" selection-end-column="31" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1010,22 +984,51 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Model/BuildsModel.java">
+    <entry file="file://$PROJECT_DIR$/src/Model/Item.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="18" column="41" selection-start-line="18" selection-start-column="41" selection-end-line="18" selection-end-column="41" />
-          <folding />
+        <state vertical-scroll-proportion="0.23448277">
+          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+          <folding>
+            <element signature="e#785#786#0" expanded="true" />
+            <element signature="e#812#813#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/UI/BuildPlanner.java">
+    <entry file="file://$PROJECT_DIR$/src/UI/SkillTreePreferences.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="56" column="5" selection-start-line="56" selection-start-column="5" selection-end-line="56" selection-end-column="5" />
+          <caret line="12" column="23" selection-start-line="12" selection-start-column="23" selection-end-line="12" selection-end-column="23" />
           <folding>
-            <element signature="method#initComponents#0;class#BuildPlanner#0" expanded="false" />
-            <marker date="1459655465815" expanded="true" signature="2110:7019" placeholder="// JFormDesigner - Component initialization - DO NOT MODIFY" />
-            <marker date="1459655465815" expanded="false" signature="7030:7628" placeholder="// JFormDesigner - Variables declaration - DO NOT MODIFY" />
+            <element signature="e#410#411#0" expanded="true" />
+            <element signature="e#441#442#0" expanded="true" />
+            <element signature="e#498#499#0" expanded="true" />
+            <element signature="e#538#539#0" expanded="true" />
+            <element signature="e#574#575#0" expanded="true" />
+            <element signature="e#608#609#0" expanded="true" />
+            <element signature="e#663#664#0" expanded="true" />
+            <element signature="e#709#710#0" expanded="true" />
+            <element signature="e#739#740#0" expanded="true" />
+            <element signature="e#765#766#0" expanded="true" />
+            <element signature="e#803#804#0" expanded="true" />
+            <element signature="e#833#834#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Model/Character.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="137" column="42" selection-start-line="137" selection-start-column="42" selection-end-line="137" selection-end-column="42" />
+          <folding>
+            <element signature="e#3171#3172#0" expanded="true" />
+            <element signature="e#3203#3204#0" expanded="true" />
+            <element signature="e#3236#3237#0" expanded="true" />
+            <element signature="e#3268#3269#0" expanded="true" />
+            <element signature="e#3324#3325#0" expanded="true" />
+            <element signature="e#3368#3369#0" expanded="true" />
+            <element signature="e#3406#3407#0" expanded="true" />
+            <element signature="e#3455#3456#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1033,24 +1036,80 @@
     <entry file="file://$PROJECT_DIR$/src/Util/URLToSkillTreeData.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="29" column="82" selection-start-line="29" selection-start-column="82" selection-end-line="29" selection-end-column="82" />
+          <caret line="17" column="57" selection-start-line="17" selection-start-column="57" selection-end-line="17" selection-end-column="57" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/UI/SkillTreeFormPart.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.23448277">
-          <caret line="23" column="101" selection-start-line="23" selection-start-column="101" selection-end-line="23" selection-end-column="101" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="20" column="3" selection-start-line="20" selection-start-column="3" selection-end-line="20" selection-end-column="3" />
           <folding>
-            <element signature="e#1194#1195#0" expanded="true" />
-            <element signature="e#1232#1233#0" expanded="true" />
-            <element signature="e#1852#1853#0" expanded="true" />
-            <element signature="e#1916#1917#0" expanded="true" />
-            <element signature="e#2021#2252#0" expanded="true" />
-            <element signature="e#2251#2252#0" expanded="true" />
-            <marker date="1459655562210" expanded="true" signature="3126:10019" placeholder="// JFormDesigner - Component initialization - DO NOT MODIFY" />
-            <marker date="1459655562210" expanded="true" signature="10025:10747" placeholder="// JFormDesigner - Variables declaration - DO NOT MODIFY" />
+            <element signature="method#initComponents#0;class#SkillTreeFormPart#0" expanded="false" />
+            <marker date="1459717920044" expanded="true" signature="3156:9408" placeholder="// JFormDesigner - Component initialization - DO NOT MODIFY" />
+            <marker date="1459717920044" expanded="true" signature="9414:10136" placeholder="// JFormDesigner - Variables declaration - DO NOT MODIFY" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Model/BuildsModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="31" column="5" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="5" />
+          <folding>
+            <element signature="e#531#532#0" expanded="true" />
+            <element signature="e#576#577#0" expanded="true" />
+            <element signature="e#1113#1114#0" expanded="true" />
+            <element signature="e#1144#1145#0" expanded="true" />
+            <element signature="e#1192#1193#0" expanded="true" />
+            <element signature="e#1224#1225#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/UI/GemListPart.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="103" column="64" selection-start-line="103" selection-start-column="64" selection-end-line="103" selection-end-column="64" />
+          <folding>
+            <marker date="1459718105773" expanded="false" signature="8006:12132" placeholder="// JFormDesigner - Component initialization - DO NOT MODIFY" />
+            <marker date="1459718105773" expanded="true" signature="12143:12694" placeholder="// JFormDesigner - Variables declaration - DO NOT MODIFY" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/UI/BuildPlanner.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="61" column="5" selection-start-line="61" selection-start-column="5" selection-end-line="61" selection-end-column="5" />
+          <folding>
+            <element signature="e#2180#2181#0" expanded="true" />
+            <element signature="e#2253#2254#0" expanded="true" />
+            <element signature="method#initComponents#0;class#BuildPlanner#0" expanded="false" />
+            <marker date="1459718284917" expanded="true" signature="2576:7483" placeholder="// JFormDesigner - Component initialization - DO NOT MODIFY" />
+            <marker date="1459718284917" expanded="false" signature="7494:8092" placeholder="// JFormDesigner - Variables declaration - DO NOT MODIFY" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Model/DisplayableItem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.44425088">
+          <caret line="16" column="19" selection-start-line="16" selection-start-column="19" selection-end-line="16" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/UI/ItemInfoPart.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5923345">
+          <caret line="36" column="98" selection-start-line="36" selection-start-column="98" selection-end-line="36" selection-end-column="98" />
+          <folding>
+            <element signature="e#610#611#0" expanded="true" />
+            <element signature="e#642#643#0" expanded="true" />
+            <marker date="1459718364477" expanded="false" signature="1136:3590" placeholder="// JFormDesigner - Component initialization - DO NOT MODIFY" />
+            <marker date="1459718364477" expanded="false" signature="3601:3948" placeholder="// JFormDesigner - Variables declaration - DO NOT MODIFY" />
           </folding>
         </state>
       </provider>

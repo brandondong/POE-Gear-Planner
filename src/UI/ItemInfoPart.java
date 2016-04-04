@@ -11,6 +11,7 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.text.BadLocationException;
+import javax.swing.text.DefaultStyledDocument;
 import javax.swing.text.StyledDocument;
 
 /**
@@ -18,10 +19,10 @@ import javax.swing.text.StyledDocument;
  */
 public class ItemInfoPart extends JPanel {
 
-    private BuildsModel model;
+    private BuildPlanner planner;
 
-    public ItemInfoPart(BuildsModel model) {
-        this.model = model;
+    public ItemInfoPart(BuildPlanner planner) {
+        this.planner = planner;
         initComponents();
         initDisplay();
     }
@@ -31,12 +32,14 @@ public class ItemInfoPart extends JPanel {
     }
 
     public void refreshDisplay() {
-        if (model.getSelectedItem() != null) {
+        if (planner.getPreferences().getSelected() != null) {
             try {
-                textPane1.setStyledDocument(model.getSelectedItem().displayItem());
+                textPane1.setStyledDocument(planner.getPreferences().getSelected().displayItem());
             } catch (BadLocationException e) {
                 Logger.addError("Could not show selected item", e);
             }
+        } else {
+            textPane1.setStyledDocument(new DefaultStyledDocument());
         }
     }
 

@@ -25,7 +25,6 @@ public class URLToSkillTreeData {
      */
     public static boolean decodeURL(String url, Character character) {
         try {
-            character.setUrl(url);
             byte[] array = decodeURLIntoBase64(url);
             CharacterClass charClass = CharacterClass.getCharacterClass(array[4]);
             character.setCharacterClass(charClass);
