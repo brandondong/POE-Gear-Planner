@@ -1,5 +1,11 @@
 package Model;
 
+import UI.SkillTreePreferences;
+import Util.CommonUtil;
+
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DefaultStyledDocument;
+import javax.swing.text.StyledDocument;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -26,8 +32,6 @@ public class Character extends Equipment {
 
     private String name;
 
-    private int numNodes;
-
     private int numJewels;
 
     public Character() {
@@ -35,7 +39,6 @@ public class Character extends Equipment {
         stats = new CharacterStats();
         keystones = new HashSet<>();
         ascendancyNodes = new HashSet<>();
-        numNodes = 0;
         numJewels = 0;
     }
 
@@ -94,10 +97,6 @@ public class Character extends Equipment {
         ascendancyNodes.add(node);
     }
 
-    public void incNumNodes() {
-        numNodes++;
-    }
-
     public void incNumJewels() {
         numJewels++;
     }
@@ -134,10 +133,6 @@ public class Character extends Equipment {
         this.ascendancy = ascendancy;
     }
 
-    public int getPredictedLevel() {
-        return Math.max(1, numNodes - 20);
-    }
-
     /**
      *
      * @return the character data presented in a nice way for debugging
@@ -172,6 +167,15 @@ public class Character extends Equipment {
             builder.append("\n\n").append(items);
         }
         return builder.toString();
+    }
+
+    public StyledDocument displayInfo(SkillTreePreferences prefs) throws BadLocationException {
+        if (characterClass != null) {
+            StyledDocument doc = new DefaultStyledDocument();
+            doc.insertString(0, characterClass.toString(), CommonUtil.getLargeFont());
+            return doc;
+        }
+        return null;
     }
 
     public String getDisplayString() {

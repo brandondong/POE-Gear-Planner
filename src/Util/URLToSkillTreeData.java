@@ -55,7 +55,6 @@ public class URLToSkillTreeData {
             int id = ByteBuffer.wrap(int16).getShort() & 0xffff;
             SimpleNode node = GameConstants.SKILL_TREE_NODES.get(id);
             if (node != null) {
-                character.incNumNodes();
                 if (node instanceof KeystoneNode) {
                     character.addKeystone((KeystoneNode) node);
                 } else if (node instanceof StatsNode) {
@@ -75,6 +74,5 @@ public class URLToSkillTreeData {
         //character.addEquipement(CharacterNameToItemData.getEquipmentFromCharacter("agentvenom1", "WTBsurvivability"));
         System.out.println(character.getInfo());
         System.out.println(character.getLifeAtLevel(95));
-        System.out.println(character.getPredictedLevel());
     }
 }

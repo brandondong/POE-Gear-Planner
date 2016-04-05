@@ -2,6 +2,8 @@ package UI;
 
 import Model.BuildsModel;
 import Model.Difficulty;
+import Util.Logger;
+import Util.URLToSkillTreeData;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -12,6 +14,9 @@ import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DefaultStyledDocument;
+import javax.swing.text.StyledDocument;
 /*
  * Created by JFormDesigner on Fri Mar 04 01:34:48 PST 2016
  */
@@ -29,19 +34,41 @@ public class SkillTreeFormPart extends JPanel {
 
     private BuildPlanner planner;
 
+    private BuildsModel model;
+
 	public SkillTreeFormPart(BuildPlanner planner) {
         this.planner = planner;
+        model = planner.getModel();
 		initComponents();
         initComboDifficulty();
         initSpinnerLevel();
         initButtonLoad();
         initTextField();
         initLabelValidate();
+        initTextPaneInfo();
 	}
+
+    private void initTextPaneInfo() {
+        refreshTextPaneInfo();
+    }
+
+    private void refreshTextPaneInfo() {
+        try {
+            StyledDocument doc = model.getSelected().displayInfo(planner.getPreferences());
+            if (doc != null) {
+                textPaneInfo.setStyledDocument(doc);
+            } else {
+                textPaneInfo.setStyledDocument(new DefaultStyledDocument());
+            }
+        } catch (BadLocationException e) {
+            Logger.addError("Error trying to display character information", e);
+        }
+    }
 
     public void refreshSettings() {
         refreshTextField();
         refreshLabelValidate();
+        refreshTextPaneInfo();
     }
 
     private void initLabelValidate() {
@@ -77,8 +104,12 @@ public class SkillTreeFormPart extends JPanel {
         buttonLoad.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                planner.getPreferences().setUrl(textField1.getText());
+                String url = textField1.getText();
+                planner.getPreferences().setUrl(url);
+                planner.getPreferences().setIsUrlLoaded(URLToSkillTreeData.decodeURL(url, model.getSelected()));
                 refreshLabelValidate();
+                refreshTextPaneInfo();
+                planner.refreshBuildSelected();
             }
         });
     }

@@ -92,6 +92,10 @@ public class BuildPlanner extends JFrame {
         return preferences.get(selected);
     }
 
+    public BuildsModel getModel() {
+        return model;
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - Brandon Dong
@@ -102,9 +106,9 @@ public class BuildPlanner extends JFrame {
         textFieldBuildName = new JTextField();
         label2 = new JLabel();
         gearListPart1 = new GearListPart();
-        gemListPart1 = new GemListPart(model, this);
+        gemListPart1 = new GemListPart(this);
         itemInfoPart1 = new ItemInfoPart(this);
-        buildsListPart1 = new BuildsListPart(model, this);
+        buildsListPart1 = new BuildsListPart(this);
 
         //======== this ========
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

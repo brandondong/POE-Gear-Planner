@@ -37,9 +37,9 @@ public class GemListPart extends JPanel {
 
     private BuildPlanner planner;
 
-    public GemListPart(BuildsModel model, BuildPlanner planner) {
-        this.model = model;
+    public GemListPart(BuildPlanner planner) {
         this.planner = planner;
+        model = planner.getModel();
         initComponents();
         initSpinnerLevel();
         initComboGemNames();
