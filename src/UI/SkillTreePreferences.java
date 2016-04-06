@@ -1,5 +1,6 @@
 package UI;
 
+import Model.Difficulty;
 import Model.DisplayableItem;
 /**
  * Created by Brandon on 2016-04-03.
@@ -14,9 +15,18 @@ public class SkillTreePreferences {
 
     private DisplayableItem selected;
 
+    private boolean withGear;
+
+    private Difficulty difficulty;
+
+    private int level;
+
     public SkillTreePreferences() {
         isUrlLoaded = false;
         url = "";
+        withGear = true;
+        difficulty = Difficulty.MERCILESS;
+        level = 90;
     }
 
     public DisplayableItem getSelected() {
@@ -41,5 +51,29 @@ public class SkillTreePreferences {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public boolean isWithGear() {
+        return withGear;
+    }
+
+    public void setWithGear(boolean withGear) {
+        this.withGear = withGear;
+    }
+
+    public Difficulty getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(Difficulty difficulty) {
+        this.difficulty = difficulty;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
     }
 }

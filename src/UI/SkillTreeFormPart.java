@@ -46,6 +46,7 @@ public class SkillTreeFormPart extends JPanel {
         initTextField();
         initLabelValidate();
         initTextPaneInfo();
+        initButtons();
 	}
 
     private void initTextPaneInfo() {
@@ -69,6 +70,9 @@ public class SkillTreeFormPart extends JPanel {
         refreshTextField();
         refreshLabelValidate();
         refreshTextPaneInfo();
+        refreshSpinnerLevel();
+        refreshComboDifficulty();
+        refreshButtons();
     }
 
     private void initLabelValidate() {
@@ -105,8 +109,9 @@ public class SkillTreeFormPart extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String url = textField1.getText();
-                planner.getPreferences().setUrl(url);
-                planner.getPreferences().setIsUrlLoaded(URLToSkillTreeData.decodeURL(url, model.getSelected()));
+                SkillTreePreferences preferences = planner.getPreferences();
+                preferences.setUrl(url);
+                preferences.setIsUrlLoaded(URLToSkillTreeData.decodeURL(url, model.getSelected()));
                 refreshLabelValidate();
                 refreshTextPaneInfo();
                 planner.refreshBuildSelected();
@@ -119,7 +124,7 @@ public class SkillTreeFormPart extends JPanel {
     }
 
     private void initSpinnerLevel() {
-        spinnerLevel.setValue(1);
+        refreshSpinnerLevel();
         spinnerLevel.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
@@ -129,18 +134,54 @@ public class SkillTreeFormPart extends JPanel {
                 } else if (value < 1) {
                     spinnerLevel.setValue(1);
                 }
+                planner.getPreferences().setLevel((Integer) spinnerLevel.getValue());
             }
         });
+    }
+
+    private void refreshSpinnerLevel() {
+        spinnerLevel.setValue(planner.getPreferences().getLevel());
     }
 
     private void initComboDifficulty() {
         for (Difficulty difficulty : Difficulty.values()) {
             comboDifficulty.addItem(difficulty);
         }
-        comboDifficulty.setSelectedItem(Difficulty.MERCILESS);
+        refreshComboDifficulty();
+        comboDifficulty.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                planner.getPreferences().setDifficulty((Difficulty) comboDifficulty.getSelectedItem());
+            }
+        });
     }
 
-	private void initComponents() {
+    private void refreshComboDifficulty() {
+        comboDifficulty.setSelectedItem(planner.getPreferences().getDifficulty());
+    }
+
+    private void refreshButtons() {
+        if (planner.getPreferences().isWithGear()) {
+            radioButton1.setSelected(true);
+        } else {
+            radioButton2.setSelected(true);
+        }
+    }
+
+    private void initButtons() {
+        refreshButtons();
+        radioButton1.addActionListener(new ButtonActionListener());
+        radioButton2.addActionListener(new ButtonActionListener());
+    }
+
+    private class ButtonActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            planner.getPreferences().setWithGear(radioButton1.isSelected());
+        }
+    }
+
+    private void initComponents() {
 		// JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - Brandon Dong
         textField1 = new JTextField();
