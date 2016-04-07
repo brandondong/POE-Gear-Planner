@@ -15,8 +15,12 @@ public class CharacterStats extends Stats {
      * @return <code>true</code> if there are uncapped elemental resistances in the chosen difficulty
      */
     public boolean hasUncappedResistances(Difficulty difficulty) {
-        return !isResistanceCapped(ResistType.FIRE, difficulty) || !isResistanceCapped(ResistType.COLD, difficulty)
-                || !isResistanceCapped(ResistType.LIGHTNING, difficulty);
+        for (ResistType type : ResistType.ELEMENTAL) {
+            if (!isResistanceCapped(type, difficulty)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -80,5 +84,15 @@ public class CharacterStats extends Stats {
      */
     public boolean hasRequiredAttribute(AttributeType type, int value) {
         return calculateAttributeValue(type) >= value;
+    }
+
+    /**
+     *
+     * @param type the {@link ResistType} of interest
+     * @param difficulty the {@link Difficulty} to be calculated against
+     * @return an info display of a given resistance
+     */
+    public String getResInfo(ResistType type, Difficulty difficulty) {
+        return String.format("%s (%d / %d%%)", type, getEffectiveResist(type, difficulty), getMaxResist(type));
     }
 }

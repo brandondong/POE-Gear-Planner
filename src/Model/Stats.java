@@ -22,19 +22,6 @@ public class Stats implements Iterable<Stat> {
 
     /**
      *
-     * @param id the unique identifier of the stat of interest
-     * @return the value of the stat on this item
-     */
-    public double getStatValue(String id) {
-        Stat stat = stats.get(id);
-        if (stat != null) {
-            return stat.getValue();
-        }
-        return 0;
-    }
-
-    /**
-     *
      * @param type the {@link ResistType} of interest
      * @return the additional resistance of that type
      */
@@ -96,10 +83,18 @@ public class Stats implements Iterable<Stat> {
         return value;
     }
 
+    /**
+     *
+     * @return the total value of flat added life
+     */
     public int getFlatLifeValue() {
         return getValueWithKeyphrase("to maximum Life");
     }
 
+    /**
+     *
+     * @return the total value of percent increased life
+     */
     public int getPercentLifeValue() {
         return getValueWithKeyphrase("increased maximum Life");
     }

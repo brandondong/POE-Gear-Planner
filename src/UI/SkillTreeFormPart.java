@@ -30,8 +30,6 @@ public class SkillTreeFormPart extends JPanel {
 
     private static final String INVALID_URL = "Failed to load Passive Skill Tree URL";
 
-    private static final String VALID_URL = "Passive Skill Tree URL loaded successfully";
-
     private BuildPlanner planner;
 
     private BuildsModel model;
@@ -80,12 +78,16 @@ public class SkillTreeFormPart extends JPanel {
     }
 
     private void refreshLabelValidate() {
-        if (planner.getPreferences().getUrl().isEmpty()) {
-            labelValidate.setText(EMPTY_URL);
-        } else if (planner.getPreferences().isUrlLoaded()) {
-            labelValidate.setText(VALID_URL);
-        } else {
+        refreshLabelValidate(true);
+    }
+
+    private void refreshLabelValidate(boolean isUrlLoaded) {
+        if (!isUrlLoaded) {
             labelValidate.setText(INVALID_URL);
+        } else if (model.getSelected().getCharacterClass() == null) {
+            labelValidate.setText(EMPTY_URL);
+        } else {
+            labelValidate.setText(model.getSelected().validate(planner.getPreferences()));
         }
     }
 
@@ -109,12 +111,10 @@ public class SkillTreeFormPart extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String url = textField1.getText();
-                SkillTreePreferences preferences = planner.getPreferences();
-                preferences.setUrl(url);
-                preferences.setIsUrlLoaded(URLToSkillTreeData.decodeURL(url, model.getSelected()));
-                refreshLabelValidate();
+                planner.getPreferences().setUrl(url);
+                refreshLabelValidate(URLToSkillTreeData.decodeURL(url, model.getSelected()));
+                planner.refreshBuildList();
                 refreshTextPaneInfo();
-                planner.refreshBuildSelected();
             }
         });
     }

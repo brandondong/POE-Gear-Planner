@@ -9,8 +9,6 @@ import Model.DisplayableItem;
  */
 public class SkillTreePreferences {
 
-    private boolean isUrlLoaded;
-
     private String url;
 
     private DisplayableItem selected;
@@ -22,7 +20,6 @@ public class SkillTreePreferences {
     private int level;
 
     public SkillTreePreferences() {
-        isUrlLoaded = false;
         url = "";
         withGear = true;
         difficulty = Difficulty.MERCILESS;
@@ -35,14 +32,6 @@ public class SkillTreePreferences {
 
     public void setSelected(DisplayableItem selected) {
         this.selected = selected;
-    }
-
-    public boolean isUrlLoaded() {
-        return isUrlLoaded;
-    }
-
-    public void setIsUrlLoaded(boolean isUrlLoaded) {
-        this.isUrlLoaded = isUrlLoaded;
     }
 
     public String getUrl() {

@@ -187,6 +187,34 @@ public class Character extends Equipment {
         return toString();
     }
 
+    public String validate(SkillTreePreferences prefs) {
+        List<ResistType> uncapped = new ArrayList<>();
+        for (ResistType type : ResistType.ELEMENTAL) {
+            if (!stats.isResistanceCapped(type, prefs.getDifficulty())) {
+                uncapped.add(type);
+            }
+        }
+        if (!uncapped.isEmpty()) {
+            return getUncappedResMessage(uncapped, prefs.getDifficulty());
+        }
+        return String.format("Resistances are capped for %s difficulty", prefs.getDifficulty());
+    }
+
+    private String getUncappedResMessage(List<ResistType> uncapped, Difficulty difficulty) {
+        if (uncapped.size() > 1) {
+            return String.format("%s resistances are uncapped for %s", getUncappedResInfo(uncapped), difficulty);
+        }
+        return String.format("%s resistance is uncapped for %s", uncapped.get(0), difficulty);
+    }
+
+    private String getUncappedResInfo(List<ResistType> uncapped) {
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < uncapped.size() - 1; i++) {
+            builder.append(uncapped.get(i)).append(", ");
+        }
+        return builder.append("and ").append(uncapped.get(uncapped.size() - 1)).toString();
+    }
+
     @Override
     public String toString() {
         return getName();
