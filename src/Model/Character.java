@@ -172,7 +172,11 @@ public class Character extends Equipment {
     public StyledDocument displayInfo(SkillTreePreferences prefs) throws BadLocationException {
         if (characterClass != null) {
             StyledDocument doc = new DefaultStyledDocument();
-            doc.insertString(0, characterClass.toString(), CommonUtil.getLargeFont());
+            StringBuilder title = new StringBuilder(characterClass.toString());
+            if (ascendancy != null) {
+                title.append("\n").append(ascendancy);
+            }
+            doc.insertString(0, title.toString(), CommonUtil.getLargeFont());
             return doc;
         }
         return null;
