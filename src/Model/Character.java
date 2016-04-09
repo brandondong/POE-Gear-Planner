@@ -72,7 +72,9 @@ public class Character extends Equipment {
     public CharacterStats combinedStats() {
         CharacterStats combined = new CharacterStats();
         combined.addStats(stats);
-        combined.addStats(characterClass.getBaseStats());
+        if (characterClass != null) {
+            combined.addStats(characterClass.getBaseStats());
+        }
         for (Item item : items) {
             combined.addStats(item.getStats());
         }
@@ -193,6 +195,7 @@ public class Character extends Equipment {
 
     public String validate(SkillTreePreferences prefs) {
         List<ResistType> uncapped = new ArrayList<>();
+        CharacterStats stats = combinedStats();
         for (ResistType type : ResistType.ELEMENTAL) {
             if (!stats.isResistanceCapped(type, prefs.getDifficulty())) {
                 uncapped.add(type);

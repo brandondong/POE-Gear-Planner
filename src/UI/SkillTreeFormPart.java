@@ -51,7 +51,7 @@ public class SkillTreeFormPart extends JPanel {
         refreshTextPaneInfo();
     }
 
-    private void refreshTextPaneInfo() {
+    public void refreshTextPaneInfo() {
         try {
             StyledDocument doc = model.getSelected().displayInfo(planner.getPreferences());
             if (doc != null) {
@@ -113,8 +113,7 @@ public class SkillTreeFormPart extends JPanel {
                 String url = textField1.getText();
                 planner.getPreferences().setUrl(url);
                 refreshLabelValidate(URLToSkillTreeData.decodeURL(url, model.getSelected()));
-                planner.refreshBuildList();
-                refreshTextPaneInfo();
+                planner.refreshStatsChanged();
             }
         });
     }

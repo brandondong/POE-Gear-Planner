@@ -68,6 +68,7 @@ public class Gem implements DisplayableItem {
         return type;
     }
 
+    @Override
     public Requirements getRequirements() {
         return requirements;
     }

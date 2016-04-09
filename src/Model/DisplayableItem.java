@@ -15,4 +15,10 @@ public interface DisplayableItem {
      * @return a styled document to be displayed representing this item
      */
     StyledDocument displayItem() throws BadLocationException;
+
+    /**
+     *
+     * @return the {@link Requirements} for this item
+     */
+    Requirements getRequirements();
 }

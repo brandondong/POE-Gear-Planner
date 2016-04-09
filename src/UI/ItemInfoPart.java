@@ -4,15 +4,18 @@
 
 package UI;
 
-import Model.BuildsModel;
+import Model.AttributeType;
+import Model.CharacterStats;
+import Model.DisplayableItem;
 import Util.Logger;
 
 import java.awt.*;
+import java.util.*;
+import java.util.List;
 import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultStyledDocument;
-import javax.swing.text.StyledDocument;
 
 /**
  * @author Brandon Dong
@@ -31,7 +34,26 @@ public class ItemInfoPart extends JPanel {
         refreshDisplay();
     }
 
-    public void refreshDisplay() {
+    public void refreshItemSelected() {
+        refreshLabelValidate();
+        refreshDisplay();
+    }
+
+    public void refreshLabelValidate() {
+        CharacterStats stats = planner.getModel().getSelected().combinedStats();
+        DisplayableItem item = planner.getPreferences().getSelected();
+        String labelText;
+        if (item == null) {
+            labelText = "No item selected";
+        } else if (stats.hasRequiredAttributes(planner.getPreferences().getSelected().getRequirements())) {
+            labelText = "All attribute requirements are met";
+        } else {
+            labelText = "Missing attribute requirements";
+        }
+        labelValidate.setText(labelText);
+    }
+
+    private void refreshDisplay() {
         if (planner.getPreferences().getSelected() != null) {
             try {
                 textPane1.setStyledDocument(planner.getPreferences().getSelected().displayItem());
@@ -47,7 +69,7 @@ public class ItemInfoPart extends JPanel {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - Brandon Dong
         panel1 = new JPanel();
-        label1 = new JLabel();
+        labelValidate = new JLabel();
         scrollPane1 = new JScrollPane();
         textPane1 = new JTextPane();
 
@@ -75,9 +97,9 @@ public class ItemInfoPart extends JPanel {
             ((GridBagLayout)panel1.getLayout()).columnWeights = new double[] {1.0, 1.0E-4};
             ((GridBagLayout)panel1.getLayout()).rowWeights = new double[] {0.0, 1.0E-4};
 
-            //---- label1 ----
-            label1.setText("No item selected.");
-            panel1.add(label1, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,
+            //---- labelValidate ----
+            labelValidate.setText("No item selected");
+            panel1.add(labelValidate, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 0, 0), 0, 0));
         }
@@ -100,7 +122,7 @@ public class ItemInfoPart extends JPanel {
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // Generated using JFormDesigner Evaluation license - Brandon Dong
     private JPanel panel1;
-    private JLabel label1;
+    private JLabel labelValidate;
     private JScrollPane scrollPane1;
     private JTextPane textPane1;
     // JFormDesigner - End of variables declaration  //GEN-END:variables

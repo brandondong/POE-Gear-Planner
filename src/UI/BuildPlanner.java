@@ -66,18 +66,20 @@ public class BuildPlanner extends JFrame {
      */
     public void refreshBuildSelected() {
         refreshBuildName();
-        refreshBuildList();
+        buildsListPart1.refreshListItems();
         gemListPart1.refreshListGems();
         skillTreeFormPart1.refreshSettings();
-        itemInfoPart1.refreshDisplay();
+        itemInfoPart1.refreshItemSelected();
     }
 
-    public void refreshBuildList() {
+    public void refreshStatsChanged() {
         buildsListPart1.refreshListItems();
+        itemInfoPart1.refreshLabelValidate();
+        skillTreeFormPart1.refreshTextPaneInfo();
     }
 
     public void refreshItemSelected() {
-        itemInfoPart1.refreshDisplay();
+        itemInfoPart1.refreshItemSelected();
     }
 
     public void refreshItemsChanged() {

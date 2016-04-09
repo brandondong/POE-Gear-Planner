@@ -25,6 +25,7 @@ public class Item implements DisplayableItem {
         return stats;
     }
 
+    @Override
     public Requirements getRequirements() {
         return requirements;
     }
