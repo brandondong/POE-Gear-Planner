@@ -85,14 +85,4 @@ public class CharacterStats extends Stats {
     public boolean hasRequiredAttribute(AttributeType type, int value) {
         return calculateAttributeValue(type) >= value;
     }
-
-    /**
-     *
-     * @param type the {@link ResistType} of interest
-     * @param difficulty the {@link Difficulty} to be calculated against
-     * @return an info display of a given resistance
-     */
-    public String getResInfo(ResistType type, Difficulty difficulty) {
-        return String.format("%s (%d / %d%%)", type, getEffectiveResist(type, difficulty), getMaxResist(type));
-    }
 }

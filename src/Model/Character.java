@@ -69,7 +69,7 @@ public class Character extends Equipment {
      *
      * @return a new set of stats representing the character's stats considering passives, gear, and base stats
      */
-    public CharacterStats combinedStats() {
+    private CharacterStats combinedStats() {
         CharacterStats combined = new CharacterStats();
         combined.addStats(stats);
         if (characterClass != null) {
@@ -178,10 +178,33 @@ public class Character extends Equipment {
             if (ascendancy != null) {
                 title.append("\n").append(ascendancy);
             }
+            title.append("\n\nStats:");
             doc.insertString(0, title.toString(), CommonUtil.getLargeFont());
+            displayAttributes(prefs, doc);
+            displayStats(prefs, doc);
             return doc;
         }
         return null;
+    }
+
+    private void displayAttributes(SkillTreePreferences prefs, StyledDocument doc) throws BadLocationException {
+        CharacterStats display = getStats(prefs);
+        StringBuilder builder = new StringBuilder();
+        for (AttributeType type : AttributeType.values()) {
+            builder.append("\n").append(String.format("%d to %s", display.calculateAttributeValue(type), type));
+        }
+        doc.insertString(doc.getLength(), builder.toString(), CommonUtil.getRegularFont());
+    }
+
+    private void displayStats(SkillTreePreferences prefs, StyledDocument doc) throws BadLocationException {
+        doc.insertString(doc.getLength(), String.format("\n%s", getStats(prefs)), CommonUtil.getRegularFont());
+    }
+
+    public CharacterStats getStats(SkillTreePreferences prefs) {
+        if (prefs.isWithGear()) {
+            return combinedStats();
+        }
+        return stats;
     }
 
     public String getDisplayString() {
@@ -208,18 +231,11 @@ public class Character extends Equipment {
     }
 
     private String getUncappedResMessage(List<ResistType> uncapped, Difficulty difficulty) {
+        String resists = CommonUtil.joinCollection(uncapped);
         if (uncapped.size() > 1) {
-            return String.format("%s resistances are uncapped for %s", getUncappedResInfo(uncapped), difficulty);
+            return String.format("%s resistances are uncapped for %s", resists, difficulty);
         }
-        return String.format("%s resistance is uncapped for %s", uncapped.get(0), difficulty);
-    }
-
-    private String getUncappedResInfo(List<ResistType> uncapped) {
-        StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < uncapped.size() - 1; i++) {
-            builder.append(uncapped.get(i)).append(", ");
-        }
-        return builder.append("and ").append(uncapped.get(uncapped.size() - 1)).toString();
+        return String.format("%s resistance is uncapped for %s", resists, difficulty);
     }
 
     @Override

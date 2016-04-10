@@ -28,9 +28,9 @@ public enum CharacterClass {
         try {
             JSONObject classData = getClassData();
             CharacterStats stats = new CharacterStats();
-            stats.addStat(AttributeType.STRENGTH.getId(), classData.getInt("base_str"));
-            stats.addStat(AttributeType.DEXTERITY.getId(), classData.getInt("base_dex"));
-            stats.addStat(AttributeType.INTELLIGENCE.getId(), classData.getInt("base_int"));
+            stats.addStat(AttributeType.STRENGTH.getAdditionalDescription(classData.getInt("base_str")));
+            stats.addStat(AttributeType.DEXTERITY.getAdditionalDescription(classData.getInt("base_dex")));
+            stats.addStat(AttributeType.INTELLIGENCE.getAdditionalDescription(classData.getInt("base_int")));
             return stats;
         } catch (Exception e) {
             Logger.addError("Could not parse class base stats.", e);

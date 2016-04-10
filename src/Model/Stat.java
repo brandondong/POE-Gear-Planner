@@ -12,11 +12,11 @@ public class Stat {
 
     private static final Pattern VALUE_PATTERN = Pattern.compile("[\\d\\.]+");
 
-    private String id;
+    private final String id;
 
-    private double value;
+    private final double value;
 
-    private boolean isNumeric;
+    private final boolean isNumeric;
 
     /**
      * Tries to parse the stat description into a formatted id and value
@@ -40,7 +40,7 @@ public class Stat {
      * @param id a formatted unique identifier for the stat type (e.g. "%.1f%% increased Armour")
      * @param value the value of the stat
      */
-    public Stat(String id, double value) {
+    private Stat(String id, double value) {
         this.id = id;
         this.value = value;
         isNumeric = true;

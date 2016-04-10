@@ -7,6 +7,8 @@ package UI;
 import Model.AttributeType;
 import Model.CharacterStats;
 import Model.DisplayableItem;
+import Model.Requirements;
+import Util.CommonUtil;
 import Util.Logger;
 
 import java.awt.*;
@@ -40,17 +42,27 @@ public class ItemInfoPart extends JPanel {
     }
 
     public void refreshLabelValidate() {
-        CharacterStats stats = planner.getModel().getSelected().combinedStats();
+        CharacterStats stats = planner.getModel().getSelected().getStats(planner.getPreferences());
         DisplayableItem item = planner.getPreferences().getSelected();
         String labelText;
         if (item == null) {
             labelText = "No item selected";
-        } else if (stats.hasRequiredAttributes(planner.getPreferences().getSelected().getRequirements())) {
+        } else if (stats.hasRequiredAttributes(item.getRequirements())) {
             labelText = "All attribute requirements are met";
         } else {
-            labelText = "Missing attribute requirements";
+            labelText = getRequirementsMessage(stats, item.getRequirements());
         }
         labelValidate.setText(labelText);
+    }
+
+    private String getRequirementsMessage(CharacterStats stats, Requirements requirements) {
+        List<AttributeType> missing = new ArrayList<>();
+        for (AttributeType type : AttributeType.values()) {
+            if (!stats.hasRequiredAttribute(type, requirements.getAttributeRequirement(type))) {
+                missing.add(type);
+            }
+        }
+        return String.format("Missing %s requirements", CommonUtil.joinCollection(missing));
     }
 
     private void refreshDisplay() {

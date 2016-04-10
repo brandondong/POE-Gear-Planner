@@ -14,8 +14,8 @@ public enum AttributeType {
      *
      * @return the unique identifier representing a flat addition of this type
      */
-    public String getId() {
-        return String.format("+%%.1f to %s", this);
+    public String getAdditionalDescription(int value) {
+        return String.format("+%d to %s", value, this);
     }
 
     public GemType getType() {

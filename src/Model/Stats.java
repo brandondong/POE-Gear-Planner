@@ -1,5 +1,7 @@
 package Model;
 
+import Util.Predicate;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -38,16 +40,15 @@ public class Stats implements Iterable<Stat> {
         return getResistValue(type, true);
     }
 
-    private int getResistValue(ResistType type, boolean isMaximum) {
-        int value = 0;
-        for (Stat stat : this) {
-            String id = stat.getId();
-            if ((id.contains(type.toString()) || id.contains("all")) && id.contains("Resistance")
-                    && !id.contains("Minions") && !id.contains("Penetrates") && id.contains("maximum") == isMaximum) {
-                value += stat.getValue();
+    private int getResistValue(final ResistType type, final boolean isMaximum) {
+        return getValueWithCondition(new Predicate<String>() {
+            @Override
+            public boolean apply(String input) {
+                return (input.contains(type.toString()) || input.contains("all")) && input.contains("Resistance")
+                        && !input.contains("Minions") && !input.contains("Penetrates")
+                        && input.contains("maximum") == isMaximum;
             }
-        }
-        return value;
+        });
     }
 
     /**
@@ -55,16 +56,14 @@ public class Stats implements Iterable<Stat> {
      * @param type the {@link AttributeType} of interest
      * @return the flat addition value of that type
      */
-    public int getAdditionalAttributeValue(AttributeType type) {
-        int value = 0;
-        for (Stat stat : this) {
-            String id = stat.getId();
-            if ((id.contains(type.toString()) || id.contains("all Attributes"))
-                    && id.contains("to")) {
-                value += stat.getValue();
+    public int getAdditionalAttributeValue(final AttributeType type) {
+        return getValueWithCondition(new Predicate<String>() {
+            @Override
+            public boolean apply(String input) {
+                return (input.contains(type.toString()) || input.contains("all Attributes"))
+                        && input.contains("to");
             }
-        }
-        return value;
+        });
     }
 
     /**
@@ -72,15 +71,13 @@ public class Stats implements Iterable<Stat> {
      * @param type the {@link AttributeType} of interest
      * @return the percentage addition value of that type
      */
-    public int getPercentAttributeValue(AttributeType type) {
-        int value = 0;
-        for (Stat stat : this) {
-            String id = stat.getId();
-            if (id.contains(type.toString()) && id.contains("increased")) {
-                value += stat.getValue();
+    public int getPercentAttributeValue(final AttributeType type) {
+        return getValueWithCondition(new Predicate<String>() {
+            @Override
+            public boolean apply(String input) {
+                return input.contains(type.toString()) && input.contains("increased");
             }
-        }
-        return value;
+        });
     }
 
     /**
@@ -88,7 +85,12 @@ public class Stats implements Iterable<Stat> {
      * @return the total value of flat added life
      */
     public int getFlatLifeValue() {
-        return getValueWithKeyphrase("to maximum Life");
+        return getValueWithCondition(new Predicate<String>() {
+            @Override
+            public boolean apply(String input) {
+                return input.contains("to maximum Life");
+            }
+        });
     }
 
     /**
@@ -96,14 +98,18 @@ public class Stats implements Iterable<Stat> {
      * @return the total value of percent increased life
      */
     public int getPercentLifeValue() {
-        return getValueWithKeyphrase("increased maximum Life");
+        return getValueWithCondition(new Predicate<String>() {
+            @Override
+            public boolean apply(String input) {
+                return input.contains("increased maximum Life");
+            }
+        });
     }
 
-    private int getValueWithKeyphrase(String phrase) {
+    private int getValueWithCondition(Predicate<String> cond) {
         int value = 0;
         for (Stat stat : this) {
-            String id = stat.getId();
-            if (id.contains(phrase)) {
+            if (cond.apply(stat.getId())) {
                 value += stat.getValue();
             }
         }
@@ -136,15 +142,6 @@ public class Stats implements Iterable<Stat> {
      */
     public void addStat(String description) {
         addStat(new Stat(description));
-    }
-
-    /**
-     *
-     * @param id the unique identifier of the stat
-     * @param value the value of the stat to be added
-     */
-    public void addStat(String id, int value) {
-        addStat(new Stat(id, value));
     }
 
     /**

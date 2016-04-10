@@ -11,9 +11,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
+import java.util.List;
 
 /**
  * Created by Brandon on 2016-02-28.
@@ -95,6 +94,17 @@ public class CommonUtil {
         StyleConstants.setLeftIndent(keyWord, 20);
         StyleConstants.setFontSize(keyWord, 12);
         return keyWord;
+    }
+
+    public static <V> String joinCollection(List<V> collect) {
+        if (collect.size() == 1) {
+            return collect.get(0).toString();
+        }
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < collect.size() - 1; i++) {
+            builder.append(collect.get(i)).append(", ");
+        }
+        return builder.append("and ").append(collect.get(collect.size() - 1)).toString();
     }
 
     private CommonUtil() {
