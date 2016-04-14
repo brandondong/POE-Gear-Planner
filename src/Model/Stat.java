@@ -53,7 +53,7 @@ public class Stat {
      * @return a stat representing the two stats combined in magnitude or the original if they cannot be added
      */
     public Stat addStat(Stat other) {
-        if (other != null && id.equals(other.getId())) {
+        if (other != null && id.equals(other.getId()) && isNumeric) {
             return new Stat(id, value + other.getValue());
         }
         return this;
@@ -107,9 +107,8 @@ public class Stat {
             return StatType.DEFENCE;
         } else if (id.contains("Speed") || id.contains("Damage") || id.contains("Area") || id.contains("Critical")) {
             return StatType.OFFENCE;
-        } else {
-            return StatType.MISCELLANEOUS;
         }
+        return StatType.MISCELLANEOUS;
     }
 
     private String parseId(String description) {

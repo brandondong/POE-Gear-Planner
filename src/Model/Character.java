@@ -3,13 +3,12 @@ package Model;
 import UI.SkillTreePreferences;
 import Util.CommonUtil;
 
+import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultStyledDocument;
 import javax.swing.text.StyledDocument;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.security.Key;
+import java.util.*;
 
 /**
  * Created by Brandon on 2016-02-20.
@@ -174,32 +173,90 @@ public class Character extends Equipment {
     public StyledDocument displayInfo(SkillTreePreferences prefs) throws BadLocationException {
         if (characterClass != null) {
             StyledDocument doc = new DefaultStyledDocument();
+            CharacterStats stat = getStats(prefs);
             StringBuilder title = new StringBuilder(characterClass.toString());
             if (ascendancy != null) {
                 title.append("\n").append(ascendancy);
             }
-            title.append("\n\nStats:");
-            doc.insertString(0, title.toString(), CommonUtil.getLargeFont());
-            displayAttributes(prefs, doc);
-            displayStats(prefs, doc);
+            doc.insertString(0, title.append("\n\n").toString(), CommonUtil.getLargeFont());
+            displayAttributes(doc, stat);
+            displayResistances(doc, stat, prefs);
+            doc.insertString(doc.getLength(), "\n", CommonUtil.getLargeFont());
+            displayStats(doc, stat);
+            doc.insertString(doc.getLength(), "\n", CommonUtil.getLargeFont());
+            displayKeystones(doc);
             return doc;
         }
         return null;
     }
 
-    private void displayAttributes(SkillTreePreferences prefs, StyledDocument doc) throws BadLocationException {
-        CharacterStats display = getStats(prefs);
+    private void displayResistances(StyledDocument doc, CharacterStats stat, SkillTreePreferences prefs) throws BadLocationException {
+        doc.insertString(doc.getLength(), "Resistances:", CommonUtil.getLargeFont());
+        for (ResistType type : ResistType.values()) {
+            String insert = String.format("\n%d / %d%% %s Resistance", stat.getEffectiveResist(type, prefs.getDifficulty()),
+                    stat.getMaxResist(type), type);
+            AttributeSet set = CommonUtil.getRegularFont();
+            if (!stat.isResistanceCapped(type, prefs.getDifficulty())) {
+                set = CommonUtil.getWarningFont();
+            }
+            doc.insertString(doc.getLength(), insert, set);
+        }
+        doc.insertString(doc.getLength(), "\n", CommonUtil.getRegularFont());
+    }
+
+    private void displayAttributes(StyledDocument doc, CharacterStats stat) throws BadLocationException {
+        doc.insertString(doc.getLength(), "Attributes:", CommonUtil.getLargeFont());
         StringBuilder builder = new StringBuilder();
         for (AttributeType type : AttributeType.values()) {
-            builder.append("\n").append(String.format("%d to %s", display.calculateAttributeValue(type), type));
+            builder.append("\n").append(String.format("%d to %s", stat.calculateAttributeValue(type), type));
         }
-        doc.insertString(doc.getLength(), builder.toString(), CommonUtil.getRegularFont());
+        doc.insertString(doc.getLength(), builder.append("\n").toString(), CommonUtil.getRegularFont());
     }
 
-    private void displayStats(SkillTreePreferences prefs, StyledDocument doc) throws BadLocationException {
-        doc.insertString(doc.getLength(), String.format("\n%s", getStats(prefs)), CommonUtil.getRegularFont());
+    private void displayStats(StyledDocument doc, CharacterStats stat) throws BadLocationException {
+        doc.insertString(doc.getLength(), "Passives:", CommonUtil.getLargeFont());
+        for (StatType type : StatType.values()) {
+            createSection(doc, stat, type);
+        }
+        doc.insertString(doc.getLength(), "\n", CommonUtil.getRegularFont());
     }
 
+    private void createSection(StyledDocument doc, CharacterStats stat, StatType type) throws BadLocationException {
+        boolean shouldAdd = false;
+        StringBuilder builder = new StringBuilder();
+        for (Stat next : stat) {
+            if (next.getType() == type) {
+                builder.append("\n").append(next);
+                shouldAdd = true;
+            }
+        }
+        if (shouldAdd) {
+            doc.insertString(doc.getLength(), String.format("\n%s", type), CommonUtil.getRegularFont(true));
+            doc.insertString(doc.getLength(), builder.toString(), CommonUtil.getRegularFont());
+        }
+    }
+
+    private void displayKeystones(StyledDocument doc) throws BadLocationException {
+        displayNotable(doc, "Keystones", keystones);
+        displayNotable(doc, "Ascendancy", ascendancyNodes);
+    }
+
+    private <V> void displayNotable(StyledDocument doc, String title, Collection<V> nodes) throws BadLocationException {
+        if (!nodes.isEmpty()) {
+            doc.insertString(doc.getLength(), String.format("%s:", title), CommonUtil.getLargeFont());
+            StringBuilder builder = new StringBuilder();
+            for (V next : nodes) {
+                builder.append(String.format("\n%s", next));
+            }
+            doc.insertString(doc.getLength(), builder.append("\n").toString(), CommonUtil.getRegularFont());
+        }
+    }
+
+    /**
+     *
+     * @param prefs the {@link SkillTreePreferences} for this character
+     * @return stats with or without gear in consideration depending on the preferences
+     */
     public CharacterStats getStats(SkillTreePreferences prefs) {
         if (prefs.isWithGear()) {
             return combinedStats();

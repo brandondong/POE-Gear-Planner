@@ -23,6 +23,8 @@ public class CommonUtil {
 
     public static final Color DEFAULT_TEXT_COLOR = Color.black;
 
+    public static final Color WARNING_TEXT_COLOR = new Color(209, 1, 1);
+
     public static final String WIKI_PREFIX = "http://pathofexile.gamepedia.com/";
 
     /**
@@ -85,13 +87,21 @@ public class CommonUtil {
     }
 
     public static AttributeSet getRegularFont() {
-        return getRegularFont(DEFAULT_TEXT_COLOR);
+        return getRegularFont(false);
     }
 
-    public static AttributeSet getRegularFont(Color c) {
+    public static AttributeSet getRegularFont(boolean shouldBold) {
+        return getRegularFont(DEFAULT_TEXT_COLOR, shouldBold);
+    }
+
+    public static AttributeSet getWarningFont() {
+        return getRegularFont(WARNING_TEXT_COLOR, false);
+    }
+
+    public static AttributeSet getRegularFont(Color c, boolean shouldBold) {
         SimpleAttributeSet keyWord = new SimpleAttributeSet();
         StyleConstants.setForeground(keyWord, c);
-        StyleConstants.setLeftIndent(keyWord, 20);
+        StyleConstants.setBold(keyWord, shouldBold);
         StyleConstants.setFontSize(keyWord, 12);
         return keyWord;
     }

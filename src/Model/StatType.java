@@ -6,5 +6,5 @@ package Model;
  * A classification of stats by type
  */
 public enum StatType {
-    OFFENCE, DEFENCE, MINION, AURA, CURSE, MANA, MISCELLANEOUS
+    OFFENCE, DEFENCE, AURA, CURSE, MANA, MINION, MISCELLANEOUS
 }
