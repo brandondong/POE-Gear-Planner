@@ -31,7 +31,7 @@ new FormModel {
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "labelBuildName"
 					"text": "Build name:"
-					"font": new java.awt.Font( "Tahoma", 1, 11 )
+					"font": new java.awt.Font( "Tahoma", 1, 14 )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) )
 				add( new FormComponent( "com.jformdesigner.designer.wrapper.HSpacer" ) {
 					name: "hSpacer1"
@@ -40,11 +40,12 @@ new FormModel {
 				} )
 				add( new FormComponent( "javax.swing.JTextField" ) {
 					name: "textFieldBuildName"
+					"font": new java.awt.Font( "Tahoma", 0, 14 )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
 					"gridx": 2
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "label2"
+					name: "labelValidate"
 					"border": new javax.swing.border.CompoundBorder( new javax.swing.border.TitledBorder( "" ), new javax.swing.border.EmptyBorder( 5, 5, 5, 5 ) )
 					"text": "All item requirements are met."
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {

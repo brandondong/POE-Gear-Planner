@@ -29,6 +29,15 @@ public class BuildPlanner extends JFrame {
         preferences = new HashMap<>();
         initComponents();
         initBuildName();
+        initLabelValidate();
+    }
+
+    private void initLabelValidate() {
+        refreshLabelValidate();
+    }
+
+    private void refreshLabelValidate() {
+        labelValidate.setText("All requirements met");
     }
 
     private void initBuildName() {
@@ -66,6 +75,7 @@ public class BuildPlanner extends JFrame {
      */
     public void refreshBuildSelected() {
         refreshBuildName();
+        refreshLabelValidate();
         buildsListPart1.refreshListItems();
         gemListPart1.refreshListGems();
         skillTreeFormPart1.refreshSettings();
@@ -76,6 +86,7 @@ public class BuildPlanner extends JFrame {
         buildsListPart1.refreshListItems();
         itemInfoPart1.refreshLabelValidate();
         skillTreeFormPart1.refreshTextPaneInfo();
+        refreshLabelValidate();
     }
 
     public void refreshItemSelected() {
@@ -110,7 +121,7 @@ public class BuildPlanner extends JFrame {
         labelBuildName = new JLabel();
         hSpacer1 = new JPanel(null);
         textFieldBuildName = new JTextField();
-        label2 = new JLabel();
+        labelValidate = new JLabel();
         gearListPart1 = new GearListPart();
         gemListPart1 = new GemListPart(this);
         itemInfoPart1 = new ItemInfoPart(this);
@@ -118,7 +129,7 @@ public class BuildPlanner extends JFrame {
 
         //======== this ========
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Path of Exile Gear BuildPlanner");
+        setTitle("Path of Exile Gear Planner");
         Container contentPane = getContentPane();
         contentPane.setLayout(new GridBagLayout());
         ((GridBagLayout)contentPane.getLayout()).columnWidths = new int[] {0, 0, 0, 0};
@@ -132,13 +143,6 @@ public class BuildPlanner extends JFrame {
         //======== panel1 ========
         {
 
-            // JFormDesigner evaluation mark
-            panel1.setBorder(new javax.swing.border.CompoundBorder(
-                new javax.swing.border.TitledBorder(new javax.swing.border.EmptyBorder(0, 0, 0, 0),
-                    "JFormDesigner Evaluation", javax.swing.border.TitledBorder.CENTER,
-                    javax.swing.border.TitledBorder.BOTTOM, new java.awt.Font("Dialog", java.awt.Font.BOLD, 12),
-                    java.awt.Color.red), panel1.getBorder())); panel1.addPropertyChangeListener(new java.beans.PropertyChangeListener(){public void propertyChange(java.beans.PropertyChangeEvent e){if("border".equals(e.getPropertyName()))throw new RuntimeException();}});
-
             panel1.setLayout(new GridBagLayout());
             ((GridBagLayout)panel1.getLayout()).columnWidths = new int[] {0, 0, 0, 0, 0};
             ((GridBagLayout)panel1.getLayout()).rowHeights = new int[] {0, 0, 0, 0, 0};
@@ -147,23 +151,26 @@ public class BuildPlanner extends JFrame {
 
             //---- labelBuildName ----
             labelBuildName.setText("Build name:");
-            labelBuildName.setFont(new Font("Tahoma", Font.BOLD, 11));
+            labelBuildName.setFont(new Font("Tahoma", Font.BOLD, 14));
             panel1.add(labelBuildName, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,
-                GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-                new Insets(0, 0, 5, 5), 0, 0));
+                    GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+                    new Insets(0, 0, 5, 5), 0, 0));
             panel1.add(hSpacer1, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 5, 5), 0, 0));
+
+            //---- textFieldBuildName ----
+            textFieldBuildName.setFont(new Font("Tahoma", Font.PLAIN, 14));
             panel1.add(textFieldBuildName, new GridBagConstraints(2, 0, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 5, 5), 0, 0));
 
-            //---- label2 ----
-            label2.setBorder(new CompoundBorder(
+            //---- labelValidate ----
+            labelValidate.setBorder(new CompoundBorder(
                 new TitledBorder(""),
                 new EmptyBorder(5, 5, 5, 5)));
-            label2.setText("All item requirements are met.");
-            panel1.add(label2, new GridBagConstraints(0, 1, 3, 1, 0.0, 0.0,
+            labelValidate.setText("All item requirements are met.");
+            panel1.add(labelValidate, new GridBagConstraints(0, 1, 3, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 5, 5), 0, 0));
             panel1.add(gearListPart1, new GridBagConstraints(0, 2, 4, 1, 0.0, 0.0,
@@ -193,13 +200,11 @@ public class BuildPlanner extends JFrame {
     private JLabel labelBuildName;
     private JPanel hSpacer1;
     private JTextField textFieldBuildName;
-    private JLabel label2;
+    private JLabel labelValidate;
     private GearListPart gearListPart1;
     private GemListPart gemListPart1;
     private ItemInfoPart itemInfoPart1;
-
     private BuildsListPart buildsListPart1;
-
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
     public static void main(String[] args) throws Exception {
