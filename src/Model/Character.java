@@ -2,6 +2,7 @@ package Model;
 
 import UI.SkillTreePreferences;
 import Util.CommonUtil;
+import Util.Validator;
 
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
@@ -78,12 +79,6 @@ public class Character extends Equipment {
             combined.addStats(item.getStats());
         }
         return combined;
-    }
-
-    public int getLifeAtLevel(int level) {
-        CharacterStats combined = combinedStats();
-        return (int) ((38 + (level * 12) + (combined.calculateAttributeValue(AttributeType.STRENGTH) / 2) +
-                        combined.getFlatLifeValue()) * (1 + ((double) combined.getPercentLifeValue()) / 100));
     }
 
     public void addStats(Stats other) {
@@ -185,6 +180,8 @@ public class Character extends Equipment {
             displayStats(doc, stat);
             doc.insertString(doc.getLength(), "\n", CommonUtil.getLargeFont());
             displayKeystones(doc);
+            doc.insertString(doc.getLength(), String.format("\nPredicted life at level %d: %d",
+                    prefs.getLevel(), getStats(prefs).getLifeAtLevel(prefs.getLevel())), CommonUtil.getRegularFont());
             return doc;
         }
         return null;
@@ -241,11 +238,11 @@ public class Character extends Equipment {
         displayNotable(doc, "Ascendancy", ascendancyNodes);
     }
 
-    private <V> void displayNotable(StyledDocument doc, String title, Collection<V> nodes) throws BadLocationException {
+    private void displayNotable(StyledDocument doc, String title, Collection<?> nodes) throws BadLocationException {
         if (!nodes.isEmpty()) {
             doc.insertString(doc.getLength(), String.format("%s:", title), CommonUtil.getLargeFont());
             StringBuilder builder = new StringBuilder();
-            for (V next : nodes) {
+            for (Object next : nodes) {
                 builder.append(String.format("\n%s", next));
             }
             doc.insertString(doc.getLength(), builder.append("\n").toString(), CommonUtil.getRegularFont());
@@ -274,25 +271,7 @@ public class Character extends Equipment {
     }
 
     public String validate(SkillTreePreferences prefs) {
-        List<ResistType> uncapped = new ArrayList<>();
-        CharacterStats stats = combinedStats();
-        for (ResistType type : ResistType.ELEMENTAL) {
-            if (!stats.isResistanceCapped(type, prefs.getDifficulty())) {
-                uncapped.add(type);
-            }
-        }
-        if (!uncapped.isEmpty()) {
-            return getUncappedResMessage(uncapped, prefs.getDifficulty());
-        }
-        return String.format("Resistances are capped for %s difficulty", prefs.getDifficulty());
-    }
-
-    private String getUncappedResMessage(List<ResistType> uncapped, Difficulty difficulty) {
-        String resists = CommonUtil.joinCollection(uncapped);
-        if (uncapped.size() > 1) {
-            return String.format("%s resistances are uncapped for %s", resists, difficulty);
-        }
-        return String.format("%s resistance is uncapped for %s", resists, difficulty);
+        return Validator.getValidationMessageForCharacter(prefs, getStats(prefs));
     }
 
     @Override

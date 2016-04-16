@@ -73,6 +73,5 @@ public class URLToSkillTreeData {
         decodeURL("https://www.pathofexile.com/fullscreen-passive-skill-tree/AAAABAMBAQFvAx4HHg18DkgPqxB7EQ8RLxFQEZYTbRQJFX4V1xa_GGobJR1PHdkfQSL0JIsmiCsKLKYsvzQKNbk3ZjeDOw09X0NUSRNJUUmxS65Ms05tUilSU1KvVeBWY1fJWAdYWlxAXGtd8mf8adhqjGwLbRltbHWedoJ4L3zlfqF_xoRIhMWGrofLiEKJ4It6j_qSdJMfkyeVLpeVl_SboZu1nDKhL6LZpcSm66crp5usmLQMtUi3MLtNu_y-Or6KwQDBxcM6w23G98gMyBTK088V0B_Xz9lb2xrdX9-K4vfmWOd06QLquutj7BjviO_r8NX0cfVL9W_31_k3", character);
         //character.addEquipement(CharacterNameToItemData.getEquipmentFromCharacter("agentvenom1", "WTBsurvivability"));
         System.out.println(character.getInfo());
-        System.out.println(character.getLifeAtLevel(95));
     }
 }

@@ -85,4 +85,14 @@ public class CharacterStats extends Stats {
     public boolean hasRequiredAttribute(AttributeType type, int value) {
         return calculateAttributeValue(type) >= value;
     }
+
+    /**
+     *
+     * @param level the level of the character
+     * @return the predicted amount of life at that level with the current stats
+     */
+    public int getLifeAtLevel(int level) {
+        return (int) ((38 + (level * 12) + (calculateAttributeValue(AttributeType.STRENGTH) / 2) +
+                getFlatLifeValue()) * (1 + ((double) getPercentLifeValue()) / 100));
+    }
 }
