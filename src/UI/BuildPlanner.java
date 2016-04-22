@@ -6,6 +6,7 @@ package UI;
 
 import Model.*;
 import Model.Character;
+import Util.Validator;
 
 import java.awt.*;
 import java.util.HashMap;
@@ -37,7 +38,11 @@ public class BuildPlanner extends JFrame {
     }
 
     private void refreshLabelValidate() {
-        labelValidate.setText("All requirements met");
+        String labelText = "No Passive Skill Tree URL entered";
+        if (!getPreferences().getUrl().isEmpty()) {
+            labelText = Validator.getValidationMessage(model.getSelected(), getPreferences());
+        }
+        labelValidate.setText(labelText);
     }
 
     private void initBuildName() {
@@ -118,9 +123,11 @@ public class BuildPlanner extends JFrame {
         // Generated using JFormDesigner Evaluation license - Brandon Dong
         skillTreeFormPart1 = new SkillTreeFormPart(this);
         panel1 = new JPanel();
+        panel2 = new JPanel();
         labelBuildName = new JLabel();
         hSpacer1 = new JPanel(null);
         textFieldBuildName = new JTextField();
+        panel3 = new JPanel();
         labelValidate = new JLabel();
         gearListPart1 = new GearListPart();
         gemListPart1 = new GemListPart(this);
@@ -142,41 +149,73 @@ public class BuildPlanner extends JFrame {
 
         //======== panel1 ========
         {
+            panel1.setPreferredSize(new Dimension(401, 402));
+
+            // JFormDesigner evaluation mark
+            panel1.setBorder(new javax.swing.border.CompoundBorder(
+                new javax.swing.border.TitledBorder(new javax.swing.border.EmptyBorder(0, 0, 0, 0),
+                    "JFormDesigner Evaluation", javax.swing.border.TitledBorder.CENTER,
+                    javax.swing.border.TitledBorder.BOTTOM, new java.awt.Font("Dialog", java.awt.Font.BOLD, 12),
+                    java.awt.Color.red), panel1.getBorder())); panel1.addPropertyChangeListener(new java.beans.PropertyChangeListener(){public void propertyChange(java.beans.PropertyChangeEvent e){if("border".equals(e.getPropertyName()))throw new RuntimeException();}});
 
             panel1.setLayout(new GridBagLayout());
-            ((GridBagLayout)panel1.getLayout()).columnWidths = new int[] {0, 0, 0, 0, 0};
-            ((GridBagLayout)panel1.getLayout()).rowHeights = new int[] {0, 0, 0, 0, 0};
-            ((GridBagLayout)panel1.getLayout()).columnWeights = new double[] {0.0, 0.0, 1.0, 0.0, 1.0E-4};
-            ((GridBagLayout)panel1.getLayout()).rowWeights = new double[] {0.0, 0.0, 1.0, 1.0, 1.0E-4};
+            ((GridBagLayout)panel1.getLayout()).columnWidths = new int[] {0, 0};
+            ((GridBagLayout)panel1.getLayout()).rowHeights = new int[] {0, 0, 0, 0};
+            ((GridBagLayout)panel1.getLayout()).columnWeights = new double[] {1.0, 1.0E-4};
+            ((GridBagLayout)panel1.getLayout()).rowWeights = new double[] {0.0, 1.0, 1.0, 1.0E-4};
 
-            //---- labelBuildName ----
-            labelBuildName.setText("Build name:");
-            labelBuildName.setFont(new Font("Tahoma", Font.BOLD, 14));
-            panel1.add(labelBuildName, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,
+            //======== panel2 ========
+            {
+                panel2.setLayout(new GridBagLayout());
+                ((GridBagLayout)panel2.getLayout()).columnWidths = new int[] {0, 0, 0, 0};
+                ((GridBagLayout)panel2.getLayout()).rowHeights = new int[] {0, 0, 0};
+                ((GridBagLayout)panel2.getLayout()).columnWeights = new double[] {0.0, 0.0, 1.0, 1.0E-4};
+                ((GridBagLayout)panel2.getLayout()).rowWeights = new double[] {0.0, 0.0, 1.0E-4};
+
+                //---- labelBuildName ----
+                labelBuildName.setText("Build name:");
+                labelBuildName.setFont(new Font("Tahoma", Font.BOLD, 14));
+                panel2.add(labelBuildName, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,
                     GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                     new Insets(0, 0, 5, 5), 0, 0));
-            panel1.add(hSpacer1, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0,
-                GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-                new Insets(0, 0, 5, 5), 0, 0));
+                panel2.add(hSpacer1, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0,
+                    GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+                    new Insets(0, 0, 5, 5), 0, 0));
 
-            //---- textFieldBuildName ----
-            textFieldBuildName.setFont(new Font("Tahoma", Font.PLAIN, 14));
-            panel1.add(textFieldBuildName, new GridBagConstraints(2, 0, 1, 1, 0.0, 0.0,
-                GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-                new Insets(0, 0, 5, 5), 0, 0));
+                //---- textFieldBuildName ----
+                textFieldBuildName.setFont(new Font("Tahoma", Font.PLAIN, 14));
+                panel2.add(textFieldBuildName, new GridBagConstraints(2, 0, 1, 1, 0.0, 0.0,
+                    GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+                    new Insets(0, 0, 5, 0), 0, 0));
 
-            //---- labelValidate ----
-            labelValidate.setBorder(new CompoundBorder(
-                new TitledBorder(""),
-                new EmptyBorder(5, 5, 5, 5)));
-            labelValidate.setText("All item requirements are met.");
-            panel1.add(labelValidate, new GridBagConstraints(0, 1, 3, 1, 0.0, 0.0,
-                GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-                new Insets(0, 0, 5, 5), 0, 0));
-            panel1.add(gearListPart1, new GridBagConstraints(0, 2, 4, 1, 0.0, 0.0,
+                //======== panel3 ========
+                {
+                    panel3.setBorder(new CompoundBorder(
+                        new TitledBorder(""),
+                        new EmptyBorder(5, 5, 5, 5)));
+                    panel3.setLayout(new GridBagLayout());
+                    ((GridBagLayout)panel3.getLayout()).columnWidths = new int[] {0, 0};
+                    ((GridBagLayout)panel3.getLayout()).rowHeights = new int[] {0, 0};
+                    ((GridBagLayout)panel3.getLayout()).columnWeights = new double[] {0.0, 1.0E-4};
+                    ((GridBagLayout)panel3.getLayout()).rowWeights = new double[] {0.0, 1.0E-4};
+
+                    //---- labelValidate ----
+                    labelValidate.setText("All item requirements are met.");
+                    panel3.add(labelValidate, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,
+                        GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+                        new Insets(0, 0, 0, 0), 0, 0));
+                }
+                panel2.add(panel3, new GridBagConstraints(0, 1, 3, 1, 0.0, 0.0,
+                    GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+                    new Insets(0, 0, 0, 0), 0, 0));
+            }
+            panel1.add(panel2, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 5, 0), 0, 0));
-            panel1.add(gemListPart1, new GridBagConstraints(0, 3, 4, 1, 0.0, 0.0,
+            panel1.add(gearListPart1, new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0,
+                GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+                new Insets(0, 0, 5, 0), 0, 0));
+            panel1.add(gemListPart1, new GridBagConstraints(0, 2, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 0, 0), 0, 0));
         }
@@ -197,9 +236,11 @@ public class BuildPlanner extends JFrame {
     // Generated using JFormDesigner Evaluation license - Brandon Dong
     private SkillTreeFormPart skillTreeFormPart1;
     private JPanel panel1;
+    private JPanel panel2;
     private JLabel labelBuildName;
     private JPanel hSpacer1;
     private JTextField textFieldBuildName;
+    private JPanel panel3;
     private JLabel labelValidate;
     private GearListPart gearListPart1;
     private GemListPart gemListPart1;

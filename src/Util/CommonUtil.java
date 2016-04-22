@@ -106,7 +106,7 @@ public class CommonUtil {
         return keyWord;
     }
 
-    public static <V> String joinCollection(List<V> collect) {
+    public static String joinCollection(List<?> collect) {
         if (collect.size() == 1) {
             return collect.get(0).toString();
         }
