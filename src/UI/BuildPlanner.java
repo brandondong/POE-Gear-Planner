@@ -42,7 +42,7 @@ public class BuildPlanner extends JFrame {
         if (!getPreferences().getUrl().isEmpty()) {
             labelText = Validator.getValidationMessage(model.getSelected(), getPreferences());
         }
-        labelValidate.setText(labelText);
+        textValidate.setText(labelText);
     }
 
     private void initBuildName() {
@@ -128,7 +128,8 @@ public class BuildPlanner extends JFrame {
         hSpacer1 = new JPanel(null);
         textFieldBuildName = new JTextField();
         panel3 = new JPanel();
-        labelValidate = new JLabel();
+        scrollPane1 = new JScrollPane();
+        textValidate = new JTextArea();
         gearListPart1 = new GearListPart();
         gemListPart1 = new GemListPart(this);
         itemInfoPart1 = new ItemInfoPart(this);
@@ -196,12 +197,15 @@ public class BuildPlanner extends JFrame {
                     panel3.setLayout(new GridBagLayout());
                     ((GridBagLayout)panel3.getLayout()).columnWidths = new int[] {0, 0};
                     ((GridBagLayout)panel3.getLayout()).rowHeights = new int[] {0, 0};
-                    ((GridBagLayout)panel3.getLayout()).columnWeights = new double[] {0.0, 1.0E-4};
+                    ((GridBagLayout)panel3.getLayout()).columnWeights = new double[] {1.0, 1.0E-4};
                     ((GridBagLayout)panel3.getLayout()).rowWeights = new double[] {0.0, 1.0E-4};
 
-                    //---- labelValidate ----
-                    labelValidate.setText("All item requirements are met.");
-                    panel3.add(labelValidate, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,
+                    //======== scrollPane1 ========
+                    {
+                        scrollPane1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+                        scrollPane1.setViewportView(textValidate);
+                    }
+                    panel3.add(scrollPane1, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,
                         GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                         new Insets(0, 0, 0, 0), 0, 0));
                 }
@@ -241,7 +245,8 @@ public class BuildPlanner extends JFrame {
     private JPanel hSpacer1;
     private JTextField textFieldBuildName;
     private JPanel panel3;
-    private JLabel labelValidate;
+    private JScrollPane scrollPane1;
+    private JTextArea textValidate;
     private GearListPart gearListPart1;
     private GemListPart gemListPart1;
     private ItemInfoPart itemInfoPart1;
