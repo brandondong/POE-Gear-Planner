@@ -64,12 +64,8 @@ new FormModel {
 					} ) {
 						name: "panel3"
 						"border": new javax.swing.border.CompoundBorder( new javax.swing.border.TitledBorder( "" ), new javax.swing.border.EmptyBorder( 5, 5, 5, 5 ) )
-						add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
-							name: "scrollPane1"
-							"verticalScrollBarPolicy": 21
-							add( new FormComponent( "javax.swing.JTextArea" ) {
-								name: "textValidate"
-							} )
+						add( new FormComponent( "javax.swing.JTextArea" ) {
+							name: "textValidate"
 						}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) )
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
 						"gridy": 1

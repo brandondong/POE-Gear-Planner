@@ -34,6 +34,8 @@ public class BuildPlanner extends JFrame {
     }
 
     private void initLabelValidate() {
+        textValidate.setLineWrap(true);
+        textValidate.setWrapStyleWord(true);
         refreshLabelValidate();
     }
 
@@ -128,7 +130,6 @@ public class BuildPlanner extends JFrame {
         hSpacer1 = new JPanel(null);
         textFieldBuildName = new JTextField();
         panel3 = new JPanel();
-        scrollPane1 = new JScrollPane();
         textValidate = new JTextArea();
         gearListPart1 = new GearListPart();
         gemListPart1 = new GemListPart(this);
@@ -199,13 +200,7 @@ public class BuildPlanner extends JFrame {
                     ((GridBagLayout)panel3.getLayout()).rowHeights = new int[] {0, 0};
                     ((GridBagLayout)panel3.getLayout()).columnWeights = new double[] {1.0, 1.0E-4};
                     ((GridBagLayout)panel3.getLayout()).rowWeights = new double[] {0.0, 1.0E-4};
-
-                    //======== scrollPane1 ========
-                    {
-                        scrollPane1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
-                        scrollPane1.setViewportView(textValidate);
-                    }
-                    panel3.add(scrollPane1, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,
+                    panel3.add(textValidate, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,
                         GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                         new Insets(0, 0, 0, 0), 0, 0));
                 }
@@ -245,7 +240,6 @@ public class BuildPlanner extends JFrame {
     private JPanel hSpacer1;
     private JTextField textFieldBuildName;
     private JPanel panel3;
-    private JScrollPane scrollPane1;
     private JTextArea textValidate;
     private GearListPart gearListPart1;
     private GemListPart gemListPart1;

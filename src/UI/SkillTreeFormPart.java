@@ -334,7 +334,7 @@ public class SkillTreeFormPart extends JPanel {
     private JLabel label4;
     private JRadioButton radioButton1;
     private JRadioButton radioButton2;
-    private JComboBox<Difficulty> comboDifficulty;
+    private JComboBox comboDifficulty;
     private JPanel hSpacer1;
     private JSpinner spinnerLevel;
 	// JFormDesigner - End of variables declaration  //GEN-END:variables
