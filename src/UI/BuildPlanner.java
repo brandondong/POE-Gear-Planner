@@ -34,9 +34,9 @@ public class BuildPlanner extends JFrame {
     }
 
     private void initLabelValidate() {
+        refreshLabelValidate();
         textValidate.setLineWrap(true);
         textValidate.setWrapStyleWord(true);
-        refreshLabelValidate();
     }
 
     private void refreshLabelValidate() {
@@ -102,6 +102,7 @@ public class BuildPlanner extends JFrame {
 
     public void refreshItemsChanged() {
         gemListPart1.refreshListGems();
+        refreshLabelValidate();
     }
 
     private void refreshBuildName() {

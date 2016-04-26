@@ -84,6 +84,12 @@ public class Validator {
         for (ResistType type : uncapped) {
             messages.add(String.format("%d %s resistance", stats.getMaxResist(type) - stats.getEffectiveResist(type, prefs.getDifficulty()), type));
         }
+        for (AttributeType type : map.keySet()) {
+            int diff = map.get(type) - stats.calculateAttributeValue(type);
+            if (diff > 0) {
+                messages.add(String.format("%d to %s", diff, type));
+            }
+        }
         return String.format("Missing the following: %s", CommonUtil.joinCollection(messages));
     }
 
