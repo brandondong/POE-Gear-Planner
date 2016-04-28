@@ -85,6 +85,7 @@ public class BuildPlanner extends JFrame {
         refreshLabelValidate();
         buildsListPart1.refreshListItems();
         gemListPart1.refreshListGems();
+        gearListPart1.refreshGearList();
         skillTreeFormPart1.refreshSettings();
         itemInfoPart1.refreshItemSelected();
     }
@@ -102,6 +103,7 @@ public class BuildPlanner extends JFrame {
 
     public void refreshItemsChanged() {
         gemListPart1.refreshListGems();
+        gearListPart1.refreshGearList();
         refreshLabelValidate();
     }
 
@@ -132,7 +134,7 @@ public class BuildPlanner extends JFrame {
         textFieldBuildName = new JTextField();
         panel3 = new JPanel();
         textValidate = new JTextArea();
-        gearListPart1 = new GearListPart();
+        gearListPart1 = new GearListPart(this);
         gemListPart1 = new GemListPart(this);
         itemInfoPart1 = new ItemInfoPart(this);
         buildsListPart1 = new BuildsListPart(this);

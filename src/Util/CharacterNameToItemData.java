@@ -33,8 +33,8 @@ public class CharacterNameToItemData {
         try {
             Equipment equipment = new Equipment();
             String source = CommonUtil.getUrlSource(getUrl(accountName, charName));
-            equipment.addItems(getItemsFromCharacter(source));
-            equipment.addGems(getGemsFromCharacter(source));
+            equipment.getItems().addAll(getItemsFromCharacter(source));
+            equipment.getGems().addAll(getGemsFromCharacter(source));
             return equipment;
         } catch (Exception e) {
             Logger.addError("Failed to retrieve character information.", e);

@@ -69,7 +69,7 @@ public class GemListPart extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Gem gem = new Gem((String) comboGemNames.getSelectedItem(), (Integer) spinnerLevel.getValue());
-                model.getSelected().addGem(gem);
+                model.getSelected().getGems().add(gem);
                 planner.refreshItemsChanged();
             }
         });
@@ -84,7 +84,7 @@ public class GemListPart extends JPanel {
         buttonRemove.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                model.getSelected().removeGems(listGems.getSelectedValuesList());
+                model.getSelected().getGems().removeAll(listGems.getSelectedValuesList());
                 planner.refreshItemsChanged();
             }
         });

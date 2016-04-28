@@ -32,26 +32,6 @@ public class Equipment {
         gems.addAll(other.getGems());
     }
 
-    public void addGem(Gem gem) {
-        gems.add(gem);
-    }
-
-    public void addItem(Item item) {
-        items.add(item);
-    }
-
-    public void addGems(Collection<Gem> other) {
-        gems.addAll(other);
-    }
-
-    public void removeGems(Collection<Gem> other) {
-        gems.removeAll(other);
-    }
-
-    public void addItems(Collection<Item> other) {
-        items.addAll(other);
-    }
-
     public List<Gem> getGems() {
         return gems;
     }

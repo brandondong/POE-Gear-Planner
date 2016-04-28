@@ -4,16 +4,73 @@
 
 package UI;
 
+import Model.BuildsModel;
+import Model.Gem;
+import Model.Item;
+
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.*;
+import java.util.List;
 import javax.swing.*;
 import javax.swing.border.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 /**
  * @author Brandon Dong
  */
 public class GearListPart extends JPanel {
-    public GearListPart() {
+
+    private BuildPlanner planner;
+
+    private BuildsModel model;
+
+    public GearListPart(BuildPlanner planner) {
+        this.planner = planner;
+        this.model = planner.getModel();
         initComponents();
+        initGearList();
+        initButtonRemove();
+    }
+
+    private void initButtonRemove() {
+        refreshButtonRemove();
+        buttonRemove.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                model.getSelected().getItems().removeAll(listGear.getSelectedValuesList());
+                planner.refreshItemsChanged();
+            }
+        });
+    }
+
+    private void refreshButtonRemove() {
+        buttonRemove.setEnabled(listGear.getSelectedValue() != null);
+    }
+
+    private void initGearList() {
+        refreshGearList();
+        listGear.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                Item value = listGear.getSelectedValue();
+                if (value != null) {
+                    planner.getPreferences().setSelected(value);
+                    planner.refreshItemSelected();
+                }
+                refreshButtonRemove();
+            }
+        });
+    }
+
+    public void refreshGearList() {
+        DefaultComboBoxModel<Item> cModel = new DefaultComboBoxModel<>();
+        for (Item item : model.getSelected().getItems()) {
+            cModel.addElement(item);
+        }
+        listGear.setModel(cModel);
     }
 
     private void initComponents() {
@@ -69,7 +126,7 @@ public class GearListPart extends JPanel {
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // Generated using JFormDesigner Evaluation license - Brandon Dong
     private JScrollPane scrollPane1;
-    private JList listGear;
+    private JList<Item> listGear;
     private JButton buttonRemove;
     private JButton buttonAdd;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
