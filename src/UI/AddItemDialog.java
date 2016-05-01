@@ -17,11 +17,6 @@ public class AddItemDialog extends JDialog {
         initComponents();
     }
 
-    public AddItemDialog(Dialog owner) {
-        super(owner);
-        initComponents();
-    }
-
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - Brandon Dong
@@ -41,6 +36,8 @@ public class AddItemDialog extends JDialog {
         cancelButton = new JButton();
 
         //======== this ========
+        setTitle("Add Items");
+        setModal(true);
         Container contentPane = getContentPane();
         contentPane.setLayout(new BorderLayout());
 

@@ -33,6 +33,16 @@ public class GearListPart extends JPanel {
         initComponents();
         initGearList();
         initButtonRemove();
+        initButtonAdd();
+    }
+
+    private void initButtonAdd() {
+        buttonAdd.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new AddItemDialog(planner).setVisible(true);
+            }
+        });
     }
 
     private void initButtonRemove() {
