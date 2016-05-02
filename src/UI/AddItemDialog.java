@@ -12,7 +12,17 @@ import javax.swing.border.*;
  * @author Brandon Dong
  */
 public class AddItemDialog extends JDialog {
-    public AddItemDialog(Frame owner) {
+
+    private static AddItemDialog INSTANCE;
+
+    public static AddItemDialog instance(Frame owner) {
+        if (INSTANCE == null) {
+            INSTANCE = new AddItemDialog(owner);
+        }
+        return INSTANCE;
+    }
+
+    private AddItemDialog(Frame owner) {
         super(owner);
         initComponents();
     }

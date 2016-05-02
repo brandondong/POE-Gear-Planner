@@ -40,7 +40,7 @@ public class GearListPart extends JPanel {
         buttonAdd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new AddItemDialog(planner).setVisible(true);
+                AddItemDialog.instance(planner).setVisible(true);
             }
         });
     }
