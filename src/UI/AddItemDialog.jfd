@@ -21,7 +21,7 @@ new FormModel {
 					name: "contentPanel"
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "label1"
-						"text": "text"
+						"text": "Account Name:"
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) )
 					add( new FormComponent( "javax.swing.JTextField" ) {
 						name: "textField1"
@@ -38,8 +38,8 @@ new FormModel {
 						"gridy": 2
 					} )
 					add( new FormComponent( "javax.swing.JButton" ) {
-						name: "button1"
-						"text": "text"
+						name: "buttonAdd"
+						"text": "Add >>"
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
 						"gridx": 1
 						"gridy": 2
@@ -55,15 +55,15 @@ new FormModel {
 						"gridy": 2
 					} )
 					add( new FormComponent( "javax.swing.JButton" ) {
-						name: "button2"
-						"text": "text"
+						name: "buttonRemove"
+						"text": "<< Remove"
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
 						"gridx": 1
 						"gridy": 3
 					} )
 					add( new FormComponent( "javax.swing.JButton" ) {
-						name: "button3"
-						"text": "text"
+						name: "buttonRemoveAll"
+						"text": "Remove All"
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
 						"gridx": 1
 						"gridy": 4
