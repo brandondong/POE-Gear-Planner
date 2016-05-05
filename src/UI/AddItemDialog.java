@@ -34,6 +34,10 @@ public class AddItemDialog extends JDialog {
         contentPanel = new JPanel();
         label1 = new JLabel();
         textField1 = new JTextField();
+        label2 = new JLabel();
+        textField2 = new JTextField();
+        button1 = new JButton();
+        panel1 = new JPanel();
         scrollPane1 = new JScrollPane();
         list1 = new JList();
         buttonAdd = new JButton();
@@ -68,52 +72,82 @@ public class AddItemDialog extends JDialog {
             {
                 contentPanel.setLayout(new GridBagLayout());
                 ((GridBagLayout)contentPanel.getLayout()).columnWidths = new int[] {0, 0, 0, 0};
-                ((GridBagLayout)contentPanel.getLayout()).rowHeights = new int[] {0, 0, 0, 0, 0, 0, 0};
-                ((GridBagLayout)contentPanel.getLayout()).columnWeights = new double[] {1.0, 0.0, 1.0, 1.0E-4};
-                ((GridBagLayout)contentPanel.getLayout()).rowWeights = new double[] {0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0E-4};
+                ((GridBagLayout)contentPanel.getLayout()).rowHeights = new int[] {0, 0, 0, 0, 0, 0, 0, 0};
+                ((GridBagLayout)contentPanel.getLayout()).columnWeights = new double[] {0.0, 1.0, 1.0, 1.0E-4};
+                ((GridBagLayout)contentPanel.getLayout()).rowWeights = new double[] {0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0E-4};
 
                 //---- label1 ----
                 label1.setText("Account Name:");
-                contentPanel.add(label1, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,
+                contentPanel.add(label1, new GridBagConstraints(0, 0, 2, 1, 0.0, 0.0,
                     GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                     new Insets(0, 0, 5, 5), 0, 0));
-                contentPanel.add(textField1, new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0,
+                contentPanel.add(textField1, new GridBagConstraints(0, 1, 2, 1, 0.0, 0.0,
                     GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                     new Insets(0, 0, 5, 5), 0, 0));
 
-                //======== scrollPane1 ========
+                //---- label2 ----
+                label2.setText("Character Name:");
+                contentPanel.add(label2, new GridBagConstraints(0, 2, 2, 1, 0.0, 0.0,
+                    GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+                    new Insets(0, 0, 5, 5), 0, 0));
+                contentPanel.add(textField2, new GridBagConstraints(0, 3, 2, 1, 0.0, 0.0,
+                    GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+                    new Insets(0, 0, 5, 5), 0, 0));
+
+                //---- button1 ----
+                button1.setText("Load Items");
+                contentPanel.add(button1, new GridBagConstraints(0, 4, 1, 1, 0.0, 0.0,
+                    GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+                    new Insets(0, 0, 5, 5), 0, 0));
+
+                //======== panel1 ========
                 {
-                    scrollPane1.setViewportView(list1);
-                }
-                contentPanel.add(scrollPane1, new GridBagConstraints(0, 2, 1, 4, 0.0, 0.0,
-                    GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-                    new Insets(0, 0, 0, 5), 0, 0));
+                    panel1.setBorder(new CompoundBorder(
+                        new TitledBorder(""),
+                        new EmptyBorder(5, 5, 5, 5)));
+                    panel1.setLayout(new GridBagLayout());
+                    ((GridBagLayout)panel1.getLayout()).columnWidths = new int[] {0, 0, 0, 0};
+                    ((GridBagLayout)panel1.getLayout()).rowHeights = new int[] {0, 0, 0, 0, 0};
+                    ((GridBagLayout)panel1.getLayout()).columnWeights = new double[] {1.0, 0.0, 1.0, 1.0E-4};
+                    ((GridBagLayout)panel1.getLayout()).rowWeights = new double[] {0.0, 0.0, 0.0, 0.0, 1.0E-4};
 
-                //---- buttonAdd ----
-                buttonAdd.setText("Add >>");
-                contentPanel.add(buttonAdd, new GridBagConstraints(1, 2, 1, 1, 0.0, 0.0,
-                    GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-                    new Insets(0, 0, 5, 5), 0, 0));
+                    //======== scrollPane1 ========
+                    {
+                        scrollPane1.setViewportView(list1);
+                    }
+                    panel1.add(scrollPane1, new GridBagConstraints(0, 0, 1, 4, 0.0, 0.0,
+                        GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+                        new Insets(0, 0, 0, 5), 0, 0));
 
-                //======== scrollPane2 ========
-                {
-                    scrollPane2.setViewportView(list2);
+                    //---- buttonAdd ----
+                    buttonAdd.setText("Add >>");
+                    panel1.add(buttonAdd, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0,
+                        GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+                        new Insets(0, 0, 5, 5), 0, 0));
+
+                    //======== scrollPane2 ========
+                    {
+                        scrollPane2.setViewportView(list2);
+                    }
+                    panel1.add(scrollPane2, new GridBagConstraints(2, 0, 1, 4, 0.0, 0.0,
+                        GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+                        new Insets(0, 0, 0, 0), 0, 0));
+
+                    //---- buttonRemove ----
+                    buttonRemove.setText("<< Remove");
+                    panel1.add(buttonRemove, new GridBagConstraints(1, 1, 1, 1, 0.0, 0.0,
+                        GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+                        new Insets(0, 0, 5, 5), 0, 0));
+
+                    //---- buttonRemoveAll ----
+                    buttonRemoveAll.setText("Remove All");
+                    panel1.add(buttonRemoveAll, new GridBagConstraints(1, 2, 1, 1, 0.0, 0.0,
+                        GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+                        new Insets(0, 0, 5, 5), 0, 0));
                 }
-                contentPanel.add(scrollPane2, new GridBagConstraints(2, 2, 1, 4, 0.0, 0.0,
+                contentPanel.add(panel1, new GridBagConstraints(0, 6, 3, 1, 0.0, 0.0,
                     GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                     new Insets(0, 0, 0, 0), 0, 0));
-
-                //---- buttonRemove ----
-                buttonRemove.setText("<< Remove");
-                contentPanel.add(buttonRemove, new GridBagConstraints(1, 3, 1, 1, 0.0, 0.0,
-                    GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-                    new Insets(0, 0, 5, 5), 0, 0));
-
-                //---- buttonRemoveAll ----
-                buttonRemoveAll.setText("Remove All");
-                contentPanel.add(buttonRemoveAll, new GridBagConstraints(1, 4, 1, 1, 0.0, 0.0,
-                    GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-                    new Insets(0, 0, 5, 5), 0, 0));
             }
             dialogPane.add(contentPanel, BorderLayout.CENTER);
 
@@ -150,6 +184,10 @@ public class AddItemDialog extends JDialog {
     private JPanel contentPanel;
     private JLabel label1;
     private JTextField textField1;
+    private JLabel label2;
+    private JTextField textField2;
+    private JButton button1;
+    private JPanel panel1;
     private JScrollPane scrollPane1;
     private JList list1;
     private JButton buttonAdd;
