@@ -5,6 +5,10 @@
 package UI;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import javax.swing.*;
 import javax.swing.border.*;
 
@@ -14,6 +18,8 @@ import javax.swing.border.*;
 public class AddItemDialog extends JDialog {
 
     private static AddItemDialog INSTANCE;
+
+    private String oldName = "";
 
     public static AddItemDialog instance(Frame owner) {
         if (INSTANCE == null) {
@@ -25,6 +31,38 @@ public class AddItemDialog extends JDialog {
     private AddItemDialog(Frame owner) {
         super(owner);
         initComponents();
+        initButtonLoad();
+        initTextField();
+    }
+
+    private void initTextField() {
+        textFieldAccount.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        refreshButtonLoad();
+                    }
+                });
+            }
+        });
+    }
+
+    private void initButtonLoad() {
+        refreshButtonLoad();
+        buttonLoad.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (!oldName.equals(textFieldAccount.getText())) {
+                    oldName = textFieldAccount.getText();
+                }
+            }
+        });
+    }
+
+    private void refreshButtonLoad() {
+        buttonLoad.setEnabled(!textFieldAccount.getText().isEmpty());
     }
 
     private void initComponents() {
@@ -33,16 +71,14 @@ public class AddItemDialog extends JDialog {
         dialogPane = new JPanel();
         contentPanel = new JPanel();
         label1 = new JLabel();
-        textField1 = new JTextField();
-        label2 = new JLabel();
-        textField2 = new JTextField();
-        button1 = new JButton();
+        textFieldAccount = new JTextField();
+        buttonLoad = new JButton();
         panel1 = new JPanel();
-        scrollPane1 = new JScrollPane();
-        list1 = new JList();
+        scrollPaneItems = new JScrollPane();
+        listItems = new JList();
         buttonAdd = new JButton();
         scrollPane2 = new JScrollPane();
-        list2 = new JList();
+        listAddedItems = new JList();
         buttonRemove = new JButton();
         buttonRemoveAll = new JButton();
         buttonBar = new JPanel();
@@ -72,31 +108,22 @@ public class AddItemDialog extends JDialog {
             {
                 contentPanel.setLayout(new GridBagLayout());
                 ((GridBagLayout)contentPanel.getLayout()).columnWidths = new int[] {0, 0, 0, 0};
-                ((GridBagLayout)contentPanel.getLayout()).rowHeights = new int[] {0, 0, 0, 0, 0, 0, 0, 0};
+                ((GridBagLayout)contentPanel.getLayout()).rowHeights = new int[] {0, 0, 0, 0, 0, 0};
                 ((GridBagLayout)contentPanel.getLayout()).columnWeights = new double[] {0.0, 1.0, 1.0, 1.0E-4};
-                ((GridBagLayout)contentPanel.getLayout()).rowWeights = new double[] {0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0E-4};
+                ((GridBagLayout)contentPanel.getLayout()).rowWeights = new double[] {0.0, 0.0, 0.0, 1.0, 0.0, 1.0E-4};
 
                 //---- label1 ----
                 label1.setText("Account Name:");
                 contentPanel.add(label1, new GridBagConstraints(0, 0, 2, 1, 0.0, 0.0,
                     GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                     new Insets(0, 0, 5, 5), 0, 0));
-                contentPanel.add(textField1, new GridBagConstraints(0, 1, 2, 1, 0.0, 0.0,
+                contentPanel.add(textFieldAccount, new GridBagConstraints(0, 1, 2, 1, 0.0, 0.0,
                     GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                     new Insets(0, 0, 5, 5), 0, 0));
 
-                //---- label2 ----
-                label2.setText("Character Name:");
-                contentPanel.add(label2, new GridBagConstraints(0, 2, 2, 1, 0.0, 0.0,
-                    GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-                    new Insets(0, 0, 5, 5), 0, 0));
-                contentPanel.add(textField2, new GridBagConstraints(0, 3, 2, 1, 0.0, 0.0,
-                    GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-                    new Insets(0, 0, 5, 5), 0, 0));
-
-                //---- button1 ----
-                button1.setText("Load Items");
-                contentPanel.add(button1, new GridBagConstraints(0, 4, 1, 1, 0.0, 0.0,
+                //---- buttonLoad ----
+                buttonLoad.setText("Load Items");
+                contentPanel.add(buttonLoad, new GridBagConstraints(0, 2, 1, 1, 0.0, 0.0,
                     GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                     new Insets(0, 0, 5, 5), 0, 0));
 
@@ -111,11 +138,11 @@ public class AddItemDialog extends JDialog {
                     ((GridBagLayout)panel1.getLayout()).columnWeights = new double[] {1.0, 0.0, 1.0, 1.0E-4};
                     ((GridBagLayout)panel1.getLayout()).rowWeights = new double[] {0.0, 0.0, 0.0, 0.0, 1.0E-4};
 
-                    //======== scrollPane1 ========
+                    //======== scrollPaneItems ========
                     {
-                        scrollPane1.setViewportView(list1);
+                        scrollPaneItems.setViewportView(listItems);
                     }
-                    panel1.add(scrollPane1, new GridBagConstraints(0, 0, 1, 4, 0.0, 0.0,
+                    panel1.add(scrollPaneItems, new GridBagConstraints(0, 0, 1, 4, 0.0, 0.0,
                         GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                         new Insets(0, 0, 0, 5), 0, 0));
 
@@ -127,7 +154,7 @@ public class AddItemDialog extends JDialog {
 
                     //======== scrollPane2 ========
                     {
-                        scrollPane2.setViewportView(list2);
+                        scrollPane2.setViewportView(listAddedItems);
                     }
                     panel1.add(scrollPane2, new GridBagConstraints(2, 0, 1, 4, 0.0, 0.0,
                         GridBagConstraints.CENTER, GridBagConstraints.BOTH,
@@ -145,7 +172,7 @@ public class AddItemDialog extends JDialog {
                         GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                         new Insets(0, 0, 5, 5), 0, 0));
                 }
-                contentPanel.add(panel1, new GridBagConstraints(0, 6, 3, 1, 0.0, 0.0,
+                contentPanel.add(panel1, new GridBagConstraints(0, 4, 3, 1, 0.0, 0.0,
                     GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                     new Insets(0, 0, 0, 0), 0, 0));
             }
@@ -183,16 +210,14 @@ public class AddItemDialog extends JDialog {
     private JPanel dialogPane;
     private JPanel contentPanel;
     private JLabel label1;
-    private JTextField textField1;
-    private JLabel label2;
-    private JTextField textField2;
-    private JButton button1;
+    private JTextField textFieldAccount;
+    private JButton buttonLoad;
     private JPanel panel1;
-    private JScrollPane scrollPane1;
-    private JList list1;
+    private JScrollPane scrollPaneItems;
+    private JList listItems;
     private JButton buttonAdd;
     private JScrollPane scrollPane2;
-    private JList list2;
+    private JList listAddedItems;
     private JButton buttonRemove;
     private JButton buttonRemoveAll;
     private JPanel buttonBar;

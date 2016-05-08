@@ -12,7 +12,7 @@ new FormModel {
 				"border": new javax.swing.border.EmptyBorder( 12, 12, 12, 12 )
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridBagLayout ) {
 					"$columnSpecs": "0, 0:1.0, 0:1.0"
-					"$rowSpecs": "0, 0, 0, 0, 0, 0:1.0, 0"
+					"$rowSpecs": "0, 0, 0, 0:1.0, 0"
 					"$hGap": 5
 					"$vGap": 5
 					"$alignLeft": true
@@ -26,29 +26,16 @@ new FormModel {
 						"gridwidth": 2
 					} )
 					add( new FormComponent( "javax.swing.JTextField" ) {
-						name: "textField1"
+						name: "textFieldAccount"
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
 						"gridy": 1
 						"gridwidth": 2
 					} )
-					add( new FormComponent( "javax.swing.JLabel" ) {
-						name: "label2"
-						"text": "Character Name:"
-					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
-						"gridy": 2
-						"gridwidth": 2
-					} )
-					add( new FormComponent( "javax.swing.JTextField" ) {
-						name: "textField2"
-					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
-						"gridy": 3
-						"gridwidth": 2
-					} )
 					add( new FormComponent( "javax.swing.JButton" ) {
-						name: "button1"
+						name: "buttonLoad"
 						"text": "Load Items"
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
-						"gridy": 4
+						"gridy": 2
 					} )
 					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridBagLayout ) {
 						"$columnSpecs": "0:1.0, 0, 0:1.0"
@@ -61,9 +48,9 @@ new FormModel {
 						name: "panel1"
 						"border": new javax.swing.border.CompoundBorder( new javax.swing.border.TitledBorder( "" ), new javax.swing.border.EmptyBorder( 5, 5, 5, 5 ) )
 						add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
-							name: "scrollPane1"
+							name: "scrollPaneItems"
 							add( new FormComponent( "javax.swing.JList" ) {
-								name: "list1"
+								name: "listItems"
 							} )
 						}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
 							"gridheight": 4
@@ -77,7 +64,7 @@ new FormModel {
 						add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 							name: "scrollPane2"
 							add( new FormComponent( "javax.swing.JList" ) {
-								name: "list2"
+								name: "listAddedItems"
 							} )
 						}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
 							"gridx": 2
@@ -98,7 +85,7 @@ new FormModel {
 							"gridy": 2
 						} )
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
-						"gridy": 6
+						"gridy": 4
 						"gridwidth": 3
 					} )
 				}, new FormLayoutConstraints( class java.lang.String ) {

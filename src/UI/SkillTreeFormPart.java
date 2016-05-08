@@ -96,7 +96,12 @@ public class SkillTreeFormPart extends JPanel {
         textField1.addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent e) {
-                refreshButtonLoad();
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        refreshButtonLoad();
+                    }
+                });
             }
         });
     }
@@ -334,7 +339,7 @@ public class SkillTreeFormPart extends JPanel {
     private JLabel label4;
     private JRadioButton radioButton1;
     private JRadioButton radioButton2;
-    private JComboBox comboDifficulty;
+    private JComboBox<Difficulty> comboDifficulty;
     private JPanel hSpacer1;
     private JSpinner spinnerLevel;
 	// JFormDesigner - End of variables declaration  //GEN-END:variables
