@@ -4,13 +4,20 @@
 
 package UI;
 
+import Util.AccountNameToCharacters;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.*;
+import java.util.List;
 import javax.swing.*;
 import javax.swing.border.*;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeModel;
 
 /**
  * @author Brandon Dong
@@ -33,6 +40,26 @@ public class AddItemDialog extends JDialog {
         initComponents();
         initButtonLoad();
         initTextField();
+        initTree();
+    }
+
+    private void initTree() {
+        refreshTree();
+    }
+
+    private void refreshTree() {
+        DefaultTreeModel model = (DefaultTreeModel) treeItems.getModel();
+        DefaultMutableTreeNode top = new DefaultMutableTreeNode("Characters");
+        createTree(top);
+        model.setRoot(top);
+    }
+
+    private void createTree(DefaultMutableTreeNode top) {
+        if (!oldName.isEmpty()) {
+            for (String character : AccountNameToCharacters.getCharacters(oldName)) {
+                top.add(new DefaultMutableTreeNode(character));
+            }
+        }
     }
 
     private void initTextField() {
@@ -56,6 +83,7 @@ public class AddItemDialog extends JDialog {
             public void actionPerformed(ActionEvent e) {
                 if (!oldName.equals(textFieldAccount.getText())) {
                     oldName = textFieldAccount.getText();
+                    refreshTree();
                 }
             }
         });
@@ -75,7 +103,7 @@ public class AddItemDialog extends JDialog {
         buttonLoad = new JButton();
         panel1 = new JPanel();
         scrollPaneItems = new JScrollPane();
-        listItems = new JList();
+        treeItems = new JTree();
         buttonAdd = new JButton();
         scrollPane2 = new JScrollPane();
         listAddedItems = new JList();
@@ -140,7 +168,7 @@ public class AddItemDialog extends JDialog {
 
                     //======== scrollPaneItems ========
                     {
-                        scrollPaneItems.setViewportView(listItems);
+                        scrollPaneItems.setViewportView(treeItems);
                     }
                     panel1.add(scrollPaneItems, new GridBagConstraints(0, 0, 1, 4, 0.0, 0.0,
                         GridBagConstraints.CENTER, GridBagConstraints.BOTH,
@@ -214,7 +242,7 @@ public class AddItemDialog extends JDialog {
     private JButton buttonLoad;
     private JPanel panel1;
     private JScrollPane scrollPaneItems;
-    private JList listItems;
+    private JTree treeItems;
     private JButton buttonAdd;
     private JScrollPane scrollPane2;
     private JList listAddedItems;

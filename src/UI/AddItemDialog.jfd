@@ -49,8 +49,8 @@ new FormModel {
 						"border": new javax.swing.border.CompoundBorder( new javax.swing.border.TitledBorder( "" ), new javax.swing.border.EmptyBorder( 5, 5, 5, 5 ) )
 						add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 							name: "scrollPaneItems"
-							add( new FormComponent( "javax.swing.JList" ) {
-								name: "listItems"
+							add( new FormComponent( "javax.swing.JTree" ) {
+								name: "treeItems"
 							} )
 						}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
 							"gridheight": 4
