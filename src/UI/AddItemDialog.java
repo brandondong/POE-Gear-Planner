@@ -13,6 +13,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.*;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -25,6 +26,8 @@ import javax.swing.tree.TreeModel;
 public class AddItemDialog extends JDialog {
 
     private static AddItemDialog INSTANCE;
+
+    private static final String ROOT_NODE = "Characters";
 
     private String oldName = "";
 
@@ -44,22 +47,35 @@ public class AddItemDialog extends JDialog {
     }
 
     private void initTree() {
-        refreshTree();
+        DefaultTreeModel model = (DefaultTreeModel) treeItems.getModel();
+        model.setRoot(new DefaultMutableTreeNode(ROOT_NODE));
     }
 
     private void refreshTree() {
-        DefaultTreeModel model = (DefaultTreeModel) treeItems.getModel();
-        DefaultMutableTreeNode top = new DefaultMutableTreeNode("Characters");
-        createTree(top);
-        model.setRoot(top);
-    }
+        new SwingWorker<List<String>, Void>() {
 
-    private void createTree(DefaultMutableTreeNode top) {
-        if (!oldName.isEmpty()) {
-            for (String character : AccountNameToCharacters.getCharacters(oldName)) {
-                top.add(new DefaultMutableTreeNode(character));
+            @Override
+            protected List<String> doInBackground() throws Exception {
+                if (!oldName.isEmpty()) {
+                    return AccountNameToCharacters.getCharacters(oldName);
+                }
+                return new ArrayList<>();
             }
-        }
+
+            @Override
+            public void done() {
+                try {
+                    List<String> names = get();
+                    DefaultMutableTreeNode root = new DefaultMutableTreeNode(ROOT_NODE);
+                    for (String name : names) {
+                        root.add(new DefaultMutableTreeNode(name));
+                    }
+                    ((DefaultTreeModel) treeItems.getModel()).setRoot(root);
+                } catch (InterruptedException | ExecutionException e) {
+                }
+
+            }
+        }.execute();
     }
 
     private void initTextField() {
