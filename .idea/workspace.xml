@@ -35,12 +35,12 @@
       <file leaf-file-name="AddItemDialog.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/UI/AddItemDialog.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5034843">
-              <caret line="64" column="28" selection-start-line="64" selection-start-column="28" selection-end-line="64" selection-end-column="28" />
+            <state vertical-scroll-proportion="0.23448277">
+              <caret line="58" column="56" selection-start-line="58" selection-start-column="56" selection-end-line="58" selection-end-column="56" />
               <folding>
                 <element signature="method#initComponents#0;class#AddItemDialog#0" expanded="false" />
-                <marker date="1463382655624" expanded="true" signature="3174:10353" placeholder="// JFormDesigner - Component initialization - DO NOT MODIFY" />
-                <marker date="1463382655624" expanded="true" signature="10365:11116" placeholder="// JFormDesigner - Variables declaration - DO NOT MODIFY" />
+                <marker date="1463470155056" expanded="true" signature="3149:10328" placeholder="// JFormDesigner - Component initialization - DO NOT MODIFY" />
+                <marker date="1463470155056" expanded="true" signature="10340:11091" placeholder="// JFormDesigner - Variables declaration - DO NOT MODIFY" />
               </folding>
             </state>
           </provider>
@@ -633,20 +633,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://C:/Program Files/Java/jdk1.7.0_79/src.zip!/javax/swing/text/JTextComponent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33275262">
-          <caret line="1741" column="18" selection-start-line="1741" selection-start-column="18" selection-end-line="1741" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Model/Gem.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="70" column="13" selection-start-line="70" selection-start-column="13" selection-end-line="70" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Model/DisplayableItem.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.37126437">
@@ -959,7 +945,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.1330724">
           <caret line="171" column="16" selection-start-line="171" selection-start-column="16" selection-end-line="171" selection-end-column="16" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -981,21 +966,33 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33333334">
           <caret line="210" column="16" selection-start-line="210" selection-start-column="16" selection-end-line="210" selection-end-column="16" />
-          <folding>
-            <element signature="e#6733#6734#0" expanded="true" />
-            <element signature="e#6761#6762#0" expanded="true" />
-          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.7.0_79/src.zip!/javax/swing/SwingWorker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.55862">
+          <caret line="290" column="11" selection-start-line="290" selection-start-column="11" selection-end-line="290" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.7.0_79/src.zip!/java/lang/Void.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.254023">
+          <caret line="36" column="6" selection-start-line="36" selection-start-column="6" selection-end-line="36" selection-end-column="6" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/UI/AddItemDialog.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5034843">
-          <caret line="64" column="28" selection-start-line="64" selection-start-column="28" selection-end-line="64" selection-end-column="28" />
+        <state vertical-scroll-proportion="0.23448277">
+          <caret line="58" column="56" selection-start-line="58" selection-start-column="56" selection-end-line="58" selection-end-column="56" />
           <folding>
             <element signature="method#initComponents#0;class#AddItemDialog#0" expanded="false" />
-            <marker date="1463382655624" expanded="true" signature="3174:10353" placeholder="// JFormDesigner - Component initialization - DO NOT MODIFY" />
-            <marker date="1463382655624" expanded="true" signature="10365:11116" placeholder="// JFormDesigner - Variables declaration - DO NOT MODIFY" />
+            <marker date="1463470155056" expanded="true" signature="3149:10328" placeholder="// JFormDesigner - Component initialization - DO NOT MODIFY" />
+            <marker date="1463470155056" expanded="true" signature="10340:11091" placeholder="// JFormDesigner - Variables declaration - DO NOT MODIFY" />
           </folding>
         </state>
       </provider>

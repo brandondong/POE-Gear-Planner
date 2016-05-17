@@ -52,27 +52,26 @@ public class AddItemDialog extends JDialog {
     }
 
     private void refreshTree() {
-        new SwingWorker<DefaultMutableTreeNode, Void>() {
+        initTree();
+        new SwingWorker<Void, DefaultMutableTreeNode>() {
 
             @Override
-            protected DefaultMutableTreeNode doInBackground() throws Exception {
-                DefaultMutableTreeNode root = new DefaultMutableTreeNode(ROOT_NODE);
+            protected Void doInBackground() throws Exception {
                 if (!oldName.isEmpty()) {
                     for (String name : AccountNameToCharacters.getCharacters(oldName)) {
-                        root.add(new DefaultMutableTreeNode(name));
+                        publish(new DefaultMutableTreeNode(name));
                     }
                 }
-                return root;
+                return null;
             }
 
             @Override
-            public void done() {
-                try {
-                    DefaultMutableTreeNode root = get();
-                    ((DefaultTreeModel) treeItems.getModel()).setRoot(root);
-                } catch (InterruptedException | ExecutionException e) {
+            protected void process(List<DefaultMutableTreeNode> nodes) {
+                DefaultTreeModel model = (DefaultTreeModel) treeItems.getModel();
+                for (DefaultMutableTreeNode node : nodes) {
+                    ((DefaultMutableTreeNode) model.getRoot()).add(node);
                 }
-
+                model.reload();
             }
         }.execute();
     }
