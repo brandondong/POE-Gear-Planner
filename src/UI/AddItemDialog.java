@@ -4,7 +4,10 @@
 
 package UI;
 
+import Model.Item;
 import Util.AccountNameToCharacters;
+import Util.CharacterNameToItemData;
+import Util.CommonUtil;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -59,7 +62,7 @@ public class AddItemDialog extends JDialog {
             protected Void doInBackground() throws Exception {
                 if (!oldName.isEmpty()) {
                     for (String name : AccountNameToCharacters.getCharacters(oldName)) {
-                        publish(new DefaultMutableTreeNode(name));
+                        publish(createCharacterNode(name));
                     }
                 }
                 return null;
@@ -76,6 +79,14 @@ public class AddItemDialog extends JDialog {
         }.execute();
     }
 
+
+    private DefaultMutableTreeNode createCharacterNode(String name) {
+        DefaultMutableTreeNode node = new DefaultMutableTreeNode(name);
+        for (Item item : CharacterNameToItemData.getEquipmentFromCharacter(oldName, name).getItems()) {
+            node.add(new DefaultMutableTreeNode(item));
+        }
+        return node;
+    }
     private void initTextField() {
         textFieldAccount.addKeyListener(new KeyAdapter() {
             @Override

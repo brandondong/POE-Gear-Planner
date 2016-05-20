@@ -32,7 +32,7 @@ public class Item implements DisplayableItem {
 
     @Override
     public String toString() {
-        return String.format("%s\n%s\n%s", name, requirements, stats);
+        return name;
     }
 
     @Override

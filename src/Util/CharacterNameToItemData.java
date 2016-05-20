@@ -84,12 +84,15 @@ public class CharacterNameToItemData {
     private static void addItem(JSONObject obj, List<Item> items) throws JSONException {
         String name = obj.getString("typeLine");
         if (!name.contains("Flask")) {
-            String prefix = obj.getString("name").replaceAll("<<.*>>", "");
+            String prefix = obj.getString("name");
             if (prefix.length() > 0) {
                 name = String.format("%s %s", prefix, name);
             }
-            Requirements requirements = getRequirements(obj.getJSONArray("requirements"));
-            items.add(new Item(requirements, getStats(obj), name));
+            Requirements requirements = new Requirements();
+            if (obj.has("requirements")) {
+                requirements = getRequirements(obj.getJSONArray("requirements"));
+            }
+            items.add(new Item(requirements, getStats(obj), name.replaceAll("<<.*>>", "")));
         }
     }
 
