@@ -19,9 +19,8 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 import javax.swing.*;
 import javax.swing.border.*;
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.TreeModel;
+import javax.swing.event.*;
+import javax.swing.tree.*;
 
 /**
  * @author Brandon Dong
@@ -34,11 +33,15 @@ public class AddItemDialog extends JDialog {
 
     private String oldName = "";
 
-    public static AddItemDialog instance(Frame owner) {
+    /**
+     * Creates an add item dialog, using the previous settings if a dialog existed previously
+     * @param owner the {@link Frame} to be displayed in
+     */
+    public static void create(Frame owner) {
         if (INSTANCE == null) {
             INSTANCE = new AddItemDialog(owner);
         }
-        return INSTANCE;
+        INSTANCE.setVisible(true);
     }
 
     private AddItemDialog(Frame owner) {
@@ -47,16 +50,125 @@ public class AddItemDialog extends JDialog {
         initButtonLoad();
         initTextField();
         initTree();
+        initButtonAdd();
+        initList();
+        initButtonRemove();
+        initButtonRemoveAll();
     }
 
+    private void initButtonRemoveAll() {
+        refreshbuttonRemoveAll();
+        buttonRemoveAll.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ((DefaultListModel <Item>) listAddedItems.getModel()).removeAllElements();
+            }
+        });
+    }
+
+    private void refreshbuttonRemoveAll() {
+        buttonRemoveAll.setEnabled(listAddedItems.getModel().getSize() > 0);
+    }
+
+    private void initButtonRemove() {
+        refreshButtonRemove();
+        buttonRemove.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                DefaultListModel<Item> model = (DefaultListModel <Item>) listAddedItems.getModel();
+                for (Item item : listAddedItems.getSelectedValuesList()) {
+                    model.removeElement(item);
+                }
+            }
+        });
+    }
+
+    private void refreshButtonRemove() {
+        buttonRemove.setEnabled(!listAddedItems.getSelectedValuesList().isEmpty());
+    }
+
+    private void initList() {
+        listAddedItems.setModel(new DefaultListModel<Item>());
+        listAddedItems.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                refreshButtonRemove();
+            }
+        });
+        listAddedItems.getModel().addListDataListener(new ListDataListener() {
+            @Override
+            public void intervalAdded(ListDataEvent e) {
+                refreshbuttonRemoveAll();
+            }
+
+            @Override
+            public void intervalRemoved(ListDataEvent e) {
+                refreshbuttonRemoveAll();
+            }
+
+            @Override
+            public void contentsChanged(ListDataEvent e) {
+                refreshbuttonRemoveAll();
+            }
+        });
+    }
+
+    private void initButtonAdd() {
+        refreshButtonAdd();
+        buttonAdd.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Set<Item> items = getSelectedItems();
+                DefaultListModel<Item> model = (DefaultListModel<Item>) listAddedItems.getModel();
+                for (Item item : items) {
+                    model.addElement(item);
+                }
+            }
+        });
+    }
+
+    private Set<Item> getSelectedItems() {
+        Set<Item> items = new HashSet<>();
+        for (TreePath path : treeItems.getSelectionPaths()) {
+            DefaultMutableTreeNode node = (DefaultMutableTreeNode) path.getLastPathComponent();
+            getSelectedRecursive(node, items);
+        }
+        return items;
+    }
+
+    private void getSelectedRecursive(DefaultMutableTreeNode node, Set<Item> items) {
+        if (node.getUserObject() instanceof  Item) {
+            items.add((Item) node.getUserObject());
+        }
+        for (int i = 0; i < node.getChildCount(); i++) {
+            getSelectedRecursive((DefaultMutableTreeNode) node.getChildAt(i), items);
+        }
+    }
+
+
     private void initTree() {
+        setRootNode();
+        treeItems.addTreeSelectionListener(new TreeSelectionListener() {
+            @Override
+            public void valueChanged(TreeSelectionEvent e) {
+                refreshButtonAdd();
+            }
+        });
+    }
+
+    private void refreshButtonAdd() {
+        buttonAdd.setEnabled(treeItems.getSelectionCount() > 0);
+    }
+
+    private void setRootNode() {
         DefaultTreeModel model = (DefaultTreeModel) treeItems.getModel();
         model.setRoot(new DefaultMutableTreeNode(ROOT_NODE));
     }
 
     private void refreshTree() {
-        initTree();
         new SwingWorker<Void, DefaultMutableTreeNode>() {
+
+            private boolean rootNodeSet = false;
 
             @Override
             protected Void doInBackground() throws Exception {
@@ -70,6 +182,10 @@ public class AddItemDialog extends JDialog {
 
             @Override
             protected void process(List<DefaultMutableTreeNode> nodes) {
+                if (!rootNodeSet) {
+                    setRootNode();
+                    rootNodeSet = true;
+                }
                 DefaultTreeModel model = (DefaultTreeModel) treeItems.getModel();
                 for (DefaultMutableTreeNode node : nodes) {
                     ((DefaultMutableTreeNode) model.getRoot()).add(node);
@@ -78,7 +194,6 @@ public class AddItemDialog extends JDialog {
             }
         }.execute();
     }
-
 
     private DefaultMutableTreeNode createCharacterNode(String name) {
         DefaultMutableTreeNode node = new DefaultMutableTreeNode(name);
@@ -270,7 +385,7 @@ public class AddItemDialog extends JDialog {
     private JTree treeItems;
     private JButton buttonAdd;
     private JScrollPane scrollPane2;
-    private JList listAddedItems;
+    private JList<Item> listAddedItems;
     private JButton buttonRemove;
     private JButton buttonRemoveAll;
     private JPanel buttonBar;

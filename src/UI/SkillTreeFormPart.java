@@ -139,6 +139,7 @@ public class SkillTreeFormPart extends JPanel {
                     spinnerLevel.setValue(1);
                 }
                 planner.getPreferences().setLevel((Integer) spinnerLevel.getValue());
+                planner.refreshStatsChanged();
             }
         });
     }
@@ -156,6 +157,7 @@ public class SkillTreeFormPart extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 planner.getPreferences().setDifficulty((Difficulty) comboDifficulty.getSelectedItem());
+                planner.refreshStatsChanged();
             }
         });
     }
