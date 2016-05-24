@@ -54,6 +54,18 @@ public class AddItemDialog extends JDialog {
         initList();
         initButtonRemove();
         initButtonRemoveAll();
+        initDialogButtons();
+    }
+
+    private void initDialogButtons() {
+        ActionListener listener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setVisible(false);
+            }
+        };
+        okButton.addActionListener(listener);
+        cancelButton.addActionListener(listener);
     }
 
     private void initButtonRemoveAll() {
