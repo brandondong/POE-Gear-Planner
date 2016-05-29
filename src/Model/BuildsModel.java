@@ -10,7 +10,7 @@ import java.util.List;
  *
  * Holds all the build information for the program
  */
-public class BuildsModel implements Iterable<Character> {
+public class BuildsModel extends CharacterSelectionObservable implements Iterable<Character> {
 
     private List<Character> characters;
 
@@ -29,6 +29,7 @@ public class BuildsModel implements Iterable<Character> {
     public void addCharacter(Character other) {
         characters.add(other);
         selected = other;
+        notifyCharacterChanged(other);
     }
 
     public void removeCharacter(Character other) {
@@ -38,6 +39,7 @@ public class BuildsModel implements Iterable<Character> {
         } else {
             characters.remove(other);
         }
+        notifyCharacterChanged(other);
     }
 
     public void removeCharacters(Collection<Character> remove) {
@@ -52,6 +54,7 @@ public class BuildsModel implements Iterable<Character> {
 
     public void setSelected(Character other) {
         selected = other;
+        notifyCharacterChanged(other);
     }
 
     public int numCharacters() {

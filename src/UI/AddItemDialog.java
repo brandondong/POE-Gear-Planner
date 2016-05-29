@@ -4,6 +4,7 @@
 
 package UI;
 
+import Model.BuildsModel;
 import Model.Item;
 import Util.AccountNameToCharacters;
 import Util.CharacterNameToItemData;
@@ -33,19 +34,25 @@ public class AddItemDialog extends JDialog {
 
     private String oldName = "";
 
+    private BuildPlanner planner;
+
+    private BuildsModel model;
+
     /**
      * Creates an add item dialog, using the previous settings if a dialog existed previously
      * @param owner the {@link Frame} to be displayed in
      */
-    public static void create(Frame owner) {
+    public static void create(BuildPlanner owner) {
         if (INSTANCE == null) {
             INSTANCE = new AddItemDialog(owner);
         }
         INSTANCE.setVisible(true);
     }
 
-    private AddItemDialog(Frame owner) {
-        super(owner);
+    private AddItemDialog(BuildPlanner planner) {
+        super(planner);
+        this.planner = planner;
+        model = planner.getModel();
         initComponents();
         initButtonLoad();
         initTextField();
@@ -58,14 +65,24 @@ public class AddItemDialog extends JDialog {
     }
 
     private void initDialogButtons() {
-        ActionListener listener = new ActionListener() {
+        okButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setVisible(false);
+                ListModel<Item> listModel = listAddedItems.getModel();
+                for (int i = 0; i < listModel.getSize(); i++) {
+                    model.getSelected().addItem(listModel.getElementAt(i));
+                }
+                removeAllItems();
+                planner.refreshItemsChanged();
+            }
+        });
+        cancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
             }
-        };
-        okButton.addActionListener(listener);
-        cancelButton.addActionListener(listener);
+        });
     }
 
     private void initButtonRemoveAll() {
@@ -73,9 +90,13 @@ public class AddItemDialog extends JDialog {
         buttonRemoveAll.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ((DefaultListModel <Item>) listAddedItems.getModel()).removeAllElements();
+                removeAllItems();
             }
         });
+    }
+
+    private void removeAllItems() {
+        ((DefaultListModel<Item>) listAddedItems.getModel()).removeAllElements();
     }
 
     private void refreshbuttonRemoveAll() {

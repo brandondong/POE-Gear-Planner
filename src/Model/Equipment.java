@@ -40,6 +40,10 @@ public class Equipment {
         return items;
     }
 
+    public void addItem(Item item) {
+        items.add(item);
+    }
+
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();

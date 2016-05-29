@@ -11,6 +11,8 @@ import Util.Validator;
 import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Observable;
+import java.util.Observer;
 import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.event.DocumentEvent;
@@ -31,6 +33,12 @@ public class BuildPlanner extends JFrame {
         initComponents();
         initBuildName();
         initLabelValidate();
+        model.addCharacterChangedListener(new Observer() {
+            @Override
+            public void update(Observable o, Object arg) {
+                refreshBuildSelected();
+            }
+        });
     }
 
     private void initLabelValidate() {
@@ -80,7 +88,7 @@ public class BuildPlanner extends JFrame {
     /**
      * Refreshes the UI when a new build is selected
      */
-    public void refreshBuildSelected() {
+    private void refreshBuildSelected() {
         refreshBuildName();
         refreshLabelValidate();
         buildsListPart1.refreshListItems();

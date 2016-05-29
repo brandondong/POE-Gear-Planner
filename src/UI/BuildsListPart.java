@@ -42,7 +42,6 @@ public class BuildsListPart extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 List<Character> selection = listItems.getSelectedValuesList();
                 model.removeCharacters(selection);
-                planner.refreshBuildSelected();
             }
         });
     }
@@ -62,7 +61,6 @@ public class BuildsListPart extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 model.setSelected(listItems.getSelectedValue());
-                planner.refreshBuildSelected();
             }
         });
     }
@@ -72,7 +70,6 @@ public class BuildsListPart extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 model.addCharacter();
-                planner.refreshBuildSelected();
             }
         });
     }
