@@ -29,22 +29,25 @@ public class BuildsModel extends CharacterSelectionObservable implements Iterabl
     public void addCharacter(Character other) {
         characters.add(other);
         selected = other;
-        notifyCharacterChanged(other);
+        notifyCharacterChanged();
     }
 
     public void removeCharacter(Character other) {
-        if (other == selected) {
-            characters.remove(other);
-            selected = characters.get(0);
-        } else {
-            characters.remove(other);
-        }
-        notifyCharacterChanged(other);
+        removeCharacterInternal(other);
+        notifyCharacterChanged();
     }
 
     public void removeCharacters(Collection<Character> remove) {
         for (Character c : remove) {
-            removeCharacter(c);
+            removeCharacterInternal(c);
+        }
+        notifyCharacterChanged();
+    }
+
+    private void removeCharacterInternal(Character other) {
+        characters.remove(other);
+        if (other == selected) {
+            selected = characters.get(0);
         }
     }
 
@@ -54,7 +57,7 @@ public class BuildsModel extends CharacterSelectionObservable implements Iterabl
 
     public void setSelected(Character other) {
         selected = other;
-        notifyCharacterChanged(other);
+        notifyCharacterChanged();
     }
 
     public int numCharacters() {

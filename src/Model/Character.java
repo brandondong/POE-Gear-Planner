@@ -129,124 +129,9 @@ public class Character extends Equipment {
         this.ascendancy = ascendancy;
     }
 
-    /**
-     *
-     * @return the character data presented in a nice way for debugging
-     */
-    public String getInfo() {
-        StringBuilder builder = new StringBuilder();
-        builder.append(name).append("\n").append(characterClass).append("\n").append(ascendancy);
-        CharacterStats combined = combinedStats();
-        for (AttributeType type : AttributeType.values()) {
-            builder.append("\n").append(String.format("%d to %s", combined.calculateAttributeValue(type), type));
-        }
-        builder.append("\n");
-        for (ResistType type : ResistType.values()) {
-            builder.append("\n").append(String.format("%d %s Resistance", combined.getEffectiveResist(type, Difficulty.MERCILESS), type));
-        }
-        builder.append("\n\nSTATS:\n").append(stats).append("\n");
-        builder.append(String.format("Number of Jewel Sockets: %d", numJewels));
-        if (!keystones.isEmpty()) {
-            builder.append("\n");
-            for (KeystoneNode keystone : keystones) {
-                builder.append("\n").append(keystone);
-            }
-        }
-        if (!ascendancyNodes.isEmpty()) {
-            builder.append("\n");
-            for (AscendancyNode node : ascendancyNodes) {
-                builder.append("\n").append(node);
-            }
-        }
-        String items = super.toString();
-        if (items.length() > 0) {
-            builder.append("\n\n").append(items);
-        }
-        return builder.toString();
-    }
 
     public StyledDocument displayInfo(SkillTreePreferences prefs) throws BadLocationException {
-        if (characterClass != null) {
-            StyledDocument doc = new DefaultStyledDocument();
-            CharacterStats stat = getStats(prefs);
-            StringBuilder title = new StringBuilder(characterClass.toString());
-            if (ascendancy != null) {
-                title.append("\n").append(ascendancy);
-            }
-            doc.insertString(0, title.append("\n\n").toString(), CommonUtil.getLargeFont());
-            displayAttributes(doc, stat);
-            displayResistances(doc, stat, prefs);
-            doc.insertString(doc.getLength(), "\n", CommonUtil.getLargeFont());
-            displayStats(doc, stat);
-            doc.insertString(doc.getLength(), "\n", CommonUtil.getLargeFont());
-            displayKeystones(doc);
-            doc.insertString(doc.getLength(), String.format("\nPredicted life at level %d: %d",
-                    prefs.getLevel(), getStats(prefs).getLifeAtLevel(prefs.getLevel())), CommonUtil.getRegularFont());
-            return doc;
-        }
-        return null;
-    }
-
-    private void displayResistances(StyledDocument doc, CharacterStats stat, SkillTreePreferences prefs) throws BadLocationException {
-        doc.insertString(doc.getLength(), "Resistances:", CommonUtil.getLargeFont());
-        for (ResistType type : ResistType.values()) {
-            String insert = String.format("\n%d / %d%% %s Resistance", stat.getEffectiveResist(type, prefs.getDifficulty()),
-                    stat.getMaxResist(type), type);
-            AttributeSet set = CommonUtil.getRegularFont();
-            if (!stat.isResistanceCapped(type, prefs.getDifficulty())) {
-                set = CommonUtil.getWarningFont();
-            }
-            doc.insertString(doc.getLength(), insert, set);
-        }
-        doc.insertString(doc.getLength(), "\n", CommonUtil.getRegularFont());
-    }
-
-    private void displayAttributes(StyledDocument doc, CharacterStats stat) throws BadLocationException {
-        doc.insertString(doc.getLength(), "Attributes:", CommonUtil.getLargeFont());
-        StringBuilder builder = new StringBuilder();
-        for (AttributeType type : AttributeType.values()) {
-            builder.append("\n").append(String.format("%d to %s", stat.calculateAttributeValue(type), type));
-        }
-        doc.insertString(doc.getLength(), builder.append("\n").toString(), CommonUtil.getRegularFont());
-    }
-
-    private void displayStats(StyledDocument doc, CharacterStats stat) throws BadLocationException {
-        doc.insertString(doc.getLength(), "Passives:", CommonUtil.getLargeFont());
-        for (StatType type : StatType.values()) {
-            createSection(doc, stat, type);
-        }
-        doc.insertString(doc.getLength(), "\n", CommonUtil.getRegularFont());
-    }
-
-    private void createSection(StyledDocument doc, CharacterStats stat, StatType type) throws BadLocationException {
-        boolean shouldAdd = false;
-        StringBuilder builder = new StringBuilder();
-        for (Stat next : stat) {
-            if (next.getType() == type) {
-                builder.append("\n").append(next);
-                shouldAdd = true;
-            }
-        }
-        if (shouldAdd) {
-            doc.insertString(doc.getLength(), String.format("\n%s", type), CommonUtil.getRegularFont(true));
-            doc.insertString(doc.getLength(), builder.toString(), CommonUtil.getRegularFont());
-        }
-    }
-
-    private void displayKeystones(StyledDocument doc) throws BadLocationException {
-        displayNotable(doc, "Keystones", keystones);
-        displayNotable(doc, "Ascendancy", ascendancyNodes);
-    }
-
-    private void displayNotable(StyledDocument doc, String title, Collection<?> nodes) throws BadLocationException {
-        if (!nodes.isEmpty()) {
-            doc.insertString(doc.getLength(), String.format("%s:", title), CommonUtil.getLargeFont());
-            StringBuilder builder = new StringBuilder();
-            for (Object next : nodes) {
-                builder.append(String.format("\n%s", next));
-            }
-            doc.insertString(doc.getLength(), builder.append("\n").toString(), CommonUtil.getRegularFont());
-        }
+        return new CharacterDisplayer().displayInfo(prefs);
     }
 
     /**
@@ -277,5 +162,92 @@ public class Character extends Equipment {
     @Override
     public String toString() {
         return getName();
+    }
+
+    private class CharacterDisplayer {
+
+        public StyledDocument displayInfo(SkillTreePreferences prefs) throws BadLocationException {
+            if (characterClass != null) {
+                StyledDocument doc = new DefaultStyledDocument();
+                CharacterStats stat = getStats(prefs);
+                StringBuilder title = new StringBuilder(characterClass.toString());
+                if (ascendancy != null) {
+                    title.append("\n").append(ascendancy);
+                }
+                doc.insertString(0, title.append("\n\n").toString(), CommonUtil.getLargeFont());
+                displayAttributes(doc, stat);
+                displayResistances(doc, stat, prefs);
+                doc.insertString(doc.getLength(), "\n", CommonUtil.getLargeFont());
+                displayStats(doc, stat);
+                doc.insertString(doc.getLength(), "\n", CommonUtil.getLargeFont());
+                displayKeystones(doc);
+                doc.insertString(doc.getLength(), String.format("\nPredicted life at level %d: %d",
+                        prefs.getLevel(), getStats(prefs).getLifeAtLevel(prefs.getLevel())), CommonUtil.getRegularFont());
+                return doc;
+            }
+            return null;
+        }
+
+        private void displayResistances(StyledDocument doc, CharacterStats stat, SkillTreePreferences prefs) throws BadLocationException {
+            doc.insertString(doc.getLength(), "Resistances:", CommonUtil.getLargeFont());
+            for (ResistType type : ResistType.values()) {
+                String insert = String.format("\n%d / %d%% %s Resistance", stat.getEffectiveResist(type, prefs.getDifficulty()),
+                        stat.getMaxResist(type), type);
+                AttributeSet set = CommonUtil.getRegularFont();
+                if (!stat.isResistanceCapped(type, prefs.getDifficulty())) {
+                    set = CommonUtil.getWarningFont();
+                }
+                doc.insertString(doc.getLength(), insert, set);
+            }
+            doc.insertString(doc.getLength(), "\n", CommonUtil.getRegularFont());
+        }
+
+        private void displayAttributes(StyledDocument doc, CharacterStats stat) throws BadLocationException {
+            doc.insertString(doc.getLength(), "Attributes:", CommonUtil.getLargeFont());
+            StringBuilder builder = new StringBuilder();
+            for (AttributeType type : AttributeType.values()) {
+                builder.append("\n").append(String.format("%d to %s", stat.calculateAttributeValue(type), type));
+            }
+            doc.insertString(doc.getLength(), builder.append("\n").toString(), CommonUtil.getRegularFont());
+        }
+
+        private void displayStats(StyledDocument doc, CharacterStats stat) throws BadLocationException {
+            doc.insertString(doc.getLength(), "Passives:", CommonUtil.getLargeFont());
+            for (StatType type : StatType.values()) {
+                createSection(doc, stat, type);
+            }
+            doc.insertString(doc.getLength(), "\n", CommonUtil.getRegularFont());
+        }
+
+        private void createSection(StyledDocument doc, CharacterStats stat, StatType type) throws BadLocationException {
+            boolean shouldAdd = false;
+            StringBuilder builder = new StringBuilder();
+            for (Stat next : stat) {
+                if (next.getType() == type) {
+                    builder.append("\n").append(next);
+                    shouldAdd = true;
+                }
+            }
+            if (shouldAdd) {
+                doc.insertString(doc.getLength(), String.format("\n%s", type), CommonUtil.getRegularFont(true));
+                doc.insertString(doc.getLength(), builder.toString(), CommonUtil.getRegularFont());
+            }
+        }
+
+        private void displayKeystones(StyledDocument doc) throws BadLocationException {
+            displayNotable(doc, "Keystones", keystones);
+            displayNotable(doc, "Ascendancy", ascendancyNodes);
+        }
+
+        private void displayNotable(StyledDocument doc, String title, Collection<?> nodes) throws BadLocationException {
+            if (!nodes.isEmpty()) {
+                doc.insertString(doc.getLength(), String.format("%s:", title), CommonUtil.getLargeFont());
+                StringBuilder builder = new StringBuilder();
+                for (Object next : nodes) {
+                    builder.append(String.format("\n%s", next));
+                }
+                doc.insertString(doc.getLength(), builder.append("\n").toString(), CommonUtil.getRegularFont());
+            }
+        }
     }
 }

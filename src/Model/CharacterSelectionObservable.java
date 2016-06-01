@@ -21,9 +21,9 @@ public abstract class CharacterSelectionObservable {
         observers.add(observer);
     }
 
-    public void notifyCharacterChanged(Character c) {
+    public void notifyCharacterChanged() {
         for (Observer observer : observers) {
-            observer.update(null, c);
+            observer.update(null, null);
         }
     }
 }
