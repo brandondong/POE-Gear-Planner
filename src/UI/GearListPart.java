@@ -50,8 +50,7 @@ public class GearListPart extends JPanel {
         buttonRemove.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                model.getSelected().getItems().removeAll(listGear.getSelectedValuesList());
-                planner.refreshItemsChanged();
+                model.getSelected().removeItems(listGear.getSelectedValuesList());
             }
         });
     }

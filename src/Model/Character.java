@@ -16,7 +16,7 @@ import java.util.*;
  *
  * Represents a character with information about stats, gems, and items
  */
-public class Character extends Equipment {
+public class Character extends StatsChangeObservable {
 
     public static final String NEW_CHARACTER_NAME = "New Build";
 
@@ -129,7 +129,6 @@ public class Character extends Equipment {
         this.ascendancy = ascendancy;
     }
 
-
     public StyledDocument displayInfo(SkillTreePreferences prefs) throws BadLocationException {
         return new CharacterDisplayer().displayInfo(prefs);
     }
@@ -157,6 +156,32 @@ public class Character extends Equipment {
 
     public String validate(SkillTreePreferences prefs) {
         return Validator.getValidationMessageForCharacter(prefs, getStats(prefs));
+    }
+
+    @Override
+    public void addGem(Gem gem) {
+        super.addGem(gem);
+        notifyItemListeners();
+    }
+
+    @Override
+    public void removeGems(Collection<Gem> toRemove) {
+        super.removeGems(toRemove);
+        notifyItemListeners();
+    }
+
+    @Override
+    public void addItem(Item item) {
+        super.addItem(item);
+        notifyItemListeners();
+        notifyStatsListeners();
+    }
+
+    @Override
+    public void removeItems(Collection<Item> toRemove) {
+        super.removeItems(toRemove);
+        notifyItemListeners();
+        notifyStatsListeners();
     }
 
     @Override

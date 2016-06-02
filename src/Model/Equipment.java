@@ -44,6 +44,18 @@ public class Equipment {
         items.add(item);
     }
 
+    public void removeItems(Collection<Item> toRemove) {
+        items.removeAll(toRemove);
+    }
+
+    public void addGem(Gem gem) {
+        gems.add(gem);
+    }
+
+    public void removeGems(Collection<Gem> toRemove) {
+        gems.removeAll(toRemove);
+    }
+
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();

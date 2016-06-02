@@ -33,10 +33,20 @@ public class BuildPlanner extends JFrame {
         initComponents();
         initBuildName();
         initLabelValidate();
+        initListeners();
+    }
+
+    private void initListeners() {
         model.addCharacterChangedListener(new Observer() {
             @Override
             public void update(Observable o, Object arg) {
                 refreshBuildSelected();
+            }
+        });
+        model.getSelected().addItemListener(new Observer() {
+            @Override
+            public void update(Observable o, Object arg) {
+                refreshItemsChanged();
             }
         });
     }
@@ -109,7 +119,7 @@ public class BuildPlanner extends JFrame {
         itemInfoPart1.refreshItemSelected();
     }
 
-    public void refreshItemsChanged() {
+    private void refreshItemsChanged() {
         gemListPart1.refreshListGems();
         gearListPart1.refreshGearList();
         refreshLabelValidate();

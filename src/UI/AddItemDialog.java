@@ -74,7 +74,6 @@ public class AddItemDialog extends JDialog {
                     model.getSelected().addItem(listModel.getElementAt(i));
                 }
                 removeAllItems();
-                planner.refreshItemsChanged();
             }
         });
         cancelButton.addActionListener(new ActionListener() {
