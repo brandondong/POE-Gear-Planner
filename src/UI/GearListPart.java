@@ -67,7 +67,6 @@ public class GearListPart extends JPanel {
                 Item value = listGear.getSelectedValue();
                 if (value != null) {
                     planner.getPreferences().setSelected(value);
-                    planner.refreshItemSelected();
                 }
                 refreshButtonRemove();
             }

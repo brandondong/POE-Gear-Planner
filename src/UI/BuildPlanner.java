@@ -49,6 +49,12 @@ public class BuildPlanner extends JFrame {
                 refreshItemsChanged();
             }
         });
+        getPreferences().addItemSelectionListener(new Observer() {
+            @Override
+            public void update(Observable o, Object arg) {
+                refreshItemSelected();
+            }
+        });
     }
 
     private void initLabelValidate() {
@@ -115,7 +121,7 @@ public class BuildPlanner extends JFrame {
         refreshLabelValidate();
     }
 
-    public void refreshItemSelected() {
+    private void refreshItemSelected() {
         itemInfoPart1.refreshItemSelected();
     }
 

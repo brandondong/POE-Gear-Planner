@@ -7,7 +7,7 @@ import Model.DisplayableItem;
  *
  * Represents preference settings for each character
  */
-public class SkillTreePreferences {
+public class SkillTreePreferences extends PreferencesObservable {
 
     private String url;
 
@@ -32,6 +32,7 @@ public class SkillTreePreferences {
 
     public void setSelected(DisplayableItem selected) {
         this.selected = selected;
+        notifyItemSelectionListeners();
     }
 
     public String getUrl() {

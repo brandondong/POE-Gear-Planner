@@ -100,7 +100,6 @@ public class GemListPart extends JPanel {
                 Gem value = listGems.getSelectedValue();
                 if (value != null) {
                     planner.getPreferences().setSelected(value);
-                    planner.refreshItemSelected();
                 }
                 refreshButtonRemove();
                 refreshButtonOpen();
