@@ -46,8 +46,8 @@ public class Character extends StatsChangeObservable {
      *
      * @return <code>true</code> if the character meets the attribute requirements of their items and gems
      */
-    public boolean hasAttributeRequirements() {
-        CharacterStats combined = combinedStats();
+    public boolean hasAttributeRequirements(SkillTreePreferences prefs) {
+        CharacterStats combined = getStats(prefs);
         for (Item item : items) {
             if (!combined.hasRequiredAttributes(item.getRequirements())) {
                 return false;
@@ -65,24 +65,9 @@ public class Character extends StatsChangeObservable {
         return stats.hasUncappedResistances(difficulty);
     }
 
-    /**
-     *
-     * @return a new set of stats representing the character's stats considering passives, gear, and base stats
-     */
-    private CharacterStats combinedStats() {
-        CharacterStats combined = new CharacterStats();
-        combined.addStats(stats);
-        if (characterClass != null) {
-            combined.addStats(characterClass.getBaseStats());
-        }
-        for (Item item : items) {
-            combined.addStats(item.getStats());
-        }
-        return combined;
-    }
-
-    public void addStats(Stats other) {
-        stats.addStats(other);
+    public void setStats(CharacterStats stats) {
+        this.stats = stats;
+        notifyStatsListeners();
     }
 
     public void addKeystone(KeystoneNode node) {
@@ -103,10 +88,6 @@ public class Character extends StatsChangeObservable {
 
     public void setCharacterClass(CharacterClass characterClass) {
         this.characterClass = characterClass;
-    }
-
-    public CharacterStats getStats() {
-        return stats;
     }
 
     public Set<KeystoneNode> getKeystones() {
@@ -139,10 +120,17 @@ public class Character extends StatsChangeObservable {
      * @return stats with or without gear in consideration depending on the preferences
      */
     public CharacterStats getStats(SkillTreePreferences prefs) {
-        if (prefs.isWithGear()) {
-            return combinedStats();
+        CharacterStats combined = new CharacterStats();
+        combined.addStats(stats);
+        if (characterClass != null) {
+            combined.addStats(characterClass.getBaseStats());
         }
-        return stats;
+        if (prefs.isWithGear()) {
+            for (Item item : items) {
+                combined.addStats(item.getStats());
+            }
+        }
+        return combined;
     }
 
     public String getDisplayString() {

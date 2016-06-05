@@ -50,6 +50,7 @@ public class URLToSkillTreeData {
         if (ByteBuffer.wrap(check).getInt() > 3) {
             start = 7;
         }
+        CharacterStats stats = new CharacterStats();
         for (int i = start; i + 1 < array.length; i += 2) {
             byte[] int16 = { array[i], array[i + 1] };
             int id = ByteBuffer.wrap(int16).getShort() & 0xffff;
@@ -58,7 +59,7 @@ public class URLToSkillTreeData {
                 if (node instanceof KeystoneNode) {
                     character.addKeystone((KeystoneNode) node);
                 } else if (node instanceof StatsNode) {
-                    character.addStats(((StatsNode) node).getStats());
+                    stats.addStats(((StatsNode) node).getStats());
                 } else if (node instanceof AscendancyNode) {
                     character.addAscendancy((AscendancyNode) node);
                 } else {
@@ -66,5 +67,6 @@ public class URLToSkillTreeData {
                 }
             }
         }
+        character.setStats(stats);
     }
 }

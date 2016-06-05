@@ -37,6 +37,12 @@ public class BuildPlanner extends JFrame {
     }
 
     private void initListeners() {
+        Observer statsListener = new Observer() {
+            @Override
+            public void update(Observable o, Object arg) {
+                refreshStatsChanged();
+            }
+        };
         model.addCharacterChangedListener(new Observer() {
             @Override
             public void update(Observable o, Object arg) {
@@ -55,6 +61,8 @@ public class BuildPlanner extends JFrame {
                 refreshItemSelected();
             }
         });
+        getPreferences().addStatSettingsChangeListener(statsListener);
+        model.getSelected().addStatsListener(statsListener);
     }
 
     private void initLabelValidate() {
@@ -114,7 +122,7 @@ public class BuildPlanner extends JFrame {
         itemInfoPart1.refreshItemSelected();
     }
 
-    public void refreshStatsChanged() {
+    private void refreshStatsChanged() {
         buildsListPart1.refreshListItems();
         itemInfoPart1.refreshLabelValidate();
         skillTreeFormPart1.refreshTextPaneInfo();

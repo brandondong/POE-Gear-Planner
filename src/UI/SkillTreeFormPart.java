@@ -118,7 +118,6 @@ public class SkillTreeFormPart extends JPanel {
                 String url = textField1.getText();
                 planner.getPreferences().setUrl(url);
                 refreshLabelValidate(URLToSkillTreeData.decodeURL(url, model.getSelected()));
-                planner.refreshStatsChanged();
             }
         });
     }
@@ -139,7 +138,6 @@ public class SkillTreeFormPart extends JPanel {
                     spinnerLevel.setValue(1);
                 }
                 planner.getPreferences().setLevel((Integer) spinnerLevel.getValue());
-                planner.refreshStatsChanged();
             }
         });
     }
@@ -157,7 +155,6 @@ public class SkillTreeFormPart extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 planner.getPreferences().setDifficulty((Difficulty) comboDifficulty.getSelectedItem());
-                planner.refreshStatsChanged();
             }
         });
     }
@@ -176,15 +173,14 @@ public class SkillTreeFormPart extends JPanel {
 
     private void initButtons() {
         refreshButtons();
-        radioButton1.addActionListener(new ButtonActionListener());
-        radioButton2.addActionListener(new ButtonActionListener());
-    }
-
-    private class ButtonActionListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            planner.getPreferences().setWithGear(radioButton1.isSelected());
-        }
+        ActionListener gearSetListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                planner.getPreferences().setWithGear(radioButton2.isSelected());
+            }
+        };
+        radioButton1.addActionListener(gearSetListener);
+        radioButton2.addActionListener(gearSetListener);
     }
 
     private void initComponents() {

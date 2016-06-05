@@ -49,6 +49,7 @@ public class SkillTreePreferences extends PreferencesObservable {
 
     public void setWithGear(boolean withGear) {
         this.withGear = withGear;
+        notifyStatSettingsChangeListeners();
     }
 
     public Difficulty getDifficulty() {
@@ -57,6 +58,7 @@ public class SkillTreePreferences extends PreferencesObservable {
 
     public void setDifficulty(Difficulty difficulty) {
         this.difficulty = difficulty;
+        notifyStatSettingsChangeListeners();
     }
 
     public int getLevel() {
@@ -65,5 +67,6 @@ public class SkillTreePreferences extends PreferencesObservable {
 
     public void setLevel(int level) {
         this.level = level;
+        notifyStatSettingsChangeListeners();
     }
 }

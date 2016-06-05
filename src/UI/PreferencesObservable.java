@@ -11,14 +11,26 @@ import java.util.Observer;
  */
 public abstract class PreferencesObservable {
 
-    private static List<Observer> observers = new ArrayList<>();
+    private static List<Observer> itemListeners = new ArrayList<>();
+
+    private static List<Observer> statListeners = new ArrayList<>();
 
     public void addItemSelectionListener(Observer observer) {
-        observers.add(observer);
+        itemListeners.add(observer);
+    }
+
+    public void addStatSettingsChangeListener(Observer observer) {
+        statListeners.add(observer);
     }
 
     public void notifyItemSelectionListeners() {
-        for (Observer observer : observers) {
+        for (Observer observer : itemListeners) {
+            observer.update(null, null);
+        }
+    }
+
+    public void notifyStatSettingsChangeListeners() {
+        for (Observer observer : statListeners) {
             observer.update(null, null);
         }
     }
