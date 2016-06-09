@@ -14,12 +14,16 @@ import java.util.List;
  */
 public class POEdbToJson {
 
-    public static final String POEDB_GEM_PREFIX = "http://poedb.tw/us/gem.php?n=";
+    private static final String POEDB_GEM_PREFIX = "http://poedb.tw/us/gem.php?n=";
 
-    public static final String POEDB_GEM_LIST_PREFIX = "http://poedb.tw/us/gem.php?c=";
+    private static final String POEDB_GEM_LIST_PREFIX = "http://poedb.tw/us/gem.php?cn=";
+
+    private static final List<String> PAGES = Arrays.asList("Active+Skill+Gem", "Support+Skill+Gem");
+
+    public static final String FILENAME = "gemdata2.json";
 
     /**
-     * Writes the gem attribute data into gemdata.json
+     * Writes the gem attribute data into the specified file
      *
      * @param name the gem name
      */
@@ -27,8 +31,6 @@ public class POEdbToJson {
         String source = CommonUtil.getUrlSource(createUrlFromGemName(name));
         List<String> atts = getAttributes(source);
         int count = countColumns(source);
-        System.out.println(atts);
-        System.out.println(count);
         writeToFile(atts, source, count, name);
     }
 
@@ -71,7 +73,7 @@ public class POEdbToJson {
     }
 
     private static void writeToFile(List<String> atts, List<List<Integer>> map, String name) throws Exception {
-        File file = new File("gemdata.json");
+        File file = new File(FILENAME);
         FileWriter fw = new FileWriter(file.getAbsoluteFile(), true);
         BufferedWriter bw = new BufferedWriter(fw);
         bw.write(String.format("\"%s\": {\n", name));
@@ -93,7 +95,8 @@ public class POEdbToJson {
 
     private static List<String> getAttributes(String source) {
         List<String> l = new ArrayList<>();
-        int start = source.indexOf("Requires Level<th>") + "Requires Level<th>".length();
+        String identifier = "Level<th>Requires Level<th>";
+        int start = source.indexOf(identifier) + identifier.length();
         int end = source.indexOf("Mana Multiplier<th>");
         if (end == -1) {
             end = source.indexOf("Mana Cost<th>");
@@ -102,7 +105,6 @@ public class POEdbToJson {
             end = source.indexOf("Mana Reserved<th>");
         }
         String atts = source.substring(start, end);
-        System.out.println(atts);
         while (atts.length() > 0) {
             int index = atts.indexOf("<th>");
             l.add(atts.substring(0, index));
@@ -129,23 +131,24 @@ public class POEdbToJson {
         return l;
     }
 
+    public static void retrieveFromPOEdbAndWriteToFile() throws Exception {
+        List<String> gems = new ArrayList<>();
+        for (String i : PAGES) {
+            String url = POEDB_GEM_LIST_PREFIX + i;
+            String source = CommonUtil.getUrlSource(url);
+            gems.addAll(getGemsList(source));
+        }
+        for (String gem : gems) {
+            System.out.println("Attempting to write info about " + gem + " to file");
+            writeGemData(gem);
+        }
+    }
+
     private POEdbToJson() {
         // prevent instantiation
     }
 
     public static void main(String[] args) throws Exception {
-        List<String> gems = new ArrayList<>();
-        for (String i : Arrays.asList("18", "19", "vaal")) {
-            String url = POEDB_GEM_LIST_PREFIX + i;
-            String source = CommonUtil.getUrlSource(url);
-            gems.addAll(getGemsList(source));
-        }
-        System.out.println(gems);
-        for (int i = 0; i < gems.size(); i++) {
-            System.out.println(i);
-            String gem = gems.get(i);
-            System.out.println(gem);
-            writeGemData(gem);
-        }
+        retrieveFromPOEdbAndWriteToFile();
     }
 }

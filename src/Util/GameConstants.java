@@ -102,7 +102,7 @@ public class GameConstants {
     private static Map<String, GemData> initGemData() {
         try {
             Map<String, GemData> map = new HashMap<>();
-            JSONObject obj = getJSONData("gemdata.json");
+            JSONObject obj = getJSONData(POEdbToJson.FILENAME);
             for (Iterator<String> keys = obj.keys(); keys.hasNext();) {
                 String key = keys.next();
                 GemData data = getGemData(key, obj.getJSONObject(key));
