@@ -1,5 +1,9 @@
 package Model;
 
+import Util.CommonUtil;
+
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DefaultStyledDocument;
 import javax.swing.text.StyledDocument;
 
 /**
@@ -36,7 +40,11 @@ public class Item implements DisplayableItem {
     }
 
     @Override
-    public StyledDocument displayItem() {
-        return null;
+    public StyledDocument displayItem() throws BadLocationException {
+        StyledDocument doc = new DefaultStyledDocument();
+        doc.insertString(0, String.format("%s\n\n", name), CommonUtil.getLargeFont());
+        doc.insertString(doc.getLength(), String.format("%s\n\n", requirements.toString()), CommonUtil.getRegularFont());
+        doc.insertString(doc.getLength(), stats.toString(), CommonUtil.getRegularFont());
+        return doc;
     }
 }
