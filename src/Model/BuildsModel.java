@@ -1,5 +1,6 @@
 package Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -10,7 +11,7 @@ import java.util.List;
  *
  * Holds all the build information for the program
  */
-public class BuildsModel extends CharacterSelectionObservable implements Iterable<Character> {
+public class BuildsModel extends CharacterSelectionObservable implements Iterable<Character>, Serializable {
 
     private List<Character> characters;
 
