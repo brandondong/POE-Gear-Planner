@@ -1,5 +1,6 @@
 package Model;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,7 +9,7 @@ import java.util.Map;
  *
  * Represents an item or gem's attribute requirements
  */
-public class Requirements {
+public class Requirements implements Serializable {
 
     private Map<AttributeType, Integer> requirements;
 

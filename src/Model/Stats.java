@@ -2,6 +2,7 @@ package Model;
 
 import Util.Predicate;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -11,7 +12,7 @@ import java.util.Map;
  *
  * Represents the stats of an item, character, node etc.
  */
-public class Stats implements Iterable<Stat> {
+public class Stats implements Iterable<Stat>, Serializable {
 
     private Map<String, Stat> stats;
 

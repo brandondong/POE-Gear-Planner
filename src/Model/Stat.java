@@ -1,5 +1,6 @@
 package Model;
 
+import java.io.Serializable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -8,7 +9,7 @@ import java.util.regex.Pattern;
  *
  * An immutable representation of a basic stat with a unique identifier and value
  */
-public class Stat {
+public class Stat implements Serializable {
 
     private static final Pattern VALUE_PATTERN = Pattern.compile("[\\d\\.]+");
 

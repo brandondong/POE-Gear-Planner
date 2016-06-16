@@ -1,5 +1,6 @@
 package Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.List;
  *
  * Represents the equipment on a character
  */
-public class Equipment {
+public class Equipment implements Serializable {
 
     protected List<Gem> gems;
 

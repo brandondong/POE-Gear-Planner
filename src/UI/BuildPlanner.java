@@ -6,9 +6,12 @@ package UI;
 
 import Model.*;
 import Model.Character;
+import Util.ModelSerializationManager;
 import Util.Validator;
 
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Observable;
@@ -34,6 +37,18 @@ public class BuildPlanner extends JFrame {
         initBuildName();
         initLabelValidate();
         initListeners();
+        setCloseBehavior();
+    }
+
+    private void setCloseBehavior() {
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                ModelSerializationManager.serializeModel(model);
+                System.exit(0);
+            }
+        });
     }
 
     private void initListeners() {
@@ -277,6 +292,6 @@ public class BuildPlanner extends JFrame {
 
     public static void main(String[] args) throws Exception {
         UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName()); //for testing
-        new BuildPlanner(new BuildsModel()).setVisible(true);
+        new BuildPlanner(ModelSerializationManager.deserializeModel()).setVisible(true);
     }
 }

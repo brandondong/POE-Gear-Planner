@@ -2,13 +2,14 @@ package Model;
 
 import javax.swing.text.BadLocationException;
 import javax.swing.text.StyledDocument;
+import java.io.Serializable;
 
 /**
  * Created by Brandon on 2016-03-15.
  *
  * Represents an item that can be displayed
  */
-public interface DisplayableItem {
+public interface DisplayableItem extends Serializable {
 
     /**
      *
